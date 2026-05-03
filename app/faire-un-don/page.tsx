@@ -84,7 +84,7 @@ export default function DonationPage() {
 
         <div className="mt-12 rounded-xl bg-primary p-8 text-primary-foreground md:p-12">
           <Heart className="text-secondary" size={36} aria-hidden="true" />
-          <h2 className="mt-5 text-balance font-heading text-2xl font-semibold md:text-3xl">
+          <h2 className="mt-5 text-balance font-heading text-2xl font-semibold text-primary-foreground md:text-3xl">
             Donner directement via le portail officiel ABMCI
           </h2>
           <p className="mt-3 max-w-2xl text-primary-foreground/80">
