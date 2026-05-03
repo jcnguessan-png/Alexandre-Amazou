@@ -46,9 +46,48 @@ export function Header() {
         <Link
           href="/"
           aria-label={`${siteConfig.shortName} — accueil`}
-          className="font-heading text-lg font-semibold tracking-tight text-primary lg:text-xl"
+          className="inline-flex items-center text-primary"
         >
-          Alexandre <span className="text-secondary">AMAZOU</span>
+          {/* Mobile : marque seule (M stylisé) */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 130 50"
+            className="h-9 w-auto lg:hidden"
+            aria-hidden="true"
+            fill="none"
+          >
+            <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 45 L35 5 L65 45" />
+              <path d="M65 45 L95 5 L125 45" />
+              <path d="M35 5 Q65 35 95 5" />
+            </g>
+          </svg>
+
+          {/* Desktop : signature complète (marque + nom) */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 240 80"
+            className="hidden h-12 w-auto lg:block"
+            aria-hidden="true"
+            fill="none"
+          >
+            <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M55 50 L75 15 L95 50" />
+              <path d="M95 50 L115 15 L135 50" />
+              <path d="M75 15 Q95 40 115 15" />
+            </g>
+            <text
+              x="120"
+              y="73"
+              textAnchor="middle"
+              fontSize="9"
+              fontFamily="Georgia, serif"
+              fill="currentColor"
+              letterSpacing="2.5"
+            >
+              ALEXANDRE AMAZOU
+            </text>
+          </svg>
         </Link>
 
         <nav aria-label="Navigation principale" className="hidden lg:block">

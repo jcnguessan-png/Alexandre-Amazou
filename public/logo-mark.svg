@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 50" fill="none" aria-label="Logo Alexandre AMAZOU">
+  <g stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 45 L35 5 L65 45"/>
+    <path d="M65 45 L95 5 L125 45"/>
+    <path d="M35 5 Q65 35 95 5"/>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" fill="none" aria-label="Alexandre AMAZOU">
+  <g stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M55 50 L75 15 L95 50"/>
+    <path d="M95 50 L115 15 L135 50"/>
+    <path d="M75 15 Q95 40 115 15"/>
+  </g>
+  <text x="120" y="73" text-anchor="middle" font-size="9" font-family="Georgia, serif" fill="currentColor" letter-spacing="2.5">
+    ALEXANDRE AMAZOU
+  </text>
+</svg>
