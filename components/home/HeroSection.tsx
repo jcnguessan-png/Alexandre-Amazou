@@ -59,18 +59,23 @@ export function HeroSection() {
             className="absolute -right-4 -top-4 h-full w-full rounded-2xl border border-secondary/40"
           />
           <div className="relative h-full w-full overflow-hidden rounded-2xl ring-1 ring-secondary/20">
+            {/* Halo doré derrière le portrait découpé (PNG transparent) */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,_rgba(201,168,76,0.18),_transparent_65%)]"
+            />
             <Image
-              src="/images/photo-bishop.jpeg"
+              src="/images/bishop-sans-fond.png"
               alt="Portrait officiel du Bishop Alexandre AMAZOU"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 480px"
-              className="object-cover"
+              className="object-cover object-top"
             />
             {/* Caption en bas, sur dégradé sombre */}
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-primary/85 via-primary/40 to-transparent"
+              className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-primary/95 via-primary/60 to-transparent"
             />
             <div className="absolute bottom-0 left-0 right-0 p-6">
               <p className="font-quote text-xs uppercase tracking-[0.2em] text-secondary">

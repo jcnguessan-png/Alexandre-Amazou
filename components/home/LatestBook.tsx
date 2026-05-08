@@ -1,9 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Download } from 'lucide-react';
 import type { Book } from '@/data/books';
 import { Button } from '@/components/ui/Button';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { BookCard } from '@/components/books/BookCard';
 import { BookOrderActions } from '@/components/books/BookOrderActions';
 
 export function LatestBook({ book }: { book: Book }) {
@@ -16,29 +16,55 @@ export function LatestBook({ book }: { book: Book }) {
         <SectionTitle
           eyebrow="Dernière parution"
           title="Le tout dernier ouvrage"
-          description="Une plongée biblique dans la cosmologie spirituelle — pour comprendre les enjeux invisibles de la vie chrétienne."
+          description="Une plongée biblique dans la cosmologie spirituelle, accompagnée de son livret de 40 jours d'application — pour comprendre et expérimenter les enjeux invisibles de la vie chrétienne."
         />
 
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(280px,400px)_1fr]">
-          <div className="mx-auto w-full max-w-sm">
-            <BookCard book={book} priority />
+        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
+          <div className="relative mx-auto w-full max-w-2xl">
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl bg-primary ring-1 ring-secondary/20">
+              <Image
+                src="/images/livres/combo-realite-40-jours.png"
+                alt="La réalité du monde des esprits (réédition 2026) accompagné du livret 40 jours de combat spirituel"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 720px"
+                className="object-cover"
+              />
+            </div>
+            <span className="absolute -top-3 left-6 rounded-full bg-secondary px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-secondary-foreground shadow-md">
+              Nouveau · 2026
+            </span>
           </div>
 
           <div>
+            <p className="font-quote text-xs uppercase tracking-[0.22em] text-secondary">
+              Le livre + le livret d'accompagnement
+            </p>
             <h3
               id="latest-book-heading"
-              className="text-balance font-heading text-3xl font-semibold leading-tight text-primary md:text-4xl"
+              className="mt-3 text-balance font-heading text-3xl font-semibold leading-tight text-primary md:text-4xl"
             >
               {book.title}
-              {book.subtitle ? (
-                <span className="ml-2 text-2xl font-medium text-foreground/60">
-                  — {book.subtitle}
-                </span>
-              ) : null}
             </h3>
+            {book.subtitle ? (
+              <p className="mt-2 font-quote text-base italic text-foreground/65 md:text-lg">
+                {book.subtitle}
+              </p>
+            ) : null}
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-foreground/80 md:text-lg">
               {book.description}
             </p>
+
+            {book.companion ? (
+              <div className="mt-6 rounded-lg border border-secondary/30 bg-secondary/5 p-5">
+                <p className="font-heading text-base font-semibold text-primary">
+                  Inclus : {book.companion.title}
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-foreground/75">
+                  {book.companion.description}
+                </p>
+              </div>
+            ) : null}
 
             <div className="mt-8 max-w-md">
               <BookOrderActions book={book} layout="stacked" />
