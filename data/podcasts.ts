@@ -1,27 +1,28 @@
-export type PodcastEpisode = {
-  id: string;
-  title: string;
-  description: string;
-  publishedAt: string; // ISO
-  duration: string; // ISO 8601 (PT45M)
-  audioUrl?: string;
-  spotifyUrl?: string;
-  applePodcastUrl?: string;
-  deezerUrl?: string;
-  youtubeUrl?: string;
-};
+/**
+ * Métadonnées statiques du podcast Séquences Vérité.
+ *
+ * Les épisodes sont récupérés à la volée depuis le flux RSS Anchor/Spotify
+ * via lib/podcast.ts (safeGetPodcastFeed). Voir app/podcast/page.tsx.
+ */
 
 export const podcastInfo = {
-  name: 'La Voix du Pasteur',
+  name: 'Séquences Vérité',
+  tagline: 'Le podcast officiel du Pasteur Alexandre AMAZOU',
   description:
-    "Le podcast officiel du Pasteur Alexandre AMAZOU : enseignements, méditations bibliques, échanges sur le leadership et la doctrine — chaque semaine.",
-  // À renseigner une fois le podcast créé sur Spotify for Podcasters.
-  spotifyShowUrl: '',
+    "Des séquences courtes, denses et pratiques pour comprendre les lois spirituelles qui gouvernent ta vie : combat spirituel, leadership chrétien, autorité du croyant, vie de prière, vision et destinée. Un enseignement biblique sans concession — pour quiconque refuse de vivre en défaite.",
+
+  // Flux RSS officiel (Anchor / Spotify for Podcasters) — utilisé par le site
+  // pour afficher les épisodes audio.
+  rssUrl: 'https://anchor.fm/s/11269faec/podcast/rss',
+
+  // Plateformes d'écoute (audio) — URLs publiques à renseigner une fois la
+  // distribution validée par chaque plateforme (24-72h après création).
+  spotifyShowUrl: '', // ex. https://open.spotify.com/show/<id>
   applePodcastUrl: '',
   deezerUrl: '',
-  rssUrl: '',
-};
 
-export const podcastEpisodes: PodcastEpisode[] = [
-  // Placeholder — à brancher sur le flux RSS réel ou sur l'API Spotify Podcaster.
-];
+  // Version vidéo : playlist YouTube "Séquences Vérité"
+  youtubePlaylistId: 'PL1j6au4j0Fs59kGmxcy7Dcbi5Tu6NuLfd',
+  youtubePlaylistUrl:
+    'https://www.youtube.com/playlist?list=PL1j6au4j0Fs59kGmxcy7Dcbi5Tu6NuLfd',
+} as const;
