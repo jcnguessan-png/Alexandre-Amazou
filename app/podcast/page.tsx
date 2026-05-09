@@ -120,7 +120,7 @@ export default async function PodcastPage() {
                   >
                     <div className="flex flex-col gap-4 md:flex-row md:gap-6">
                       {showImage ? (
-                        <div className="relative aspect-square w-full max-w-[140px] flex-shrink-0 overflow-hidden rounded-md bg-muted md:w-32">
+                        <div className="relative aspect-square w-full max-w-[140px] flex-shrink-0 self-start overflow-hidden rounded-md bg-muted md:w-32">
                           <Image
                             src={showImage}
                             alt=""
