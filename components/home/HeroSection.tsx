@@ -16,7 +16,7 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(201,168,76,0.08),_transparent_60%)]" />
       </div>
 
-      <div className="container relative grid min-h-[calc(100vh-5rem)] items-center gap-12 py-20 md:py-28 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+      <div className="container relative grid min-h-[calc(100vh-5rem)] items-center gap-12 py-20 md:py-28 lg:grid-cols-[1.45fr_1fr] lg:gap-16">
         <div className="motion-safe:animate-fade-up">
           <p className="font-quote text-sm uppercase tracking-[0.25em] text-secondary">
             Site officiel
@@ -52,7 +52,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative mx-auto hidden aspect-[3/5] w-full max-w-md motion-safe:animate-fade-in lg:block">
+        <div className="relative mx-auto hidden aspect-[3/5] w-full max-w-[340px] motion-safe:animate-fade-in lg:block">
           {/* Cadre décoratif doré décalé */}
           <div
             aria-hidden="true"

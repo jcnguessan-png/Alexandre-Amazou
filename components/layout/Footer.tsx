@@ -7,7 +7,6 @@ const footerNav = {
     { href: '/a-propos', label: 'À propos' },
     { href: '/mes-livres', label: 'Mes livres' },
     { href: '/mes-enseignements', label: 'Mes enseignements' },
-    { href: '/agenda', label: 'Agenda' },
     { href: '/podcast', label: 'Podcast' },
   ],
   ministeres: [

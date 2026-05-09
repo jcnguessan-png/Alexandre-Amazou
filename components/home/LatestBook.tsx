@@ -19,15 +19,15 @@ export function LatestBook({ book }: { book: Book }) {
           description="Une plongée biblique dans la cosmologie spirituelle, accompagnée de son livret de 40 jours d'application — pour comprendre et expérimenter les enjeux invisibles de la vie chrétienne."
         />
 
-        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
-          <div className="relative mx-auto w-full max-w-2xl">
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl bg-primary ring-1 ring-secondary/20">
+        <div className="mt-8 grid items-start gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
+          <div className="relative mx-auto w-full max-w-xl lg:sticky lg:top-28 lg:self-start">
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl bg-primary ring-1 ring-secondary/20 shadow-md">
               <Image
                 src="/images/livres/combo-realite-40-jours.png"
                 alt="La réalité du monde des esprits (réédition 2026) accompagné du livret 40 jours de combat spirituel"
                 fill
                 priority
-                sizes="(max-width: 1024px) 100vw, 720px"
+                sizes="(max-width: 1024px) 100vw, 600px"
                 className="object-cover"
               />
             </div>

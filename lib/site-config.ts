@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: 'Alexandre AMAZOU',
   baseline: 'Transformer des personnes ordinaires en véritables leaders',
   description:
-    "Site officiel du Pasteur Alexandre AMAZOU — enseignant biblique, Bishop, fondateur de l'ABMCI, auteur de onze ouvrages. Enseignements, livres, agenda et conférences.",
+    "Site officiel du Pasteur Alexandre AMAZOU — enseignant biblique, Bishop, fondateur de l'ABMCI, auteur de onze ouvrages. Enseignements, livres et podcast.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://alexandreamazou.com',
   locale: 'fr_FR',
   contact: {
@@ -69,7 +69,6 @@ export const navItems = [
   { href: '/a-propos', label: 'À propos' },
   { href: '/mes-livres', label: 'Mes livres' },
   { href: '/mes-enseignements', label: 'Mes enseignements' },
-  { href: '/agenda', label: 'Agenda' },
   { href: '/podcast', label: 'Podcast' },
   { href: '/me-contacter', label: 'Me contacter' },
 ] as const;
