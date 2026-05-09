@@ -20,12 +20,15 @@ export const metadata: Metadata = {
   },
 };
 
-// Revalidation horaire — le flux RSS Anchor est rafraîchi toutes les heures
-export const revalidate = 3600;
+// Revalidation à la minute — les ajouts/modifs depuis Spotify for Podcasters
+// remontent rapidement sur le site sans rebuild.
+export const revalidate = 60;
 
 export default async function PodcastPage() {
   const feed = await safeGetPodcastFeed();
   const episodes = feed?.episodes ?? [];
+  const showImage = feed?.show.imageUrl;
+  const hasPublicSpotify = Boolean(podcastInfo.spotifyShowUrl);
 
   return (
     <>
@@ -116,10 +119,10 @@ export default async function PodcastPage() {
                     className="rounded-lg border border-border bg-background p-5 transition hover:border-secondary/40 hover:shadow-sm md:p-6"
                   >
                     <div className="flex flex-col gap-4 md:flex-row md:gap-6">
-                      {ep.imageUrl ? (
+                      {showImage ? (
                         <div className="relative aspect-square w-full max-w-[140px] flex-shrink-0 overflow-hidden rounded-md bg-muted md:w-32">
                           <Image
-                            src={ep.imageUrl}
+                            src={showImage}
                             alt=""
                             fill
                             sizes="140px"
@@ -164,7 +167,7 @@ export default async function PodcastPage() {
                           </audio>
                         ) : null}
 
-                        {ep.spotifyEpisodeUrl ? (
+                        {hasPublicSpotify && ep.spotifyEpisodeUrl ? (
                           <div className="mt-3">
                             <a
                               href={ep.spotifyEpisodeUrl}
