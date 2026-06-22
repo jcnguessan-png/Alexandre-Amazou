@@ -68,6 +68,15 @@ function textResponse(text: string, status = 200): Response {
   });
 }
 
+// Diagnostic léger : ouvrir /api/chat dans le navigateur indique si la clé est
+// bien chargée dans CET environnement (sans jamais exposer la clé elle-même).
+export function GET(): Response {
+  return Response.json({
+    configured: Boolean(process.env.ANTHROPIC_API_KEY),
+    model: MODEL,
+  });
+}
+
 export async function POST(req: Request): Promise<Response> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return textResponse(FALLBACK_MESSAGE);
