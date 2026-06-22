@@ -9,6 +9,10 @@ export const maxDuration = 30;
 // ex. claude-haiku-4-5 pour réduire fortement le coût d'un bot public.
 const MODEL = process.env.CHATBOT_MODEL || 'claude-opus-4-8';
 
+// Le paramètre `effort` n'est pas supporté par Haiku 4.5 ni Sonnet 4.5 (400).
+// On ne l'envoie donc que pour les modèles qui l'acceptent (Opus, Sonnet 4.6, Fable).
+const SUPPORTS_EFFORT = !/haiku|sonnet-4-5/i.test(MODEL);
+
 const MAX_MESSAGES = 20;
 const MAX_CHARS_PER_MESSAGE = 2000;
 const MAX_TOTAL_CHARS = 8000;
@@ -95,8 +99,8 @@ export async function POST(req: Request): Promise<Response> {
           model: MODEL,
           max_tokens: 1024,
           system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
-          output_config: { effort: 'low' },
           messages,
+          ...(SUPPORTS_EFFORT ? { output_config: { effort: 'low' as const } } : {}),
         });
         for await (const event of llm) {
           if (
