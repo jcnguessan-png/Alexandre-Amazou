@@ -1,39 +1,53 @@
 import type { Metadata } from 'next';
-import { HeroSection } from '@/components/home/HeroSection';
-import { StatsSection } from '@/components/home/StatsSection';
-import { LatestBook } from '@/components/home/LatestBook';
-import { LatestVideos } from '@/components/home/LatestVideos';
-import { NewsletterBanner } from '@/components/home/NewsletterBanner';
-import { TestimonialsSlider } from '@/components/home/TestimonialsSlider';
-import { AboutTeaser } from '@/components/home/AboutTeaser';
-import { featuredBook } from '@/data/books';
-import { testimonials } from '@/data/testimonials';
+import { books, featuredBook } from '@/data/books';
 import { safeGetFeaturedPlaylistVideos } from '@/lib/youtube';
 import { siteConfig } from '@/lib/site-config';
+import { HeroDynamic } from '@/components/home/dynamic/HeroDynamic';
+import { StatsBand } from '@/components/home/dynamic/StatsBand';
+import { BentoSection } from '@/components/home/dynamic/BentoSection';
+import { BooksStrip } from '@/components/home/dynamic/BooksStrip';
+import { ConferenceBand } from '@/components/home/dynamic/ConferenceBand';
+import { FinalCta } from '@/components/home/dynamic/FinalCta';
+import { RevealOnScroll } from '@/components/home/dynamic/RevealOnScroll';
+import './dynamic-home.css';
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} – Site officiel`,
+  title: `${siteConfig.name} — La Parole qui forme des leaders`,
   description:
-    "Pasteur Alexandre AMAZOU — enseignant biblique, Bishop, fondateur de l'ABMCI, auteur de onze ouvrages dont deux best-sellers. Découvrez les enseignements, livres, podcast et la newsletter officielle.",
+    "Site officiel du Pasteur Alexandre AMAZOU. Enseignements YouTube, onze ouvrages, biographie. Enseignant biblique, Bishop, fondateur de l'ABMCI.",
   alternates: { canonical: '/' },
 };
 
-// ISR : revalidation toutes les heures pour la page d'accueil
-// (les vidéos YouTube changent ; le reste est statique)
+// ISR : revalidation toutes les heures (les vidéos YouTube changent ; le reste est statique).
 export const revalidate = 3600;
 
+// Pose l'état « caché » des éléments .reveal avant le paint (pas de FOUC) et,
+// en filet de sécurité, révèle tout après 5 s si l'hydratation échoue.
+const REVEAL_BOOTSTRAP =
+  "document.documentElement.classList.add('js-reveal');" +
+  'setTimeout(function(){var n=document.querySelectorAll(".dyn-home .reveal");' +
+  'for(var i=0;i<n.length;i++)n[i].classList.add("in");},5000);';
+
 export default async function HomePage() {
-  const videos = await safeGetFeaturedPlaylistVideos(6);
+  const videos = await safeGetFeaturedPlaylistVideos(8);
+  const poster = videos[0]?.thumbnailHigh ?? videos[0]?.thumbnailUrl;
 
   return (
     <>
-      <HeroSection />
-      <StatsSection />
-      <LatestBook book={featuredBook} />
-      <LatestVideos videos={videos} />
-      <NewsletterBanner source="home" />
-      <TestimonialsSlider testimonials={testimonials} />
-      <AboutTeaser />
+      <script dangerouslySetInnerHTML={{ __html: REVEAL_BOOTSTRAP }} />
+      <div className="dyn-home" data-page="accueil">
+        <HeroDynamic />
+        <StatsBand />
+        <BentoSection
+          book={featuredBook}
+          playlistId={siteConfig.youtube.featuredPlaylistId}
+          poster={poster}
+        />
+        <BooksStrip books={books} />
+        <ConferenceBand />
+        <FinalCta youtubeUrl={siteConfig.youtube.channelUrl} />
+      </div>
+      <RevealOnScroll />
     </>
   );
 }
