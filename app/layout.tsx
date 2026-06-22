@@ -1,5 +1,13 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Playfair_Display, Lora } from 'next/font/google';
+import {
+  Inter,
+  Playfair_Display,
+  Lora,
+  Space_Grotesk,
+  Cormorant_Garamond,
+  Source_Serif_4,
+  Archivo,
+} from 'next/font/google';
 import Script from 'next/script';
 import { siteConfig } from '@/lib/site-config';
 import { personSchema, organizationSchema, websiteSchema } from '@/lib/schema';
@@ -27,6 +35,36 @@ const lora = Lora({
   variable: '--font-quote',
   display: 'swap',
   style: ['italic'],
+});
+
+// ── Direction C (accueil dynamique) — système typographique dédié ──
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-cormorant',
+  display: 'swap',
+  weight: ['500', '600', '700'],
+  style: ['normal', 'italic'],
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  variable: '--font-source-serif',
+  display: 'swap',
+  weight: ['400', '500'],
+});
+
+const archivo = Archivo({
+  subsets: ['latin'],
+  variable: '--font-archivo',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -111,7 +149,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="fr"
-      className={`${inter.variable} ${playfair.variable} ${lora.variable}`}
+      className={`${inter.variable} ${playfair.variable} ${lora.variable} ${spaceGrotesk.variable} ${cormorant.variable} ${sourceSerif.variable} ${archivo.variable}`}
     >
       <head>
         <JsonLd data={personSchema()} />

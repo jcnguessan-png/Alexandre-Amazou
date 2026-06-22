@@ -1,0 +1,813 @@
+/* =========================================================
+   ACCUEIL — DIRECTION C (Moderne / Dynamique)
+   Styles dédiés à la page d'accueil, scopés sous .dyn-home pour
+   ne jamais déborder sur le reste du site (Tailwind / pages claires).
+   Bleu nuit profond + or. Grotesque moderne + serif majestueux.
+   ========================================================= */
+
+.dyn-home {
+  /* Couleurs — bleu nuit riche + or */
+  --ink: #0a0a14;
+  --navy-900: #0d0d1e;
+  --navy-800: #12122b;
+  --navy-700: #181838;
+  --navy-600: #222248;
+  --navy-500: #2e2e5a;
+  --gold: #c9a84c;
+  --gold-bright: #e4c977;
+  --gold-deep: #9a7b2e;
+  --cream: #f4eedf;
+  --muted-on-dark: rgba(244, 238, 223, 0.62);
+
+  /* Familles typographiques (chargées via next/font dans layout.tsx) */
+  --serif: var(--font-cormorant), 'Times New Roman', serif;
+  --body: var(--font-source-serif), Georgia, serif;
+  --sans: var(--font-archivo), system-ui, sans-serif;
+  --grotesk: var(--font-space-grotesk), var(--font-archivo), sans-serif;
+
+  --maxw: 1280px;
+  --ease: cubic-bezier(0.22, 0.61, 0.21, 1);
+
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.dyn-home img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- Boutons partagés ---------- */
+.dyn-home .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 17px 30px;
+  transition: all 0.3s var(--ease);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dyn-home .btn .ar {
+  transition: transform 0.3s var(--ease);
+}
+.dyn-home .btn:hover .ar {
+  transform: translateX(5px);
+}
+.dyn-home .btn-gold {
+  background: var(--gold);
+  color: var(--navy-900);
+}
+.dyn-home .btn-gold:hover {
+  background: var(--gold-bright);
+}
+.dyn-home .btn-ghost-gold {
+  background: transparent;
+  color: var(--gold);
+  border-color: rgba(201, 168, 76, 0.5);
+}
+.dyn-home .btn-ghost-gold:hover {
+  background: var(--gold);
+  color: var(--navy-900);
+  border-color: var(--gold);
+}
+
+/* ---------- Couverture de livre (partagée) ---------- */
+.dyn-home .book-cover {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-800);
+}
+.dyn-home .book-cover-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--gold);
+}
+.dyn-home .book-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--navy-900);
+  padding: 5px 10px;
+  z-index: 2;
+}
+
+/* ---------- Reveal au scroll ----------
+   La logique ajoute .in quand l'élément entre dans le viewport.
+   L'état caché n'est appliqué que si <html class="js-reveal"> (posé
+   avant le paint par un script inline) : sans JS, tout reste visible. */
+html.js-reveal .dyn-home .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+html.js-reveal .dyn-home .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+.dyn-home .reveal[data-delay='1'] {
+  transition-delay: 0.08s;
+}
+.dyn-home .reveal[data-delay='2'] {
+  transition-delay: 0.16s;
+}
+/* Restaure le « lift » au survol des tuiles, que .reveal.in écraserait sinon. */
+html.js-reveal .dyn-home .tile.reveal.in:hover {
+  transform: translateY(-4px);
+}
+
+/* ====== DISPLAY ====== */
+.dyn-home .c-display {
+  font-family: var(--grotesk);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+
+/* ====== HERO ====== */
+.dyn-home .c-hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.dyn-home .c-hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.dyn-home .c-hero-bg .g1 {
+  position: absolute;
+  top: -15%;
+  left: -10%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.18), transparent 60%);
+  filter: blur(10px);
+  animation: dh-float1 12s ease-in-out infinite;
+}
+.dyn-home .c-hero-bg .g2 {
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(46, 46, 90, 0.8), transparent 60%);
+  animation: dh-float2 14s ease-in-out infinite;
+}
+.dyn-home .c-hero-bg .grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(201, 168, 76, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+  -webkit-mask-image: radial-gradient(ellipse at center, black, transparent 78%);
+  mask-image: radial-gradient(ellipse at center, black, transparent 78%);
+}
+@keyframes dh-float1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(40px, 30px);
+  }
+}
+@keyframes dh-float2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-40px, -20px);
+  }
+}
+
+.dyn-home .c-hero-main {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+  padding: 150px 40px 40px;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 40px;
+  align-items: center;
+}
+.dyn-home .c-tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 100px;
+  padding: 9px 18px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.dyn-home .c-tagline .pin {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.6);
+  animation: dh-blink 2s infinite;
+}
+@keyframes dh-blink {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(201, 168, 76, 0);
+  }
+}
+.dyn-home .c-h1 {
+  font-family: var(--grotesk);
+  font-weight: 700;
+  font-size: clamp(3rem, 7vw, 6.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  margin-top: 28px;
+  color: var(--cream);
+}
+.dyn-home .c-h1 .sweep {
+  background: linear-gradient(
+    100deg,
+    var(--gold-deep),
+    var(--gold-bright),
+    var(--gold),
+    var(--gold-bright)
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: dh-sweep 5s linear infinite;
+}
+@keyframes dh-sweep {
+  to {
+    background-position: 250% 0;
+  }
+}
+.dyn-home .c-sub {
+  margin-top: 26px;
+  font-size: 19px;
+  color: var(--muted-on-dark);
+  max-width: 46ch;
+}
+.dyn-home .c-hero-cta {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.dyn-home .c-portrait {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 380px;
+}
+.dyn-home .c-portrait .panel {
+  position: relative;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  background: linear-gradient(180deg, rgba(34, 34, 72, 0.5), rgba(10, 10, 20, 0.2));
+  padding: 14px 14px 0;
+}
+.dyn-home .c-portrait .panel::before,
+.dyn-home .c-portrait .panel::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--gold);
+}
+.dyn-home .c-portrait .panel::before {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.dyn-home .c-portrait .panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+.dyn-home .c-portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.5));
+}
+
+/* ====== MARQUEE ====== */
+.dyn-home .marquee {
+  position: relative;
+  z-index: 3;
+  border-top: 1px solid rgba(201, 168, 76, 0.2);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+  overflow: hidden;
+  padding: 18px 0;
+  background: rgba(10, 10, 20, 0.5);
+}
+.dyn-home .marquee .track {
+  display: inline-flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: dh-scroll 26s linear infinite;
+}
+.dyn-home .marquee .track span {
+  font-family: var(--grotesk);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  padding: 0 28px;
+  color: var(--cream);
+}
+.dyn-home .marquee .track span.alt {
+  color: var(--gold);
+}
+.dyn-home .marquee .track span .star {
+  color: var(--gold);
+  margin-right: 28px;
+}
+.dyn-home .marquee .track span .star.cream {
+  color: var(--cream);
+}
+@keyframes dh-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ====== STATS BAND ====== */
+.dyn-home .c-stats {
+  background: var(--navy-900);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+}
+.dyn-home .c-stats .row {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 64px 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.dyn-home .c-stats .s {
+  text-align: center;
+  padding: 6px 24px;
+  border-right: 1px solid rgba(244, 238, 223, 0.1);
+}
+.dyn-home .c-stats .s:last-child {
+  border-right: 0;
+}
+.dyn-home .c-stats .s .v {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 4vw, 3.5rem);
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.dyn-home .c-stats .s .l {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-on-dark);
+  margin-top: 14px;
+}
+
+/* ====== SECTION GENERIQUE ====== */
+.dyn-home .c-sec {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 110px 40px;
+}
+.dyn-home #enseignements {
+  scroll-margin-top: 90px;
+}
+.dyn-home .c-head {
+  margin-bottom: 50px;
+}
+.dyn-home .c-head .k {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.dyn-home .c-head h2 {
+  font-family: var(--grotesk);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-top: 14px;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+.dyn-home .c-head h2 em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+/* ====== BENTO ====== */
+.dyn-home .bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 18px;
+}
+.dyn-home .tile {
+  position: relative;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  background: linear-gradient(180deg, rgba(34, 34, 72, 0.34), rgba(13, 13, 30, 0.34));
+  padding: 28px;
+  overflow: hidden;
+  transition:
+    border-color 0.3s,
+    transform 0.3s var(--ease);
+}
+.dyn-home .tile:hover {
+  border-color: rgba(201, 168, 76, 0.5);
+  transform: translateY(-4px);
+}
+.dyn-home .tile-video {
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: 0;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(34, 34, 72, 0.9), rgba(10, 10, 20, 0.95));
+}
+.dyn-home .tile-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.dyn-home .yt-facade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  border: 0;
+  cursor: pointer;
+  color: var(--cream);
+}
+.dyn-home .yt-facade::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 10, 20, 0.35), rgba(10, 10, 20, 0.75));
+}
+.dyn-home .yt-facade .pv {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.dyn-home .yt-facade .play {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  transition: transform 0.3s;
+}
+.dyn-home .yt-facade:hover .play {
+  transform: scale(1.08);
+}
+.dyn-home .yt-facade .play svg {
+  width: 28px;
+  height: 28px;
+  fill: var(--navy-900);
+  margin-left: 4px;
+}
+.dyn-home .yt-facade .t {
+  font-family: var(--grotesk);
+  font-weight: 600;
+  font-size: 20px;
+}
+.dyn-home .yt-facade .s {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-on-dark);
+  margin-top: 8px;
+}
+.dyn-home .tile-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.dyn-home .tile-stat .v {
+  font-family: var(--grotesk);
+  font-weight: 700;
+  font-size: clamp(2.8rem, 4vw, 3.6rem);
+  color: var(--gold);
+  line-height: 1;
+}
+.dyn-home .tile-stat .l {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-on-dark);
+  margin-top: 12px;
+}
+.dyn-home .tile-book {
+  padding: 0;
+  grid-row: span 2;
+}
+.dyn-home .tile-book .book-cover {
+  width: 100%;
+  height: 100%;
+}
+.dyn-home .tile-book .lbl {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 18px;
+  background: linear-gradient(transparent, rgba(10, 10, 20, 0.92));
+  font-family: var(--grotesk);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--cream);
+  z-index: 2;
+}
+.dyn-home .tile-quote {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.dyn-home .tile-quote .q {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  line-height: 1.3;
+  color: var(--cream);
+}
+.dyn-home .tile-quote .src {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 16px;
+}
+.dyn-home .tile-cta {
+  background: var(--gold);
+  color: var(--navy-900);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.dyn-home .tile-cta:hover {
+  background: var(--gold-bright);
+}
+.dyn-home .tile-cta .big {
+  font-family: var(--grotesk);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.dyn-home .tile-cta .ar {
+  font-size: 30px;
+  align-self: flex-end;
+}
+
+/* ====== BANDEAU LIVRES ====== */
+.dyn-home .c-books {
+  background: var(--navy-900);
+}
+.dyn-home .c-books-head {
+  padding-bottom: 24px;
+}
+.dyn-home .c-books-headrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.dyn-home .c-strip {
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+  padding: 6px 40px 30px;
+  scroll-snap-type: x mandatory;
+}
+.dyn-home .c-strip::-webkit-scrollbar {
+  height: 6px;
+}
+.dyn-home .c-strip .card {
+  flex: none;
+  width: 250px;
+  scroll-snap-align: start;
+}
+.dyn-home .c-strip .card .book-cover {
+  aspect-ratio: 2 / 3;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+  transition: transform 0.35s var(--ease);
+}
+.dyn-home .c-strip .card:hover .book-cover {
+  transform: translateY(-8px);
+}
+.dyn-home .c-strip .card h3 {
+  font-family: var(--grotesk);
+  font-weight: 600;
+  font-size: 17px;
+  margin-top: 16px;
+  color: var(--cream);
+}
+.dyn-home .c-strip .card .th {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 6px;
+}
+
+/* ====== CONFERENCE (kinetic) ====== */
+.dyn-home .c-conf {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 120px 40px;
+  background: var(--ink);
+}
+.dyn-home .c-conf::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.12), transparent 60%);
+}
+.dyn-home .c-conf .k {
+  position: relative;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.dyn-home .c-conf .num {
+  position: relative;
+  font-family: var(--grotesk);
+  font-weight: 700;
+  font-size: clamp(5rem, 16vw, 15rem);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--gold);
+}
+.dyn-home .c-conf .num b {
+  -webkit-text-stroke: 0;
+  color: var(--gold);
+}
+.dyn-home .c-conf h2 {
+  position: relative;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin-top: 4px;
+  color: var(--cream);
+}
+.dyn-home .c-conf p {
+  position: relative;
+  max-width: 56ch;
+  margin: 22px auto 0;
+  color: var(--muted-on-dark);
+  font-size: 18px;
+}
+
+/* ====== FINAL ====== */
+.dyn-home .c-final {
+  text-align: center;
+  padding: 120px 40px;
+  background: var(--navy-900);
+}
+.dyn-home .c-final h2 {
+  font-family: var(--grotesk);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 0.96;
+  color: var(--cream);
+}
+.dyn-home .c-final h2 em {
+  font-style: normal;
+  color: var(--gold);
+}
+.dyn-home .c-final .cta {
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 940px) {
+  .dyn-home .c-hero-main {
+    grid-template-columns: 1fr;
+    padding-top: 130px;
+  }
+  .dyn-home .c-portrait {
+    max-width: 300px;
+    order: -1;
+  }
+  .dyn-home .bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dyn-home .tile-video,
+  .dyn-home .tile-quote {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 720px) {
+  .dyn-home .c-stats .row {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 0;
+  }
+  .dyn-home .c-stats .s:nth-child(2) {
+    border-right: 0;
+  }
+}
+@media (max-width: 560px) {
+  .dyn-home .bento {
+    grid-template-columns: 1fr;
+  }
+  .dyn-home .tile-video,
+  .dyn-home .tile-quote {
+    grid-column: span 1;
+  }
+  .dyn-home .tile-book {
+    grid-row: span 2;
+  }
+}
+
+/* ====== MOTION REDUITE ====== */
+@media (prefers-reduced-motion: reduce) {
+  .dyn-home .c-hero-bg .g1,
+  .dyn-home .c-hero-bg .g2,
+  .dyn-home .c-tagline .pin,
+  .dyn-home .c-h1 .sweep,
+  .dyn-home .marquee .track {
+    animation: none;
+  }
+  html.js-reveal .dyn-home .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
