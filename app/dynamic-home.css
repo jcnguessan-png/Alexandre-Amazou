@@ -1,148 +1,10 @@
 /* =========================================================
    ACCUEIL — DIRECTION C (Moderne / Dynamique)
-   Styles dédiés à la page d'accueil, scopés sous .dyn-home pour
-   ne jamais déborder sur le reste du site (Tailwind / pages claires).
-   Bleu nuit profond + or. Grotesque moderne + serif majestueux.
+   Styles spécifiques à la page d'accueil. La fondation partagée
+   (tokens, boutons, book-cover, eyebrow, reveal…) vit dans
+   theme-dyn.css, scopée sous .dyn. Ici tout est scopé sous .dyn-home.
    ========================================================= */
 
-.dyn-home {
-  /* Couleurs — bleu nuit riche + or */
-  --ink: #0a0a14;
-  --navy-900: #0d0d1e;
-  --navy-800: #12122b;
-  --navy-700: #181838;
-  --navy-600: #222248;
-  --navy-500: #2e2e5a;
-  --gold: #c9a84c;
-  --gold-bright: #e4c977;
-  --gold-deep: #9a7b2e;
-  --cream: #f4eedf;
-  --muted-on-dark: rgba(244, 238, 223, 0.62);
-
-  /* Familles typographiques (chargées via next/font dans layout.tsx) */
-  --serif: var(--font-cormorant), 'Times New Roman', serif;
-  --body: var(--font-source-serif), Georgia, serif;
-  --sans: var(--font-archivo), system-ui, sans-serif;
-  --grotesk: var(--font-space-grotesk), var(--font-archivo), sans-serif;
-
-  --maxw: 1280px;
-  --ease: cubic-bezier(0.22, 0.61, 0.21, 1);
-
-  background: var(--ink);
-  color: var(--cream);
-  font-family: var(--body);
-  font-size: 18px;
-  line-height: 1.65;
-}
-
-.dyn-home img {
-  display: block;
-  max-width: 100%;
-}
-
-/* ---------- Boutons partagés ---------- */
-.dyn-home .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 17px 30px;
-  transition: all 0.3s var(--ease);
-  border: 1px solid transparent;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.dyn-home .btn .ar {
-  transition: transform 0.3s var(--ease);
-}
-.dyn-home .btn:hover .ar {
-  transform: translateX(5px);
-}
-.dyn-home .btn-gold {
-  background: var(--gold);
-  color: var(--navy-900);
-}
-.dyn-home .btn-gold:hover {
-  background: var(--gold-bright);
-}
-.dyn-home .btn-ghost-gold {
-  background: transparent;
-  color: var(--gold);
-  border-color: rgba(201, 168, 76, 0.5);
-}
-.dyn-home .btn-ghost-gold:hover {
-  background: var(--gold);
-  color: var(--navy-900);
-  border-color: var(--gold);
-}
-
-/* ---------- Couverture de livre (partagée) ---------- */
-.dyn-home .book-cover {
-  position: relative;
-  overflow: hidden;
-  background: var(--navy-800);
-}
-.dyn-home .book-cover-fallback {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  text-align: center;
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1.2;
-  color: var(--gold);
-}
-.dyn-home .book-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  font-family: var(--sans);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: var(--gold);
-  color: var(--navy-900);
-  padding: 5px 10px;
-  z-index: 2;
-}
-
-/* ---------- Reveal au scroll ----------
-   La logique ajoute .in quand l'élément entre dans le viewport.
-   L'état caché n'est appliqué que si <html class="js-reveal"> (posé
-   avant le paint par un script inline) : sans JS, tout reste visible. */
-html.js-reveal .dyn-home .reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.7s var(--ease),
-    transform 0.7s var(--ease);
-}
-html.js-reveal .dyn-home .reveal.in {
-  opacity: 1;
-  transform: none;
-}
-.dyn-home .reveal[data-delay='1'] {
-  transition-delay: 0.08s;
-}
-.dyn-home .reveal[data-delay='2'] {
-  transition-delay: 0.16s;
-}
-/* Restaure le « lift » au survol des tuiles, que .reveal.in écraserait sinon. */
-html.js-reveal .dyn-home .tile.reveal.in:hover {
-  transform: translateY(-4px);
-}
-
-/* ====== DISPLAY ====== */
 .dyn-home .c-display {
   font-family: var(--grotesk);
   font-weight: 700;
@@ -412,7 +274,7 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
   margin-top: 14px;
 }
 
-/* ====== SECTION GENERIQUE ====== */
+/* ====== SECTION BENTO ====== */
 .dyn-home .c-sec {
   max-width: var(--maxw);
   margin: 0 auto;
@@ -446,8 +308,6 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
   font-style: normal;
   color: var(--gold);
 }
-
-/* ====== BENTO ====== */
 .dyn-home .bento {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -468,6 +328,10 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
   border-color: rgba(201, 168, 76, 0.5);
   transform: translateY(-4px);
 }
+/* Restaure le « lift » au survol des tuiles, que .reveal.in écraserait sinon. */
+html.js-reveal .dyn-home .tile.reveal.in:hover {
+  transform: translateY(-4px);
+}
 .dyn-home .tile-video {
   grid-column: span 2;
   grid-row: span 2;
@@ -481,64 +345,6 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
   width: 100%;
   height: 100%;
   border: 0;
-}
-.dyn-home .yt-facade {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: cover;
-  background-position: center;
-  border: 0;
-  cursor: pointer;
-  color: var(--cream);
-}
-.dyn-home .yt-facade::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(10, 10, 20, 0.35), rgba(10, 10, 20, 0.75));
-}
-.dyn-home .yt-facade .pv {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-}
-.dyn-home .yt-facade .play {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  background: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  transition: transform 0.3s;
-}
-.dyn-home .yt-facade:hover .play {
-  transform: scale(1.08);
-}
-.dyn-home .yt-facade .play svg {
-  width: 28px;
-  height: 28px;
-  fill: var(--navy-900);
-  margin-left: 4px;
-}
-.dyn-home .yt-facade .t {
-  font-family: var(--grotesk);
-  font-weight: 600;
-  font-size: 20px;
-}
-.dyn-home .yt-facade .s {
-  font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted-on-dark);
-  margin-top: 8px;
 }
 .dyn-home .tile-stat {
   display: flex;
@@ -805,9 +611,5 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
   .dyn-home .c-h1 .sweep,
   .dyn-home .marquee .track {
     animation: none;
-  }
-  html.js-reveal .dyn-home .reveal {
-    opacity: 1 !important;
-    transform: none !important;
   }
 }

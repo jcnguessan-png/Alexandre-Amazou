@@ -3,9 +3,10 @@ import { notFound } from 'next/navigation';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { books, getBookBySlug, getRelatedBooks } from '@/data/books';
-import { BookDetail } from '@/components/books/BookDetail';
+import { BookDetailDyn } from '@/components/books/BookDetailDyn';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { bookSchema, breadcrumbSchema } from '@/lib/schema';
+import './livre.css';
 
 type Params = { slug: string };
 
@@ -53,7 +54,7 @@ export default async function BookPage({ params }: { params: Params }) {
   const related = getRelatedBooks(book, 3);
 
   return (
-    <div className="container py-16 md:py-20">
+    <div className="dyn dyn-livre" data-page="livres">
       <JsonLd data={bookSchema(book)} />
       <JsonLd
         data={breadcrumbSchema([
@@ -62,7 +63,7 @@ export default async function BookPage({ params }: { params: Params }) {
           { name: book.title, href: `/mes-livres/${book.slug}` },
         ])}
       />
-      <BookDetail book={book} excerptSource={excerpt} related={related} />
+      <BookDetailDyn book={book} excerptSource={excerpt} related={related} />
     </div>
   );
 }

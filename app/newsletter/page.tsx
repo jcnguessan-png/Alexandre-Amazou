@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { CheckCircle2 } from 'lucide-react';
-import { SectionTitle } from '@/components/ui/SectionTitle';
+import { DynPageHero } from '@/components/layout/DynPageHero';
 import { NewsletterBanner } from '@/components/home/NewsletterBanner';
 
 export const metadata: Metadata = {
@@ -20,30 +20,33 @@ const benefits = [
 
 export default function NewsletterPage() {
   return (
-    <>
-      <div className="container py-16 md:py-20">
-        <SectionTitle
-          as="h1"
-          eyebrow="Newsletter"
-          title="Recevez mes réflexions hebdomadaires"
-          description="Une parole pour fortifier votre semaine, équiper votre ministère et nourrir votre marche avec Dieu."
-        />
+    <div className="dyn" data-page="newsletter">
+      <DynPageHero
+        eyebrow="Newsletter"
+        title="Recevez mes réflexions hebdomadaires"
+        lead="Une parole pour fortifier votre semaine, équiper votre ministère et nourrir votre marche avec Dieu."
+      />
 
-        <ul className="mt-10 grid gap-4 md:grid-cols-2">
+      <div className="page-body">
+        <ul className="dgrid cols-2">
           {benefits.map((benefit) => (
-            <li key={benefit} className="flex items-start gap-3 rounded-lg border border-border bg-background p-5">
+            <li
+              className="dcard reveal"
+              key={benefit}
+              style={{ listStyle: 'none', flexDirection: 'row', gap: '14px', alignItems: 'flex-start' }}
+            >
               <CheckCircle2
                 size={20}
                 aria-hidden="true"
-                className="mt-0.5 flex-shrink-0 text-secondary"
+                style={{ color: 'var(--gold)', flexShrink: 0, marginTop: '2px' }}
               />
-              <p className="text-sm leading-relaxed text-foreground/80">{benefit}</p>
+              <p style={{ marginTop: 0 }}>{benefit}</p>
             </li>
           ))}
         </ul>
       </div>
 
       <NewsletterBanner source="newsletter-page" />
-    </>
+    </div>
   );
 }

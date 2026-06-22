@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
-import { Heart, CreditCard, Smartphone, Building2 } from 'lucide-react';
-import { SectionTitle } from '@/components/ui/SectionTitle';
-import { Button } from '@/components/ui/Button';
-import { Quote } from '@/components/ui/Quote';
+import Link from 'next/link';
+import { CreditCard, Smartphone, Building2 } from 'lucide-react';
+import { DynPageHero } from '@/components/layout/DynPageHero';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
 import { siteConfig } from '@/lib/site-config';
@@ -18,7 +17,7 @@ const channels = [
   {
     icon: Smartphone,
     title: 'Mobile Money',
-    description: 'Wave, Orange Money, MTN Money — les solutions privilégiées en Afrique de l\'Ouest.',
+    description: "Wave, Orange Money, MTN Money — les solutions privilégiées en Afrique de l'Ouest.",
     note: 'Numéros communiqués par le secrétariat sur demande.',
   },
   {
@@ -37,7 +36,7 @@ const channels = [
 
 export default function DonationPage() {
   return (
-    <>
+    <div className="dyn" data-page="don">
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Accueil', href: '/' },
@@ -45,65 +44,60 @@ export default function DonationPage() {
         ])}
       />
 
-      <div className="container py-16 md:py-20">
-        <SectionTitle
-          as="h1"
-          eyebrow="Soutenir le ministère"
-          title="Faire un don"
-          description="Votre soutien financier permet de poursuivre l'œuvre missionnaire, de financer les conférences internationales, de former gratuitement les serviteurs de Dieu et de produire les contenus qui transforment des vies."
-        />
+      <DynPageHero
+        eyebrow="Soutenir le ministère"
+        title="Faire un don"
+        lead="Votre soutien financier permet de poursuivre l'œuvre missionnaire, de financer les conférences internationales, de former gratuitement les serviteurs de Dieu et de produire les contenus qui transforment des vies."
+      />
 
-        <Quote reference="2 Corinthiens 9 : 7-8">
-          Que chacun donne comme il l'a résolu en son cœur, sans tristesse ni
-          contrainte ; car Dieu aime celui qui donne avec joie. Et Dieu peut
-          vous combler de toutes sortes de grâces, afin que, possédant toujours
-          en toutes choses de quoi satisfaire à tous vos besoins, vous ayez
-          encore en abondance pour toute bonne œuvre.
-        </Quote>
+      <div className="page-body">
+        <div className="stack-lg">
+          <div className="dquote reveal">
+            <p className="q">
+              « Que chacun donne comme il l&apos;a résolu en son cœur, sans tristesse ni
+              contrainte ; car Dieu aime celui qui donne avec joie. »
+            </p>
+            <p className="src">— 2 Corinthiens 9 : 7</p>
+          </div>
 
-        <h2 className="mt-12 text-2xl font-semibold text-primary">
-          Comment faire un don
-        </h2>
-        <span className="mt-3 block h-[2px] w-12 bg-secondary" aria-hidden="true" />
+          <div>
+            <div className="subhead reveal">
+              <p className="eyebrow eyebrow-gold">Trois canaux</p>
+              <h2>Comment faire un don</h2>
+              <span className="bar" aria-hidden="true" />
+            </div>
+            <div className="dgrid cols-3" style={{ marginTop: '32px' }}>
+              {channels.map((c) => (
+                <div className="dcard reveal" key={c.title}>
+                  <span className="ic">
+                    <c.icon size={22} aria-hidden="true" />
+                  </span>
+                  <h3>{c.title}</h3>
+                  <p>{c.description}</p>
+                  <p className="note">{c.note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <ul className="mt-8 grid gap-6 md:grid-cols-3">
-          {channels.map((c) => (
-            <li
-              key={c.title}
-              className="flex flex-col rounded-lg border border-border bg-background p-6 shadow-sm"
-            >
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-secondary/10 text-secondary">
-                <c.icon size={22} aria-hidden="true" />
-              </div>
-              <h3 className="mt-5 text-lg font-semibold text-primary">{c.title}</h3>
-              <p className="mt-2 flex-1 text-sm text-foreground/75">{c.description}</p>
-              <p className="mt-4 text-xs italic text-foreground/55">{c.note}</p>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-12 rounded-xl bg-primary p-8 text-primary-foreground md:p-12">
-          <Heart className="text-secondary" size={36} aria-hidden="true" />
-          <h2 className="mt-5 text-balance font-heading text-2xl font-semibold text-primary-foreground md:text-3xl">
-            Donner directement via le portail officiel ABMCI
-          </h2>
-          <p className="mt-3 max-w-2xl text-primary-foreground/80">
-            Toutes les transactions sont gérées par le portail sécurisé de
-            l'Alliance Biblique Missionnaire Côte d'Ivoire — vous recevrez un
-            accusé de réception immédiat et, sur demande, un reçu fiscal.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild variant="primary" size="md">
-              <a href={siteConfig.donationUrl} target="_blank" rel="noopener noreferrer">
-                Faire un don sur abmci.com
+          <div className="panel-gold reveal">
+            <h2>Donner directement via le portail officiel ABMCI</h2>
+            <p>
+              Toutes les transactions sont gérées par le portail sécurisé de l&apos;Alliance
+              Biblique Missionnaire Côte d&apos;Ivoire — vous recevrez un accusé de réception
+              immédiat et, sur demande, un reçu fiscal.
+            </p>
+            <div className="cta">
+              <a className="btn btn-gold" href={siteConfig.donationUrl} target="_blank" rel="noopener noreferrer">
+                Faire un don sur abmci.com <span className="ar">→</span>
               </a>
-            </Button>
-            <Button asChild variant="secondary" size="md">
-              <a href="/me-contacter">Demander un reçu fiscal</a>
-            </Button>
+              <Link className="btn btn-ghost-gold" href="/me-contacter">
+                Demander un reçu fiscal
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

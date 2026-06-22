@@ -15,7 +15,9 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { SkipToContent } from '@/components/layout/SkipToContent';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { RevealOnScroll } from '@/components/home/dynamic/RevealOnScroll';
 import './globals.css';
+import './theme-dyn.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -140,8 +142,15 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#1A1A2E',
+  themeColor: '#0A0A14',
 };
+
+// Pose l'état « caché » des éléments .reveal avant le paint (pas de FOUC) et,
+// en filet de sécurité, révèle tout après 5 s si l'hydratation échoue.
+const REVEAL_BOOTSTRAP =
+  "document.documentElement.classList.add('js-reveal');" +
+  'setTimeout(function(){var n=document.querySelectorAll(".dyn .reveal");' +
+  'for(var i=0;i<n.length;i++)n[i].classList.add("in");},5000);';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
@@ -164,13 +173,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         ) : null}
       </head>
-      <body className="flex min-h-screen flex-col">
+      <body className="flex min-h-screen flex-col bg-[#0A0A14]">
+        <script dangerouslySetInnerHTML={{ __html: REVEAL_BOOTSTRAP }} />
         <SkipToContent targetId="main-content" />
         <Header />
         <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
           {children}
         </main>
         <Footer />
+        <RevealOnScroll />
       </body>
     </html>
   );
