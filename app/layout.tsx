@@ -16,6 +16,7 @@ import { SkipToContent } from '@/components/layout/SkipToContent';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { RevealOnScroll } from '@/components/home/dynamic/RevealOnScroll';
+import { ChatWidget } from '@/components/chat/ChatWidget';
 import './globals.css';
 import './theme-dyn.css';
 
@@ -181,6 +182,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <ChatWidget />
         <RevealOnScroll />
       </body>
     </html>

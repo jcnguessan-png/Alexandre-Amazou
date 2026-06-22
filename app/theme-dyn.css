@@ -52,6 +52,12 @@
 .dyn :target {
   scroll-margin-top: 96px;
 }
+/* globals.css impose text-primary (bleu nuit foncé) à tous les h1–h6 : sur les
+   pages sombres ça rend les titres illisibles. On force l'héritage de la couleur
+   de la section (crème sur fond sombre, navy sur les sections claires). */
+.dyn :is(h1, h2, h3, h4, h5, h6) {
+  color: inherit;
+}
 
 /* ---------- Utilities ---------- */
 .dyn .wrap {
