@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
@@ -57,6 +58,7 @@ function PlatformRow({ label, href, withRss }: { label: string; href?: string; w
 export default async function PodcastPage() {
   const feed = await safeGetPodcastFeed();
   const episodes = feed?.episodes ?? [];
+  const showImage = feed?.show.imageUrl;
   const hasPublicSpotify = Boolean(podcastInfo.spotifyShowUrl);
 
   return (
@@ -99,13 +101,25 @@ export default async function PodcastPage() {
             </div>
           </div>
           <div className="pc-cover reveal" data-delay="1" aria-hidden="true">
-            <Headphones className="hp" />
-            <div className="nm">
-              SÉQUENCES
-              <br />
-              VÉRITÉ
-            </div>
-            <div className="by">Pasteur Alexandre Amazou</div>
+            {showImage ? (
+              <Image
+                src={showImage}
+                alt=""
+                fill
+                sizes="(max-width: 880px) 320px, 460px"
+                unoptimized
+              />
+            ) : (
+              <>
+                <Headphones className="hp" />
+                <div className="nm">
+                  SÉQUENCES
+                  <br />
+                  VÉRITÉ
+                </div>
+                <div className="by">Pasteur Alexandre Amazou</div>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -142,11 +156,18 @@ export default async function PodcastPage() {
             episodes.map((ep, index) => {
               const listenHref =
                 (hasPublicSpotify ? ep.spotifyEpisodeUrl : undefined) ?? podcastInfo.youtubePlaylistUrl;
+              const art = ep.imageUrl ?? showImage;
               return (
                 <article className="ep reveal" key={ep.id}>
                   <div className="art" aria-hidden="true">
-                    <Headphones className="hp" />
-                    <div className="t">SÉQUENCES VÉRITÉ</div>
+                    {art ? (
+                      <Image src={art} alt="" fill sizes="130px" unoptimized />
+                    ) : (
+                      <>
+                        <Headphones className="hp" />
+                        <div className="t">SÉQUENCES VÉRITÉ</div>
+                      </>
+                    )}
                   </div>
                   <div>
                     <div className="meta">

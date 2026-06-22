@@ -319,6 +319,21 @@
   margin: 0;
 }
 
+/* Pochettes issues du flux RSS (cloudfront → next/image unoptimized) */
+.dyn-podcast .pc-cover {
+  overflow: hidden;
+}
+.dyn-podcast .pc-cover img {
+  object-fit: cover;
+}
+.dyn-podcast .ep .art {
+  position: relative;
+  overflow: hidden;
+}
+.dyn-podcast .ep .art img {
+  object-fit: cover;
+}
+
 @media (max-width: 880px) {
   .dyn-podcast .pc-hero .inner {
     grid-template-columns: 1fr;
