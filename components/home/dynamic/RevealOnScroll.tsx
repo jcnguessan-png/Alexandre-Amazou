@@ -1,21 +1,21 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 /**
- * Révèle les éléments `.reveal` de la page d'accueil quand ils entrent dans le
- * viewport. S'exécute à chaque montage (y compris navigations côté client).
- * L'état caché initial est posé avant le paint par un script inline (voir
- * app/page.tsx) gaté sur <html class="js-reveal"> — donc sans JS, tout reste
- * visible. Un filet de sécurité dans ce script révèle tout après 5 s au cas où
- * l'hydratation échouerait.
+ * Révèle les éléments `.dyn .reveal` quand ils entrent dans le viewport.
+ * Monté une fois dans le layout, il re-scanne à chaque changement de route
+ * (navigation côté client). L'état caché initial est posé avant le paint par
+ * un script inline dans le layout, gaté sur <html class="js-reveal"> — donc
+ * sans JS, tout reste visible ; un filet de sécurité y révèle tout après 5 s
+ * si l'hydratation échoue.
  */
 export function RevealOnScroll() {
-  useEffect(() => {
-    const root = document.querySelector('.dyn-home');
-    if (!root) return;
+  const pathname = usePathname();
 
-    const els = Array.from(root.querySelectorAll<HTMLElement>('.reveal'));
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>('.dyn .reveal'));
     if (els.length === 0) return;
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -38,7 +38,7 @@ export function RevealOnScroll() {
 
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [pathname]);
 
   return null;
 }

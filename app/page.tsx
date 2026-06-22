@@ -8,7 +8,6 @@ import { BentoSection } from '@/components/home/dynamic/BentoSection';
 import { BooksStrip } from '@/components/home/dynamic/BooksStrip';
 import { ConferenceBand } from '@/components/home/dynamic/ConferenceBand';
 import { FinalCta } from '@/components/home/dynamic/FinalCta';
-import { RevealOnScroll } from '@/components/home/dynamic/RevealOnScroll';
 import './dynamic-home.css';
 
 export const metadata: Metadata = {
@@ -21,33 +20,22 @@ export const metadata: Metadata = {
 // ISR : revalidation toutes les heures (les vidéos YouTube changent ; le reste est statique).
 export const revalidate = 3600;
 
-// Pose l'état « caché » des éléments .reveal avant le paint (pas de FOUC) et,
-// en filet de sécurité, révèle tout après 5 s si l'hydratation échoue.
-const REVEAL_BOOTSTRAP =
-  "document.documentElement.classList.add('js-reveal');" +
-  'setTimeout(function(){var n=document.querySelectorAll(".dyn-home .reveal");' +
-  'for(var i=0;i<n.length;i++)n[i].classList.add("in");},5000);';
-
 export default async function HomePage() {
   const videos = await safeGetFeaturedPlaylistVideos(8);
   const poster = videos[0]?.thumbnailHigh ?? videos[0]?.thumbnailUrl;
 
   return (
-    <>
-      <script dangerouslySetInnerHTML={{ __html: REVEAL_BOOTSTRAP }} />
-      <div className="dyn-home" data-page="accueil">
-        <HeroDynamic />
-        <StatsBand />
-        <BentoSection
-          book={featuredBook}
-          playlistId={siteConfig.youtube.featuredPlaylistId}
-          poster={poster}
-        />
-        <BooksStrip books={books} />
-        <ConferenceBand />
-        <FinalCta youtubeUrl={siteConfig.youtube.channelUrl} />
-      </div>
-      <RevealOnScroll />
-    </>
+    <div className="dyn dyn-home" data-page="accueil">
+      <HeroDynamic />
+      <StatsBand />
+      <BentoSection
+        book={featuredBook}
+        playlistId={siteConfig.youtube.featuredPlaylistId}
+        poster={poster}
+      />
+      <BooksStrip books={books} />
+      <ConferenceBand />
+      <FinalCta youtubeUrl={siteConfig.youtube.channelUrl} />
+    </div>
   );
 }

@@ -1,0 +1,295 @@
+/* Mes livres — Direction C. Scopé sous .dyn-livres. Fondation : theme-dyn.css */
+
+/* HERO */
+.dyn-livres .lv-hero {
+  background: var(--ink);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+.dyn-livres .lv-hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 50vw;
+  background: radial-gradient(ellipse, rgba(201, 168, 76, 0.12), transparent 60%);
+}
+.dyn-livres .lv-hero .inner {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 160px 40px 70px;
+  text-align: center;
+}
+.dyn-livres .lv-hero h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  margin-top: 16px;
+}
+.dyn-livres .lv-hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+.dyn-livres .lv-hero p {
+  font-size: 19px;
+  color: var(--muted-on-dark);
+  max-width: 56ch;
+  margin: 22px auto 0;
+}
+
+/* FEATURED */
+.dyn-livres .lv-feat {
+  background: var(--navy-900);
+  color: var(--cream);
+}
+.dyn-livres .lv-feat .inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 90px 40px;
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 56px;
+  align-items: center;
+}
+.dyn-livres .lv-feat .cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  box-shadow: 0 34px 70px rgba(0, 0, 0, 0.5);
+}
+.dyn-livres .lv-feat .cover .book-cover {
+  width: 100%;
+  height: 100%;
+}
+.dyn-livres .lv-feat .tag {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.dyn-livres .lv-feat h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+  line-height: 1.02;
+  margin-top: 14px;
+}
+.dyn-livres .lv-feat .sub {
+  font-family: var(--body);
+  font-style: italic;
+  color: var(--gold-bright);
+  font-size: 18px;
+  margin-top: 8px;
+}
+.dyn-livres .lv-feat p.desc {
+  color: var(--muted-on-dark);
+  font-size: 17.5px;
+  margin-top: 18px;
+  max-width: 56ch;
+}
+.dyn-livres .lv-feat .cta {
+  margin-top: 26px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* CATALOGUE */
+.dyn-livres .lv-cat {
+  background: var(--paper-2);
+  color: var(--navy-900);
+}
+.dyn-livres .lv-cat .inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 90px 40px 110px;
+}
+.dyn-livres .lv-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 56px;
+}
+.dyn-livres .lv-filters button {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 11px 20px;
+  border: 1px solid rgba(13, 13, 30, 0.2);
+  color: var(--navy-900);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+.dyn-livres .lv-filters button:hover {
+  border-color: var(--gold-deep);
+  color: var(--gold-deep);
+}
+.dyn-livres .lv-filters button.active {
+  background: var(--navy-900);
+  color: var(--cream);
+  border-color: var(--navy-900);
+}
+.dyn-livres .lv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 32px;
+}
+.dyn-livres .lv-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  transition:
+    transform 0.3s var(--ease),
+    box-shadow 0.3s;
+}
+.dyn-livres .lv-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(10, 10, 30, 0.18);
+}
+.dyn-livres .lv-card .lv-cover-link {
+  display: block;
+}
+.dyn-livres .lv-card .book-cover {
+  aspect-ratio: 3 / 2.1;
+}
+.dyn-livres .lv-card .body {
+  padding: 26px 26px 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.dyn-livres .lv-card .yr {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.dyn-livres .lv-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.08;
+  margin-top: 8px;
+}
+.dyn-livres .lv-card h3 a:hover {
+  color: var(--gold-deep);
+}
+.dyn-livres .lv-card .sub {
+  font-family: var(--body);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.dyn-livres .lv-card p {
+  font-size: 15.5px;
+  color: #44404f;
+  margin-top: 14px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dyn-livres .lv-card .foot {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.dyn-livres .lv-card .themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.dyn-livres .lv-card .themes span {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 4px 9px;
+}
+.dyn-livres .lv-card .order {
+  margin-top: 14px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy-900);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.dyn-livres .lv-card .order:hover {
+  color: var(--gold-deep);
+}
+
+/* COMMANDER */
+.dyn-livres .lv-order {
+  background: var(--ink);
+  color: var(--cream);
+  text-align: center;
+  padding: 100px 40px;
+}
+.dyn-livres .lv-order h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+}
+.dyn-livres .lv-order h2 em {
+  color: var(--gold);
+  font-style: italic;
+}
+.dyn-livres .lv-order p {
+  color: var(--muted-on-dark);
+  font-size: 18px;
+  max-width: 50ch;
+  margin: 18px auto 0;
+}
+.dyn-livres .lv-order .cta {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 920px) {
+  .dyn-livres .lv-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 860px) {
+  .dyn-livres .lv-feat .inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .dyn-livres .lv-feat .cover {
+    max-width: 280px;
+  }
+}
+@media (max-width: 560px) {
+  .dyn-livres .lv-grid {
+    grid-template-columns: 1fr;
+  }
+}

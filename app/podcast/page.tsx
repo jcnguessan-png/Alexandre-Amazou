@@ -1,13 +1,12 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
-import { Headphones, Rss, Youtube, ExternalLink, Play } from 'lucide-react';
-import { SectionTitle } from '@/components/ui/SectionTitle';
-import { Button } from '@/components/ui/Button';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
 import { podcastInfo } from '@/data/podcasts';
 import { safeGetPodcastFeed, formatPublishedAt } from '@/lib/podcast';
+import { siteConfig } from '@/lib/site-config';
+import { YouTubeFacade } from '@/components/home/dynamic/YouTubeFacade';
+import './podcast.css';
 
 export const metadata: Metadata = {
   title: `Podcast — ${podcastInfo.name}`,
@@ -20,18 +19,48 @@ export const metadata: Metadata = {
   },
 };
 
-// Revalidation à la minute — les ajouts/modifs depuis Spotify for Podcasters
-// remontent rapidement sur le site sans rebuild.
+// Revalidation à la minute — les ajouts depuis Spotify for Podcasters remontent vite.
 export const revalidate = 60;
+
+function Headphones({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+      <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+      <rect x="2.5" y="13" width="4.5" height="7" rx="1.6" />
+      <rect x="17" y="13" width="4.5" height="7" rx="1.6" />
+    </svg>
+  );
+}
+
+function PlatformRow({ label, href, withRss }: { label: string; href?: string; withRss?: boolean }) {
+  return (
+    <div className="row">
+      <span className="name">
+        {withRss ? (
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M5 3a16 16 0 0 1 16 16h-3A13 13 0 0 0 5 6V3zm0 6a10 10 0 0 1 10 10h-3A7 7 0 0 0 5 12V9zm1.5 6a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z" />
+          </svg>
+        ) : null}
+        {label}
+      </span>
+      {href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          Écouter <span aria-hidden="true">↗</span>
+        </a>
+      ) : (
+        <span className="soon">À venir</span>
+      )}
+    </div>
+  );
+}
 
 export default async function PodcastPage() {
   const feed = await safeGetPodcastFeed();
   const episodes = feed?.episodes ?? [];
-  const showImage = feed?.show.imageUrl;
   const hasPublicSpotify = Boolean(podcastInfo.spotifyShowUrl);
 
   return (
-    <>
+    <div className="dyn dyn-podcast" data-page="podcast">
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Accueil', href: '/' },
@@ -39,256 +68,129 @@ export default async function PodcastPage() {
         ])}
       />
 
-      <div className="container py-16 md:py-20">
-        <SectionTitle
-          as="h1"
-          eyebrow="Podcast officiel"
-          title={podcastInfo.name}
-          description={podcastInfo.description}
-        />
-
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.6fr]">
-          {/* ── Aside : plateformes d'écoute ───────────────────────── */}
-          <aside className="rounded-lg border border-border bg-muted/30 p-6 md:p-8 lg:sticky lg:top-28 lg:self-start">
-            <Headphones className="text-secondary" size={36} aria-hidden="true" />
-            <h2 className="mt-4 font-heading text-xl font-semibold text-primary">
-              Écouter sur votre plateforme
-            </h2>
-            <p className="mt-3 text-sm text-foreground/70">
-              Abonne-toi sur la plateforme de ton choix pour ne manquer
-              aucun épisode.
+      {/* HERO */}
+      <section className="pc-hero">
+        <div className="inner">
+          <div>
+            <p className="eyebrow eyebrow-gold reveal">Podcast officiel</p>
+            <h1 className="reveal" data-delay="1">
+              <em>Séquences</em> Vérité
+            </h1>
+            <p className="tag reveal" data-delay="1">
+              Le podcast du Pasteur Alexandre AMAZOU
             </p>
-
-            <ul className="mt-6 space-y-3 text-sm">
-              <PlatformRow
-                label="Spotify"
-                href={podcastInfo.spotifyShowUrl}
-                fallbackLabel="À venir"
-              />
-              <PlatformRow
-                label="Apple Podcasts"
-                href={podcastInfo.applePodcastUrl}
-                fallbackLabel="À venir"
-              />
-              <PlatformRow
-                label="Deezer"
-                href={podcastInfo.deezerUrl}
-                fallbackLabel="À venir"
-              />
-              <PlatformRow
-                label="YouTube"
+            <p className="desc reveal" data-delay="2">
+              {podcastInfo.description}
+            </p>
+            <div className="cta reveal" data-delay="2">
+              <a
+                className="btn btn-gold"
                 href={podcastInfo.youtubePlaylistUrl}
-              />
-              <PlatformRow
-                label="Flux RSS"
-                href={podcastInfo.rssUrl}
-                icon={<Rss size={14} aria-hidden="true" />}
-              />
-            </ul>
-
-            <div className="mt-6 border-t border-border pt-6">
-              <Button asChild variant="outline" size="sm" className="w-full">
-                <Link href="/newsletter">Être prévenu·e des nouveaux épisodes</Link>
-              </Button>
-            </div>
-          </aside>
-
-          {/* ── Liste des épisodes audio (RSS) ──────────────────────── */}
-          <section aria-labelledby="episodes-heading">
-            <h2
-              id="episodes-heading"
-              className="font-heading text-2xl font-semibold text-primary"
-            >
-              Derniers épisodes
-            </h2>
-            <span className="mt-3 block h-[2px] w-12 bg-secondary" aria-hidden="true" />
-
-            {episodes.length === 0 ? (
-              <div className="mt-8 rounded-lg border border-dashed border-border bg-background p-8 text-center">
-                <Rss className="mx-auto text-secondary" size={32} aria-hidden="true" />
-                <p className="mt-4 text-foreground/70">
-                  Les premiers épisodes arrivent très bientôt — abonne-toi
-                  dès maintenant pour ne rien manquer.
-                </p>
-              </div>
-            ) : (
-              <ol className="mt-8 space-y-5">
-                {episodes.map((ep, index) => (
-                  <li
-                    key={ep.id}
-                    className="rounded-lg border border-border bg-background p-5 transition hover:border-secondary/40 hover:shadow-sm md:p-6"
-                  >
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-6">
-                      {showImage ? (
-                        <div className="relative aspect-square w-full max-w-[140px] flex-shrink-0 self-start overflow-hidden rounded-md bg-muted md:w-32">
-                          <Image
-                            src={showImage}
-                            alt=""
-                            fill
-                            sizes="140px"
-                            className="object-cover"
-                            unoptimized
-                          />
-                        </div>
-                      ) : null}
-
-                      <div className="flex-1">
-                        <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-foreground/55">
-                          <span className="font-semibold text-secondary">
-                            Épisode {episodes.length - index}
-                          </span>
-                          <span aria-hidden="true">•</span>
-                          <time dateTime={ep.publishedAt}>
-                            {formatPublishedAt(ep.publishedAt)}
-                          </time>
-                          {ep.durationLabel ? (
-                            <>
-                              <span aria-hidden="true">•</span>
-                              <span>{ep.durationLabel}</span>
-                            </>
-                          ) : null}
-                        </div>
-
-                        <h3 className="mt-2 font-heading text-lg font-semibold leading-snug text-primary md:text-xl">
-                          {ep.title}
-                        </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-foreground/75">
-                          {ep.description}
-                        </p>
-
-                        {ep.audioUrl ? (
-                          <audio
-                            controls
-                            preload="none"
-                            className="mt-4 w-full"
-                            src={ep.audioUrl}
-                          >
-                            Votre navigateur ne supporte pas la lecture audio.
-                          </audio>
-                        ) : null}
-
-                        {hasPublicSpotify && ep.spotifyEpisodeUrl ? (
-                          <div className="mt-3">
-                            <a
-                              href={ep.spotifyEpisodeUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 text-xs font-medium text-secondary hover:underline"
-                            >
-                              Écouter sur Spotify
-                              <ExternalLink size={12} aria-hidden="true" />
-                            </a>
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            )}
-          </section>
-        </div>
-
-        {/* ── Section vidéo : playlist YouTube ──────────────────────── */}
-        <section
-          aria-labelledby="video-heading"
-          className="mt-20 border-t border-border pt-16"
-        >
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
-            <div>
-              <p className="font-quote text-sm uppercase tracking-[0.22em] text-secondary">
-                Aussi en vidéo
-              </p>
-              <h2
-                id="video-heading"
-                className="mt-3 font-heading text-2xl font-semibold leading-tight text-primary md:text-3xl"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                La playlist Séquences Vérité sur YouTube
-              </h2>
-              <span className="mt-4 block h-[2px] w-12 bg-secondary" aria-hidden="true" />
-              <p className="mt-5 text-base leading-relaxed text-foreground/80">
-                Chaque épisode du podcast est aussi disponible en vidéo
-                sur la chaîne YouTube officielle. Lis-les directement ici
-                ou ouvre la playlist complète pour t'abonner et activer la
-                cloche.
-              </p>
-
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button asChild variant="primary" size="md">
-                  <a
-                    href={podcastInfo.youtubePlaylistUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Youtube size={18} aria-hidden="true" />
-                    Voir la playlist sur YouTube
-                  </a>
-                </Button>
-                <Button asChild variant="outline" size="md">
-                  <Link href="/mes-enseignements">
-                    <Play size={16} aria-hidden="true" />
-                    Tous les enseignements
-                  </Link>
-                </Button>
-              </div>
+                Voir la playlist <span className="ar">→</span>
+              </a>
+              {podcastInfo.rssUrl ? (
+                <a className="btn btn-ghost-gold" href={podcastInfo.rssUrl} target="_blank" rel="noopener noreferrer">
+                  Flux RSS
+                </a>
+              ) : null}
             </div>
+          </div>
+          <div className="pc-cover reveal" data-delay="1" aria-hidden="true">
+            <Headphones className="hp" />
+            <div className="nm">
+              SÉQUENCES
+              <br />
+              VÉRITÉ
+            </div>
+            <div className="by">Pasteur Alexandre Amazou</div>
+          </div>
+        </div>
+      </section>
 
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-border bg-muted shadow-md">
-              <iframe
-                title="Playlist YouTube — Séquences Vérité"
-                src={`https://www.youtube-nocookie.com/embed/videoseries?list=${podcastInfo.youtubePlaylistId}&rel=0`}
-                className="absolute inset-0 h-full w-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
+      <section className="pc-body">
+        {/* Aside : plateformes */}
+        <aside className="pc-aside reveal">
+          <Headphones className="hp" />
+          <h2>Écouter sur votre plateforme</h2>
+          <p>Abonnez-vous sur la plateforme de votre choix pour ne manquer aucun épisode.</p>
+          <div className="pc-plat">
+            <PlatformRow label="Spotify" href={podcastInfo.spotifyShowUrl} />
+            <PlatformRow label="Apple Podcasts" href={podcastInfo.applePodcastUrl} />
+            <PlatformRow label="Deezer" href={podcastInfo.deezerUrl} />
+            <PlatformRow label="YouTube" href={podcastInfo.youtubePlaylistUrl} />
+            <PlatformRow label="Flux RSS" href={podcastInfo.rssUrl} withRss />
+          </div>
+          <Link className="btn btn-ghost-gold" href="/newsletter">
+            Être prévenu des nouveaux épisodes
+          </Link>
+        </aside>
+
+        {/* Épisodes */}
+        <div className="pc-eps">
+          <h2 className="reveal">Derniers épisodes</h2>
+          <div className="bar reveal" />
+
+          {episodes.length === 0 ? (
+            <div className="pc-empty reveal">
+              Les premiers épisodes arrivent très bientôt — abonnez-vous dès maintenant pour ne
+              rien manquer.
+            </div>
+          ) : (
+            episodes.map((ep, index) => {
+              const listenHref =
+                (hasPublicSpotify ? ep.spotifyEpisodeUrl : undefined) ?? podcastInfo.youtubePlaylistUrl;
+              return (
+                <article className="ep reveal" key={ep.id}>
+                  <div className="art" aria-hidden="true">
+                    <Headphones className="hp" />
+                    <div className="t">SÉQUENCES VÉRITÉ</div>
+                  </div>
+                  <div>
+                    <div className="meta">
+                      <span className="num">Épisode {episodes.length - index}</span>
+                      <span aria-hidden="true">•</span>
+                      <time dateTime={ep.publishedAt}>{formatPublishedAt(ep.publishedAt)}</time>
+                      {ep.durationLabel ? (
+                        <>
+                          <span aria-hidden="true">•</span>
+                          <span>{ep.durationLabel}</span>
+                        </>
+                      ) : null}
+                    </div>
+                    <h3>{ep.title}</h3>
+                    <p>{ep.description}</p>
+                    {ep.audioUrl ? (
+                      <audio controls preload="none" src={ep.audioUrl}>
+                        Votre navigateur ne supporte pas la lecture audio.
+                      </audio>
+                    ) : null}
+                    <a className="listen" href={listenHref} target="_blank" rel="noopener noreferrer">
+                      Écouter l&apos;épisode <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </article>
+              );
+            })
+          )}
+
+          {/* Tous les épisodes, en vidéo */}
+          <div className="pc-video reveal">
+            <p className="lbl">Tous les épisodes · en vidéo</p>
+            <h3>La playlist Séquences Vérité</h3>
+            <div className="ytp">
+              <YouTubeFacade
+                playlistId={podcastInfo.youtubePlaylistId ?? siteConfig.youtube.featuredPlaylistId}
+                title=""
+                subtitle=""
+                ariaLabel="Lancer la playlist Séquences Vérité"
               />
             </div>
           </div>
-        </section>
-      </div>
-    </>
-  );
-}
-
-function PlatformRow({
-  label,
-  href,
-  fallbackLabel = 'À venir',
-  icon,
-}: {
-  label: string;
-  href?: string;
-  fallbackLabel?: string;
-  icon?: React.ReactNode;
-}) {
-  if (!href) {
-    return (
-      <li className="flex items-center justify-between text-foreground/60">
-        <span className="flex items-center gap-2">
-          {icon}
-          {label}
-        </span>
-        <span className="text-xs uppercase tracking-wide text-secondary">
-          {fallbackLabel}
-        </span>
-      </li>
-    );
-  }
-  return (
-    <li className="flex items-center justify-between text-foreground/80">
-      <span className="flex items-center gap-2">
-        {icon}
-        {label}
-      </span>
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-wide text-primary transition hover:text-secondary"
-      >
-        Écouter
-        <ExternalLink size={12} aria-hidden="true" />
-      </a>
-    </li>
+        </div>
+      </section>
+    </div>
   );
 }

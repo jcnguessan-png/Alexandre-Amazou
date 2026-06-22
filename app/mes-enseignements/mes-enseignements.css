@@ -1,0 +1,206 @@
+/* Mes enseignements — Direction C. Scopé sous .dyn-ens. Fondation : theme-dyn.css */
+
+/* HERO */
+.dyn-ens .en-hero {
+  position: relative;
+  overflow: hidden;
+}
+.dyn-ens .en-hero::before {
+  content: '';
+  position: absolute;
+  top: -25%;
+  right: -10%;
+  width: 70vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.16), transparent 60%);
+}
+.dyn-ens .en-hero .inner {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 160px 40px 50px;
+  text-align: center;
+}
+.dyn-ens .en-hero h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  margin-top: 16px;
+}
+.dyn-ens .en-hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+.dyn-ens .en-hero p {
+  font-size: 19px;
+  color: var(--muted-on-dark);
+  max-width: 58ch;
+  margin: 22px auto 0;
+}
+.dyn-ens .en-hero .cta {
+  margin-top: 34px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* PLAYER */
+.dyn-ens .en-player {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 20px 40px 30px;
+}
+.dyn-ens .yt3 {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  background: linear-gradient(135deg, rgba(34, 34, 72, 0.9), rgba(10, 10, 20, 0.95)),
+    repeating-linear-gradient(135deg, transparent 0 24px, rgba(201, 168, 76, 0.04) 24px 25px);
+  overflow: hidden;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5);
+}
+.dyn-ens .yt3 iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.dyn-ens .yt3 .play {
+  width: 96px;
+  height: 96px;
+  box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.5);
+  animation: en-pulse 2.6s infinite;
+}
+.dyn-ens .yt3 .play svg {
+  width: 36px;
+  height: 36px;
+  margin-left: 5px;
+}
+@keyframes en-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 30px rgba(201, 168, 76, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dyn-ens .yt3 .play {
+    animation: none;
+  }
+}
+.dyn-ens .yt3 .t {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 26px;
+}
+.dyn-ens .yt3 .s {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+}
+
+/* THÈMES */
+.dyn-ens .en-themes {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 70px 40px 100px;
+}
+.dyn-ens .en-themes .head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.dyn-ens .en-themes .head h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+  margin-top: 12px;
+}
+.dyn-ens .en-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.dyn-ens .en-card {
+  display: block;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  background: linear-gradient(180deg, rgba(34, 34, 72, 0.32), rgba(13, 13, 30, 0.32));
+  padding: 32px 30px;
+  transition:
+    border-color 0.3s,
+    transform 0.3s var(--ease);
+}
+.dyn-ens .en-card:hover {
+  border-color: rgba(201, 168, 76, 0.5);
+  transform: translateY(-4px);
+}
+html.js-reveal .dyn-ens .en-card.reveal.in:hover {
+  transform: translateY(-4px);
+}
+.dyn-ens .en-card .ic {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 30px;
+  color: var(--gold);
+}
+.dyn-ens .en-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 23px;
+  margin-top: 12px;
+}
+.dyn-ens .en-card p {
+  color: var(--muted-on-dark);
+  font-size: 15.5px;
+  margin-top: 10px;
+}
+.dyn-ens .en-card .go {
+  margin-top: 16px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ABONNEMENT */
+.dyn-ens .en-sub {
+  background: var(--navy-900);
+  text-align: center;
+  padding: 90px 40px;
+}
+.dyn-ens .en-sub h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+}
+.dyn-ens .en-sub h2 em {
+  color: var(--gold);
+  font-style: italic;
+}
+.dyn-ens .en-sub p {
+  color: var(--muted-on-dark);
+  font-size: 18px;
+  max-width: 50ch;
+  margin: 16px auto 0;
+}
+.dyn-ens .en-sub .cta {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 820px) {
+  .dyn-ens .en-grid {
+    grid-template-columns: 1fr;
+  }
+}

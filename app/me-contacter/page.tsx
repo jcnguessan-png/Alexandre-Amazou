@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import { Mail, Phone, MapPin, Clock, MessageCircle, ArrowRight } from 'lucide-react';
-import { SectionTitle } from '@/components/ui/SectionTitle';
+import { Mail, Phone, MapPin, Youtube, Facebook, Instagram, MessageCircle } from 'lucide-react';
 import { ContactForm } from '@/components/ui/ContactForm';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { contactPageSchema, localBusinessSchema, breadcrumbSchema } from '@/lib/schema';
 import { siteConfig } from '@/lib/site-config';
+import './me-contacter.css';
 
 export const metadata: Metadata = {
   title: 'Me contacter',
@@ -19,8 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const { contact, social } = siteConfig;
+
   return (
-    <>
+    <div className="dyn dyn-contact" data-page="contact">
       <JsonLd data={contactPageSchema()} />
       <JsonLd data={localBusinessSchema()} />
       <JsonLd
@@ -30,95 +32,83 @@ export default function ContactPage() {
         ])}
       />
 
-      <div className="container py-16 md:py-20">
-        <SectionTitle
-          as="h1"
-          eyebrow="Contact"
-          title="Contacter le Pasteur Alexandre AMAZOU"
-          description="Invitations, rendez-vous pastoraux, demandes de presse, partenariats : votre message sera transmis directement au secrétariat ministériel."
-        />
+      <section className="ct-hero">
+        <div className="ct-wrap">
+          <div className="ct-intro">
+            <p className="eyebrow eyebrow-gold reveal">Me contacter</p>
+            <h1 className="reveal" data-delay="1">
+              Entrons en <em>relation</em>
+            </h1>
+            <p className="lead reveal" data-delay="2">
+              Pour une invitation, une question sur les enseignements, une commande d&apos;ouvrage
+              ou une demande de prière — l&apos;équipe pastorale vous répond.
+            </p>
 
-        <div className="mt-10 grid gap-12 lg:grid-cols-[1.3fr_1fr]">
-          <ContactForm />
-
-          <aside className="space-y-8 rounded-lg border border-border bg-muted/30 p-6 md:p-8 lg:sticky lg:top-28 lg:self-start">
-            <div>
-              <h2 className="font-heading text-xl font-semibold text-primary">
-                Coordonnées
-              </h2>
-              <span className="mt-3 block h-[2px] w-12 bg-secondary" aria-hidden="true" />
-
-              <ul className="mt-6 space-y-5 text-sm">
-                <li>
-                  <p className="flex items-center gap-2 font-semibold text-primary">
-                    <Mail size={16} className="text-secondary" aria-hidden="true" />
-                    Email
-                  </p>
-                  <a
-                    href={`mailto:${siteConfig.contact.email}`}
-                    className="mt-1 block text-foreground/75 hover:text-secondary"
-                  >
-                    {siteConfig.contact.email}
-                  </a>
-                </li>
-                <li>
-                  <p className="flex items-center gap-2 font-semibold text-primary">
-                    <Phone size={16} className="text-secondary" aria-hidden="true" />
-                    Téléphone
-                  </p>
-                  <a
-                    href={`tel:${siteConfig.contact.phoneIntl}`}
-                    className="mt-1 block text-foreground/75 hover:text-secondary"
-                  >
-                    {siteConfig.contact.phone}
-                  </a>
-                </li>
-                <li>
-                  <p className="flex items-center gap-2 font-semibold text-primary">
-                    <Clock size={16} className="text-secondary" aria-hidden="true" />
-                    Rendez-vous
-                  </p>
-                  <p className="mt-1 text-foreground/75">{siteConfig.contact.rdv}</p>
-                </li>
-                <li>
-                  <p className="flex items-center gap-2 font-semibold text-primary">
-                    <MapPin size={16} className="text-secondary" aria-hidden="true" />
-                    Adresse
-                  </p>
-                  <address className="mt-1 not-italic text-foreground/75">
-                    {siteConfig.contact.address.organisation}
-                    <br />
-                    {siteConfig.contact.address.street}
-                    <br />
-                    {siteConfig.contact.address.locality}, {siteConfig.contact.address.city}
-                    <br />
-                    {siteConfig.contact.address.country}
-                  </address>
-                </li>
-              </ul>
+            <div className="ct-list reveal" data-delay="2">
+              <div className="ct-item">
+                <span className="ic">
+                  <Mail aria-hidden="true" />
+                </span>
+                <div>
+                  <div className="k">Email</div>
+                  <div className="v">
+                    <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                  </div>
+                  <div className="sub">{contact.responseDelay}</div>
+                </div>
+              </div>
+              <div className="ct-item">
+                <span className="ic">
+                  <Phone aria-hidden="true" />
+                </span>
+                <div>
+                  <div className="k">Téléphone &amp; WhatsApp</div>
+                  <div className="v">
+                    <a href={`tel:${contact.phoneIntl}`}>{contact.phone}</a>
+                  </div>
+                  <div className="sub">{contact.rdv}</div>
+                </div>
+              </div>
+              <div className="ct-item">
+                <span className="ic">
+                  <MapPin aria-hidden="true" />
+                </span>
+                <div>
+                  <div className="k">Adresse</div>
+                  <div className="v">{contact.address.organisation}</div>
+                  <div className="sub">
+                    {contact.address.street}, {contact.address.locality} — {contact.address.city},{' '}
+                    {contact.address.country}
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <a
-              href={siteConfig.contact.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between gap-3 rounded-lg bg-[#25D366] px-5 py-4 text-white transition hover:bg-[#1da851]"
-              aria-label="Discuter sur WhatsApp avec le secrétariat"
-            >
-              <span className="flex items-center gap-3">
-                <MessageCircle size={20} aria-hidden="true" />
-                <span className="font-semibold">Discuter sur WhatsApp</span>
-              </span>
-              <ArrowRight size={16} aria-hidden="true" />
-            </a>
+            <div className="ct-social reveal" data-delay="3">
+              <a href={social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <Youtube aria-hidden="true" />
+              </a>
+              <a href={social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <Facebook aria-hidden="true" />
+              </a>
+              <a href={social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <Instagram aria-hidden="true" />
+              </a>
+              <a href={social.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <MessageCircle aria-hidden="true" />
+              </a>
+            </div>
+          </div>
 
-            <p className="text-xs leading-relaxed text-foreground/60">
-              {siteConfig.contact.responseDelay}. Pour toute urgence pastorale,
-              merci de contacter directement votre église locale ABMCI.
+          <div className="ct-form reveal" data-delay="1">
+            <h2>Envoyer un message</h2>
+            <p className="note">
+              Vos données ne sont utilisées que pour répondre à votre demande.
             </p>
-          </aside>
+            <ContactForm />
+          </div>
         </div>
-      </div>
-    </>
+      </section>
+    </div>
   );
 }

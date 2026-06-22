@@ -1,25 +1,42 @@
 'use client';
 
 import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 /**
- * Façade YouTube « click-to-load » : n'embarque l'iframe (et les cookies
- * YouTube) qu'au clic. Avant : un poster léger + bouton lecture.
+ * Façade YouTube « click-to-load » réutilisable : n'embarque l'iframe (et les
+ * cookies YouTube) qu'au clic. Avant : un poster léger + bouton lecture.
+ * Le conteneur (tuile, .yt3, .ytp…) fournit le ratio/positionnement ; la façade
+ * remplit ce conteneur en absolu.
  */
 export function YouTubeFacade({
   playlistId,
+  videoId,
   poster,
+  title = 'Lancer les enseignements',
+  subtitle = 'Playlist officielle · YouTube',
+  ariaLabel = 'Lancer la lecture des enseignements',
+  className,
 }: {
-  playlistId: string;
+  playlistId?: string;
+  videoId?: string;
   poster?: string;
+  title?: string;
+  subtitle?: string;
+  ariaLabel?: string;
+  className?: string;
 }) {
   const [loaded, setLoaded] = useState(false);
+
+  const src = videoId
+    ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`
+    : `https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&autoplay=1&rel=0`;
 
   if (loaded) {
     return (
       <iframe
-        src={`https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&autoplay=1&rel=0`}
-        title="Enseignements du Pasteur Alexandre AMAZOU"
+        src={src}
+        title={title || 'Vidéo YouTube'}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       />
@@ -29,9 +46,9 @@ export function YouTubeFacade({
   return (
     <button
       type="button"
-      className="yt-facade"
+      className={cn('yt-facade', poster && 'has-poster', className)}
       style={poster ? { backgroundImage: `url(${poster})` } : undefined}
-      aria-label="Lancer la lecture des enseignements (playlist officielle YouTube)"
+      aria-label={ariaLabel}
       onClick={() => setLoaded(true)}
     >
       <span className="pv">
@@ -40,8 +57,8 @@ export function YouTubeFacade({
             <path d="M8 5v14l11-7z" />
           </svg>
         </span>
-        <span className="t">Lancer les enseignements</span>
-        <span className="s">Playlist officielle · YouTube</span>
+        {title ? <span className="t">{title}</span> : null}
+        {subtitle ? <span className="s">{subtitle}</span> : null}
       </span>
     </button>
   );

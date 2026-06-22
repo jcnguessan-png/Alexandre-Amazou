@@ -8,15 +8,12 @@ import { cn } from '@/lib/utils';
 import { navItems, siteConfig } from '@/lib/site-config';
 import { Button } from '@/components/ui/Button';
 
+// Direction C : nav sombre fixe sur tout le site. Transparente au-dessus du
+// héros (sombre) de chaque page, fond nuit flouté dès qu'on scrolle.
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  // Accueil = Direction C (page sombre) : la nav se superpose au héros
-  // (transparente en haut, fond nuit floutée au scroll). Les autres pages
-  // gardent le thème clair d'origine.
-  const onDark = pathname === '/';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -43,25 +40,17 @@ export function Header() {
   return (
     <header
       className={cn(
-        'top-0 z-50 w-full transition-all',
-        onDark ? 'fixed text-[#F4EEDF]' : 'sticky',
-        onDark
-          ? solid
-            ? 'border-b border-secondary/20 bg-[#0A0A14]/85 backdrop-blur-md'
-            : 'bg-transparent'
-          : solid
-            ? 'border-b border-border bg-background/90 backdrop-blur-md'
-            : 'bg-background/40 backdrop-blur-sm',
+        'fixed top-0 z-50 w-full text-[#F4EEDF] transition-all',
+        solid
+          ? 'border-b border-secondary/20 bg-[#0A0A14]/85 backdrop-blur-md'
+          : 'bg-transparent',
       )}
     >
       <div className="container flex h-16 items-center justify-between gap-4 lg:h-20">
         <Link
           href="/"
           aria-label={`${siteConfig.shortName} — accueil`}
-          className={cn(
-            'inline-flex items-center',
-            onDark ? 'text-[#F4EEDF]' : 'text-primary',
-          )}
+          className="inline-flex items-center text-[#F4EEDF]"
         >
           {/* Mobile : marque seule (M stylisé) */}
           <svg
@@ -119,13 +108,7 @@ export function Header() {
                     aria-current={isActive ? 'page' : undefined}
                     className={cn(
                       'relative rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                      onDark
-                        ? isActive
-                          ? 'text-[#F4EEDF]'
-                          : 'text-[#F4EEDF]/70 hover:text-[#F4EEDF]'
-                        : isActive
-                          ? 'text-primary'
-                          : 'text-foreground/70 hover:text-primary',
+                      isActive ? 'text-[#F4EEDF]' : 'text-[#F4EEDF]/70 hover:text-[#F4EEDF]',
                     )}
                   >
                     {item.label}
@@ -153,10 +136,7 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-          className={cn(
-            'inline-flex h-11 w-11 items-center justify-center rounded-md lg:hidden',
-            onDark ? 'text-[#F4EEDF]' : 'text-primary',
-          )}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-[#F4EEDF] lg:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -167,10 +147,7 @@ export function Header() {
       <div
         id="mobile-menu"
         hidden={!open}
-        className={cn(
-          'border-t lg:hidden',
-          onDark ? 'border-secondary/20 bg-[#0A0A14]' : 'border-border bg-background',
-        )}
+        className="border-t border-secondary/20 bg-[#0A0A14] lg:hidden"
       >
         <nav aria-label="Navigation mobile" className="container py-6">
           <ul className="flex flex-col gap-1">
@@ -186,13 +163,7 @@ export function Header() {
                     aria-current={isActive ? 'page' : undefined}
                     className={cn(
                       'block rounded-md px-3 py-3 text-base font-medium',
-                      onDark
-                        ? isActive
-                          ? 'bg-white/5 text-[#F4EEDF]'
-                          : 'text-[#F4EEDF]/80'
-                        : isActive
-                          ? 'bg-primary/5 text-primary'
-                          : 'text-foreground/80',
+                      isActive ? 'bg-white/5 text-[#F4EEDF]' : 'text-[#F4EEDF]/80',
                     )}
                   >
                     {item.label}
@@ -201,12 +172,7 @@ export function Header() {
               );
             })}
           </ul>
-          <div
-            className={cn(
-              'mt-6 border-t pt-6',
-              onDark ? 'border-secondary/20' : 'border-border',
-            )}
-          >
+          <div className="mt-6 border-t border-secondary/20 pt-6">
             <Button asChild variant="primary" size="md" className="w-full">
               <Link href="/faire-un-don">Soutenir le ministère</Link>
             </Button>

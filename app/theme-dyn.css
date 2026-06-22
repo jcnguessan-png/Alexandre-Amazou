@@ -1,0 +1,592 @@
+/* =========================================================
+   THÈME DIRECTION C — fondation partagée (toutes les pages)
+   Bleu nuit profond + or, serif majestueux + grotesque moderne.
+   Tout est scopé sous .dyn pour cohabiter avec le reste (Tailwind).
+   Les styles spécifiques à chaque page vivent dans leur propre
+   fichier CSS, scopé sous .dyn .<page>.
+   ========================================================= */
+
+.dyn {
+  /* Couleurs */
+  --ink: #0a0a14;
+  --navy-900: #0d0d1e;
+  --navy-800: #12122b;
+  --navy-700: #181838;
+  --navy-600: #222248;
+  --navy-500: #2e2e5a;
+  --gold: #c9a84c;
+  --gold-bright: #e4c977;
+  --gold-deep: #9a7b2e;
+  --cream: #f4eedf;
+  --paper: #fbfaf5;
+  --paper-2: #f1ecdf;
+  --line: #e2dbca;
+  --muted: #6e6a7a;
+  --muted-on-dark: rgba(244, 238, 223, 0.62);
+
+  /* Typographies (chargées via next/font dans layout.tsx) */
+  --serif: var(--font-cormorant), 'Times New Roman', serif;
+  --body: var(--font-source-serif), Georgia, serif;
+  --sans: var(--font-archivo), system-ui, sans-serif;
+  --grotesk: var(--font-space-grotesk), var(--font-archivo), sans-serif;
+
+  --maxw: 1280px;
+  --ease: cubic-bezier(0.22, 0.61, 0.21, 1);
+
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.dyn img {
+  display: block;
+  max-width: 100%;
+}
+.dyn ::selection {
+  background: var(--gold);
+  color: var(--navy-900);
+}
+/* Décale les ancres sous la nav fixe (#isbem, #leadership, #enseignements…). */
+.dyn :target {
+  scroll-margin-top: 96px;
+}
+
+/* ---------- Utilities ---------- */
+.dyn .wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.dyn .wrap-narrow {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.dyn .eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.dyn .eyebrow-gold {
+  color: var(--gold);
+}
+.dyn .gold-text {
+  color: var(--gold);
+}
+
+/* ---------- Boutons ---------- */
+.dyn .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 17px 30px;
+  transition: all 0.3s var(--ease);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dyn .btn .ar {
+  transition: transform 0.3s var(--ease);
+}
+.dyn .btn:hover .ar {
+  transform: translateX(5px);
+}
+.dyn .btn-gold {
+  background: var(--gold);
+  color: var(--navy-900);
+}
+.dyn .btn-gold:hover {
+  background: var(--gold-bright);
+}
+.dyn .btn-dark {
+  background: var(--navy-900);
+  color: var(--cream);
+}
+.dyn .btn-dark:hover {
+  background: var(--navy-700);
+}
+.dyn .btn-ghost-gold {
+  background: transparent;
+  color: var(--gold);
+  border-color: rgba(201, 168, 76, 0.5);
+}
+.dyn .btn-ghost-gold:hover {
+  background: var(--gold);
+  color: var(--navy-900);
+  border-color: var(--gold);
+}
+.dyn .btn-ghost-dark {
+  background: transparent;
+  color: var(--navy-900);
+  border-color: rgba(13, 13, 30, 0.3);
+}
+.dyn .btn-ghost-dark:hover {
+  background: var(--navy-900);
+  color: var(--cream);
+}
+
+/* ---------- Couverture de livre ---------- */
+.dyn .book-cover {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-800);
+}
+.dyn .book-cover-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--gold);
+}
+.dyn .book-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--navy-900);
+  padding: 5px 10px;
+  z-index: 2;
+}
+
+/* ---------- Façade YouTube (réutilisable) ---------- */
+.dyn .yt-facade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  border: 0;
+  cursor: pointer;
+  color: var(--cream);
+}
+.dyn .yt-facade.has-poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 10, 20, 0.35), rgba(10, 10, 20, 0.75));
+}
+.dyn .yt-facade .pv {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.dyn .yt-facade .play {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  transition: transform 0.3s;
+}
+.dyn .yt-facade:hover .play {
+  transform: scale(1.08);
+}
+.dyn .yt-facade .play svg {
+  width: 28px;
+  height: 28px;
+  fill: var(--navy-900);
+  margin-left: 4px;
+}
+.dyn .yt-facade .t {
+  font-family: var(--grotesk);
+  font-weight: 600;
+  font-size: 20px;
+}
+.dyn .yt-facade .s {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-on-dark);
+  margin-top: 8px;
+}
+
+/* ---------- En-tête de section générique ---------- */
+.dyn .section-head {
+  max-width: 760px;
+}
+.dyn .section-head h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin-top: 18px;
+}
+.dyn .section-head p {
+  font-size: 19px;
+  margin-top: 20px;
+  color: inherit;
+  opacity: 0.78;
+}
+
+/* ---------- Reveal au scroll ----------
+   L'état caché n'est posé que sous <html class="js-reveal"> (script
+   inline dans le layout, avant le paint) : sans JS, tout reste visible.
+   RevealOnScroll ajoute .in à l'entrée dans le viewport. */
+html.js-reveal .dyn .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+html.js-reveal .dyn .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+.dyn .reveal[data-delay='1'] {
+  transition-delay: 0.08s;
+}
+.dyn .reveal[data-delay='2'] {
+  transition-delay: 0.16s;
+}
+.dyn .reveal[data-delay='3'] {
+  transition-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-reveal .dyn .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   Primitives pour les pages utilitaires/légales (sans maquette
+   dédiée) : héros sombre, prose sombre, cartes, encarts, pages centrées.
+   ========================================================= */
+.dyn .page-hero {
+  position: relative;
+  overflow: hidden;
+}
+.dyn .page-hero::before {
+  content: '';
+  position: absolute;
+  top: -25%;
+  right: -10%;
+  width: 60vw;
+  height: 55vw;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.13), transparent 60%);
+  pointer-events: none;
+}
+.dyn .page-hero .inner {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 160px 40px 56px;
+}
+.dyn .page-hero.center .inner {
+  text-align: center;
+}
+.dyn .page-hero h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin-top: 16px;
+}
+.dyn .page-hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+.dyn .page-hero .lead {
+  font-size: 19px;
+  color: var(--muted-on-dark);
+  max-width: 64ch;
+  margin-top: 20px;
+}
+.dyn .page-hero.center .lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dyn .page-body {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 12px 40px 110px;
+}
+.dyn .page-body.narrow {
+  max-width: 820px;
+}
+
+/* Prose sombre (légal, presse) */
+.dyn .prose-dark {
+  color: rgba(244, 238, 223, 0.82);
+  font-size: 17.5px;
+  line-height: 1.75;
+}
+.dyn .prose-dark > * + * {
+  margin-top: 18px;
+}
+.dyn .prose-dark h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  color: var(--cream);
+  margin-top: 42px;
+}
+.dyn .prose-dark h2:first-child {
+  margin-top: 0;
+}
+.dyn .prose-dark a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.dyn .prose-dark a:hover {
+  color: var(--gold-bright);
+}
+.dyn .prose-dark strong {
+  color: var(--cream);
+  font-weight: 600;
+}
+.dyn .prose-dark ul {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+.dyn .prose-dark li {
+  position: relative;
+  padding-left: 22px;
+}
+.dyn .prose-dark li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 14px;
+  width: 9px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* Cartes sombres + grilles */
+.dyn .dgrid {
+  display: grid;
+  gap: 20px;
+}
+.dyn .dgrid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.dyn .dgrid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.dyn .dcard {
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  background: linear-gradient(180deg, rgba(34, 34, 72, 0.3), rgba(13, 13, 30, 0.3));
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  transition:
+    border-color 0.3s,
+    transform 0.3s var(--ease);
+}
+.dyn .dcard:hover {
+  border-color: rgba(201, 168, 76, 0.45);
+}
+.dyn a.dcard:hover {
+  transform: translateY(-4px);
+}
+.dyn .dcard .ic {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.dyn .dcard .ko {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.dyn .dcard h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 22px;
+}
+.dyn .dcard p {
+  color: var(--muted-on-dark);
+  font-size: 15.5px;
+  margin-top: 10px;
+}
+.dyn .dcard .note {
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(244, 238, 223, 0.5);
+  margin-top: 14px;
+}
+.dyn .dcard .go {
+  margin-top: 18px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Citation / pullquote sombre */
+.dyn .dquote {
+  border-left: 2px solid var(--gold);
+  padding-left: 26px;
+  margin: 40px 0;
+}
+.dyn .dquote .q {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  line-height: 1.3;
+  color: var(--cream);
+}
+.dyn .dquote .src {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 14px;
+}
+
+/* Encart gold (CTA box) */
+.dyn .panel-gold {
+  border: 1px solid var(--gold-deep);
+  background: rgba(201, 168, 76, 0.1);
+  padding: 36px 38px;
+}
+.dyn .panel-gold h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  color: var(--cream);
+}
+.dyn .panel-gold p {
+  color: var(--muted-on-dark);
+  margin-top: 12px;
+  max-width: 60ch;
+}
+.dyn .panel-gold .cta {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Pages centrées (merci, confirmation, 404) */
+.dyn .page-center {
+  min-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 150px 40px 90px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.dyn .page-center .ico {
+  color: var(--gold);
+}
+.dyn .page-center .k {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 24px;
+}
+.dyn .page-center h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.02;
+  margin-top: 14px;
+}
+.dyn .page-center p {
+  color: var(--muted-on-dark);
+  font-size: 18px;
+  margin-top: 18px;
+}
+.dyn .page-center .cta {
+  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dyn .updated {
+  font-size: 14px;
+  color: rgba(244, 238, 223, 0.45);
+  margin-top: 36px;
+}
+
+/* Rythme vertical entre blocs d'une page utilitaire */
+.dyn .stack-lg > * + * {
+  margin-top: 56px;
+}
+.dyn .subhead h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin-top: 12px;
+}
+.dyn .subhead .bar {
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+  margin-top: 16px;
+}
+
+@media (max-width: 860px) {
+  .dyn .dgrid.cols-2,
+  .dyn .dgrid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+  .dyn .page-hero .inner {
+    padding-top: 130px;
+  }
+}

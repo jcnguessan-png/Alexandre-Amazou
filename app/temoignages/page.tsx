@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Quote as QuoteIcon } from 'lucide-react';
-import { SectionTitle } from '@/components/ui/SectionTitle';
+import { DynPageHero } from '@/components/layout/DynPageHero';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
 import { testimonials } from '@/data/testimonials';
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function TestimonialsPage() {
   return (
-    <>
+    <div className="dyn" data-page="temoignages">
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Accueil', href: '/' },
@@ -22,33 +23,50 @@ export default function TestimonialsPage() {
         ])}
       />
 
-      <div className="container py-16 md:py-20">
-        <SectionTitle
-          as="h1"
-          eyebrow="Témoignages"
-          title="Des vies transformées par la Parole"
-          description="Voici quelques témoignages de frères et sœurs qui ont reçu les enseignements du Pasteur Alexandre AMAZOU. Ils sont partagés avec leur consentement explicite."
-        />
+      <DynPageHero
+        eyebrow="Témoignages"
+        title="Des vies transformées par la Parole"
+        lead="Voici quelques témoignages de frères et sœurs qui ont reçu les enseignements du Pasteur Alexandre AMAZOU. Ils sont partagés avec leur consentement explicite."
+      />
 
-        <ul className="mt-12 grid gap-8 md:grid-cols-2">
+      <div className="page-body">
+        <ul className="dgrid cols-2">
           {testimonials.map((t) => (
-            <li
-              key={t.id}
-              className="relative rounded-lg border border-border bg-background p-8 shadow-sm"
-            >
-              <QuoteIcon
-                size={36}
-                aria-hidden="true"
-                className="absolute -top-4 left-6 text-secondary"
-              />
-              <blockquote className="font-quote text-lg italic leading-relaxed text-primary md:text-xl">
+            <li className="dcard reveal" key={t.id} style={{ listStyle: 'none' }}>
+              <QuoteIcon size={30} aria-hidden="true" style={{ color: 'var(--gold)' }} />
+              <blockquote
+                style={{
+                  fontFamily: 'var(--serif)',
+                  fontStyle: 'italic',
+                  fontSize: '20px',
+                  lineHeight: 1.4,
+                  color: 'var(--cream)',
+                  marginTop: '14px',
+                }}
+              >
                 « {t.quote} »
               </blockquote>
-              <figcaption className="mt-6 text-sm">
-                <span className="font-semibold text-primary">{t.name}</span>
-                {t.role ? <span className="block text-foreground/70">{t.role}</span> : null}
+              <figcaption style={{ marginTop: '18px' }}>
+                <span style={{ fontFamily: 'var(--serif)', fontSize: '18px', color: 'var(--cream)' }}>
+                  {t.name}
+                </span>
+                {t.role ? (
+                  <span style={{ display: 'block', fontSize: '14px', color: 'var(--muted-on-dark)', marginTop: '2px' }}>
+                    {t.role}
+                  </span>
+                ) : null}
                 {t.city ? (
-                  <span className="block text-xs uppercase tracking-[0.15em] text-secondary">
+                  <span
+                    style={{
+                      display: 'block',
+                      fontFamily: 'var(--sans)',
+                      fontSize: '11px',
+                      letterSpacing: '0.14em',
+                      textTransform: 'uppercase',
+                      color: 'var(--gold)',
+                      marginTop: '6px',
+                    }}
+                  >
                     {t.city}
                     {t.countryCode ? `, ${t.countryCode}` : ''}
                   </span>
@@ -58,23 +76,19 @@ export default function TestimonialsPage() {
           ))}
         </ul>
 
-        <div className="mx-auto mt-16 max-w-2xl rounded-lg border border-secondary/30 bg-secondary/5 p-6 text-center md:p-8">
-          <p className="font-heading text-xl font-semibold text-primary">
-            Vous avez vécu une transformation ?
+        <div className="panel-gold reveal" style={{ marginTop: '56px', textAlign: 'center' }}>
+          <h2>Vous avez vécu une transformation ?</h2>
+          <p style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+            Partagez votre témoignage en sélectionnant l&apos;objet « Témoignage » dans le
+            formulaire de contact. Votre récit pourra encourager d&apos;autres frères et sœurs.
           </p>
-          <p className="mt-3 text-sm text-foreground/70">
-            Partagez votre témoignage en sélectionnant l'objet « Témoignage »
-            dans le formulaire de contact. Votre récit pourra encourager
-            d'autres frères et sœurs.
-          </p>
-          <a
-            href="/me-contacter"
-            className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-secondary"
-          >
-            Partager mon témoignage →
-          </a>
+          <div className="cta" style={{ justifyContent: 'center' }}>
+            <Link className="btn btn-gold" href="/me-contacter">
+              Partager mon témoignage <span className="ar">→</span>
+            </Link>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

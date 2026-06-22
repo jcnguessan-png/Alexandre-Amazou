@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
-import { SectionTitle } from '@/components/ui/SectionTitle';
-import { BookFilter } from '@/components/books/BookFilter';
+import Link from 'next/link';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { books } from '@/data/books';
 import { bookListSchema, breadcrumbSchema } from '@/lib/schema';
+import { books, featuredBook } from '@/data/books';
+import { siteConfig, buildBookWhatsAppUrl } from '@/lib/site-config';
+import { BookCover } from '@/components/home/dynamic/BookCover';
+import { BooksCatalog } from '@/components/books/BooksCatalog';
+import './mes-livres.css';
 
 export const metadata: Metadata = {
   title: 'Mes livres',
@@ -18,12 +21,20 @@ export const metadata: Metadata = {
   },
 };
 
+function truncate(text: string, max: number): string {
+  if (text.length <= max) return text;
+  const slice = text.slice(0, max);
+  const lastSpace = slice.lastIndexOf(' ');
+  return `${slice.slice(0, lastSpace > 0 ? lastSpace : max).trimEnd()}…`;
+}
+
 export default function BooksPage() {
-  // Tri : récent d'abord
   const sorted = [...books].sort((a, b) => b.datePublished.localeCompare(a.datePublished));
+  const feat = featuredBook;
+  const amazon = siteConfig.bookOrder.amazonAuthorUrl;
 
   return (
-    <div className="container py-16 md:py-20">
+    <div className="dyn dyn-livres" data-page="livres">
       <JsonLd data={bookListSchema(sorted)} />
       <JsonLd
         data={breadcrumbSchema([
@@ -32,14 +43,78 @@ export default function BooksPage() {
         ])}
       />
 
-      <SectionTitle
-        as="h1"
-        eyebrow="Bibliographie"
-        title="Les livres du Pasteur Alexandre AMAZOU"
-        description="Neuf ouvrages d'enseignement biblique, écrits pour bâtir, restaurer et équiper. Chaque livre est disponible à la commande sur la librairie ABMCI ; un extrait gratuit accompagne plusieurs titres."
-      />
+      {/* HERO */}
+      <section className="lv-hero">
+        <div className="inner">
+          <p className="eyebrow eyebrow-gold reveal">Bibliographie</p>
+          <h1 className="reveal" data-delay="1">
+            Onze ouvrages pour <em>bâtir des leaders</em>
+          </h1>
+          <p className="reveal" data-delay="2">
+            Du monde spirituel au leadership chrétien, de la prière aux finances du Royaume —
+            une œuvre écrite, fruit de plus de vingt ans de ministère et de révélation.
+          </p>
+        </div>
+      </section>
 
-      <BookFilter books={sorted} />
+      {/* À LA UNE */}
+      <section className="lv-feat">
+        <div className="inner">
+          <div className="cover reveal">
+            <BookCover book={feat} badge="Best-seller 2026" priority />
+          </div>
+          <div className="reveal" data-delay="1">
+            <p className="tag">À la une · Réédition révisée &amp; augmentée</p>
+            <h2>{feat.title}</h2>
+            {feat.subtitle ? <p className="sub">{feat.subtitle}</p> : null}
+            <p className="desc">{truncate(feat.description, 360)}</p>
+            <div className="cta">
+              <a
+                className="btn btn-gold"
+                href={buildBookWhatsAppUrl(feat.title)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Commander sur WhatsApp <span className="ar">→</span>
+              </a>
+              <a className="btn btn-ghost-gold" href={amazon} target="_blank" rel="noopener noreferrer">
+                Voir sur Amazon
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CATALOGUE */}
+      <section className="lv-cat">
+        <div className="inner">
+          <BooksCatalog books={sorted} />
+        </div>
+      </section>
+
+      {/* COMMANDER */}
+      <section className="lv-order">
+        <h2 className="reveal">
+          Comment <em>commander</em> ?
+        </h2>
+        <p className="reveal" data-delay="1">
+          Tous les ouvrages sont disponibles à la Librairie Alliance (Abidjan) via WhatsApp, et
+          sur la boutique Amazon de l&apos;auteur pour une livraison internationale.
+        </p>
+        <div className="cta reveal" data-delay="1">
+          <a
+            className="btn btn-gold"
+            href={buildBookWhatsAppUrl('vos ouvrages')}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Librairie Alliance · WhatsApp
+          </a>
+          <a className="btn btn-ghost-gold" href={amazon} target="_blank" rel="noopener noreferrer">
+            Boutique Amazon
+          </a>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
-import { SectionTitle } from '@/components/ui/SectionTitle';
-import { TeachingsBrowser } from '@/components/teachings/TeachingsBrowser';
+import Link from 'next/link';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { safeGetFeaturedPlaylistVideos } from '@/lib/youtube';
 import { videoObjectSchema, breadcrumbSchema } from '@/lib/schema';
+import { siteConfig } from '@/lib/site-config';
+import { YouTubeFacade } from '@/components/home/dynamic/YouTubeFacade';
+import './mes-enseignements.css';
 
 export const metadata: Metadata = {
   title: 'Mes enseignements',
@@ -20,12 +22,41 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600;
 
+const THEMES = [
+  {
+    title: 'Monde spirituel',
+    text: 'Combat spirituel, réalité des esprits, héritage et libération — la dimension invisible expliquée bibliquement.',
+  },
+  {
+    title: 'Leadership chrétien',
+    text: 'Vocation, vision, valeurs — former des serviteurs de Dieu équipés pour leur appel et leur génération.',
+  },
+  {
+    title: 'Prière & foi',
+    text: 'Prière de commandement, intercession, prières exaucées — bâtir une vie de prière puissante et féconde.',
+  },
+  {
+    title: 'Famille & héritage',
+    text: 'Ordre divin, faveur des pères, bénédiction générationnelle — la doctrine vécue d’abord à la maison.',
+  },
+  {
+    title: 'Réussite & finances',
+    text: 'Réussir sa vie selon Dieu, théologie de l’argent au service du Royaume, produire pour la mission.',
+  },
+  {
+    title: "Conférence d'Abidjan",
+    text: 'Les temps forts du réveil spirituel de l’Afrique francophone, près de 10 000 personnes chaque année.',
+  },
+];
+
 export default async function TeachingsPage() {
-  // On affiche uniquement la playlist officielle curée par le pasteur
   const videos = await safeGetFeaturedPlaylistVideos(50);
+  const poster = videos[0]?.thumbnailHigh ?? videos[0]?.thumbnailUrl;
+  const channel = siteConfig.youtube.channelUrl;
+  const channelVideos = `${channel}/videos`;
 
   return (
-    <div className="container py-16 md:py-20">
+    <div className="dyn dyn-ens" data-page="enseignements">
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Accueil', href: '/' },
@@ -36,36 +67,90 @@ export default async function TeachingsPage() {
         <JsonLd key={v.id} data={videoObjectSchema(v)} />
       ))}
 
-      <SectionTitle
-        as="h1"
-        eyebrow="Espace médias"
-        title="Mes enseignements"
-        description="Plus de 30 années de prédications, séminaires et émissions — accessibles librement. Que cette parole vous fortifie, vous corrige et vous équipe pour la mission que Dieu a placée sur votre vie."
-      />
-
-      {videos.length > 0 ? (
-        <TeachingsBrowser videos={videos} />
-      ) : (
-        <div className="rounded-lg border border-dashed border-border bg-muted/40 p-12 text-center">
-          <p className="text-foreground/70">
-            La galerie d'enseignements sera disponible dès que la clé{' '}
-            <code className="rounded bg-muted px-1.5 py-0.5 text-sm">YOUTUBE_API_KEY</code> sera renseignée dans{' '}
-            <code className="rounded bg-muted px-1.5 py-0.5 text-sm">.env.local</code>.
+      {/* HERO */}
+      <section className="en-hero">
+        <div className="inner">
+          <p className="eyebrow eyebrow-gold reveal">Mes enseignements</p>
+          <h1 className="reveal" data-delay="1">
+            La Parole en <em>vidéo</em>, librement
+          </h1>
+          <p className="reveal" data-delay="2">
+            Des centaines de prédications, séminaires et enseignements bibliques en accès libre.
+            Plongez dans la doctrine, sans concession, directement depuis la chaîne officielle
+            YouTube.
           </p>
-          <p className="mt-3 text-sm text-foreground/50">
-            En attendant, retrouvez la chaîne officielle directement sur{' '}
+          <div className="cta reveal" data-delay="2">
+            <a className="btn btn-gold" href={channel} target="_blank" rel="noopener noreferrer">
+              S&apos;abonner à la chaîne <span className="ar">→</span>
+            </a>
             <a
-              href="https://www.youtube.com/channel/UCi2WIBsPCQycQK2NYwKA61Q"
+              className="btn btn-ghost-gold"
+              href={siteConfig.youtube.featuredPlaylistUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-secondary underline-offset-4 hover:underline"
             >
-              YouTube
+              Voir la playlist
             </a>
-            .
-          </p>
+          </div>
         </div>
-      )}
+      </section>
+
+      {/* PLAYER */}
+      <div className="en-player">
+        <div className="yt3 reveal">
+          <YouTubeFacade
+            playlistId={siteConfig.youtube.featuredPlaylistId}
+            poster={poster}
+            ariaLabel="Lancer la lecture des enseignements"
+          />
+        </div>
+      </div>
+
+      {/* THÈMES */}
+      <section className="en-themes">
+        <div className="head reveal">
+          <p className="eyebrow eyebrow-gold">Par thème</p>
+          <h2>Explorez selon votre besoin</h2>
+        </div>
+        <div className="en-grid">
+          {THEMES.map((t, i) => (
+            <a
+              className="en-card reveal"
+              data-delay={String(i % 3)}
+              href={channelVideos}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={t.title}
+            >
+              <div className="ic" aria-hidden="true">
+                ✦
+              </div>
+              <h3>{t.title}</h3>
+              <p>{t.text}</p>
+              <div className="go">Voir sur YouTube →</div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* ABONNEMENT */}
+      <section className="en-sub">
+        <h2 className="reveal">
+          Ne manquez aucun <em>enseignement</em>
+        </h2>
+        <p className="reveal" data-delay="1">
+          Abonnez-vous à la chaîne YouTube officielle et activez les notifications pour suivre
+          chaque nouvelle prédication.
+        </p>
+        <div className="cta reveal" data-delay="1">
+          <a className="btn btn-gold" href={channel} target="_blank" rel="noopener noreferrer">
+            S&apos;abonner sur YouTube <span className="ar">→</span>
+          </a>
+          <Link className="btn btn-ghost-gold" href="/mes-livres">
+            Découvrir mes livres
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
