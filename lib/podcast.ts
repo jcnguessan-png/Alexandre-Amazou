@@ -7,7 +7,6 @@
  */
 
 import { XMLParser } from 'fast-xml-parser';
-import { podcastInfo } from '@/data/podcasts';
 
 export type PodcastShow = {
   title: string;
@@ -89,14 +88,17 @@ function parseDuration(raw: unknown): { seconds?: number; label?: string } {
  * Throw en cas d'erreur réseau ou de parsing — utiliser `safeGetPodcastFeed`
  * pour un fallback gracieux.
  */
-export async function getPodcastFeed(): Promise<PodcastFeed> {
-  if (!podcastInfo.rssUrl) {
-    throw new Error('podcastInfo.rssUrl manquant — renseigner dans data/podcasts.ts');
+export async function getPodcastFeed(rssUrl: string): Promise<PodcastFeed> {
+  if (!rssUrl) {
+    throw new Error('rssUrl manquant');
   }
 
-  const res = await fetch(podcastInfo.rssUrl, {
+  // Timeout dur : un flux lent/bloqué ne doit jamais figer le build ni une page
+  // (safeGetPodcastFeed renverra null → état « épisodes bientôt » + ISR ensuite).
+  const res = await fetch(rssUrl, {
     headers: { 'User-Agent': 'AlexandreAmazouSite/1.0 (+https://alexandreamazou.com)' },
-    next: { revalidate: 3600 },
+    next: { revalidate: 600 },
+    signal: AbortSignal.timeout(8000),
   });
   if (!res.ok) {
     throw new Error(`RSS fetch failed: ${res.status} ${res.statusText}`);
@@ -155,9 +157,9 @@ export async function getPodcastFeed(): Promise<PodcastFeed> {
   return { show, episodes };
 }
 
-export async function safeGetPodcastFeed(): Promise<PodcastFeed | null> {
+export async function safeGetPodcastFeed(rssUrl: string): Promise<PodcastFeed | null> {
   try {
-    return await getPodcastFeed();
+    return await getPodcastFeed(rssUrl);
   } catch (err) {
     console.warn('[podcast] safeGetPodcastFeed failed:', err instanceof Error ? err.message : err);
     return null;

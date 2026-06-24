@@ -10,7 +10,7 @@
 
 import { siteConfig, ministryStats } from '@/lib/site-config';
 import { books, bookThemes, type BookTheme } from '@/data/books';
-import { podcastInfo } from '@/data/podcasts';
+import { podcasts } from '@/data/podcasts';
 import { upcomingEvents } from '@/data/events';
 import { formatDateFR } from '@/lib/utils';
 
@@ -80,10 +80,15 @@ export function buildKnowledgeBase(): string {
 - Playlist officielle d'enseignements : ${c.youtube.featuredPlaylistUrl}
 - Des centaines de prédications, séminaires et enseignements bibliques en accès libre. Page du site : /mes-enseignements
 
-## Podcast
-- ${podcastInfo.name} — ${podcastInfo.tagline}. ${podcastInfo.description}
-- Écouter : playlist YouTube ${podcastInfo.youtubePlaylistUrl}${podcastInfo.rssUrl ? ` ; flux RSS ${podcastInfo.rssUrl}` : ''}
-- Page du site : /podcast
+## Podcasts (page du site : /podcast)
+${podcasts
+  .map(
+    (p) =>
+      `- « ${p.name} » — ${p.tagline}. ${p.description} Page : /podcast/${p.slug}${
+        p.youtubePlaylistUrl ? ` · Version vidéo (YouTube) : ${p.youtubePlaylistUrl}` : ''
+      } · Flux RSS : ${p.rssUrl}`,
+  )
+  .join('\n')}
 
 ## Livres (${books.length} ouvrages) et comment les commander
 - Catalogue complet sur la page : /mes-livres
