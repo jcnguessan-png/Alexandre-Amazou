@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { books } from '@/data/books';
+import { podcasts } from '@/data/podcasts';
 import { siteConfig } from '@/lib/site-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -28,5 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...bookRoutes];
+  const podcastRoutes: MetadataRoute.Sitemap = podcasts.map((show) => ({
+    url: `${baseUrl}/podcast/${show.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...bookRoutes, ...podcastRoutes];
 }

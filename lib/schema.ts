@@ -2,6 +2,7 @@ import { siteConfig } from './site-config';
 import type { Book } from '@/data/books';
 import type { Event } from '@/data/events';
 import type { Video } from './youtube';
+import type { PodcastShow } from '@/data/podcasts';
 
 const absoluteUrl = (path: string) =>
   path.startsWith('http') ? path : `${siteConfig.url.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}`;
@@ -175,6 +176,25 @@ export const eventSchema = (event: Event) => ({
   organizer: { '@id': `${siteConfig.url}/#person` },
   ...(event.registrationUrl ? { url: event.registrationUrl } : {}),
 });
+
+export const podcastSchema = (show: PodcastShow, imageUrl?: string) => {
+  const platforms = [show.spotifyShowUrl, show.applePodcastUrl, show.deezerUrl, show.youtubePlaylistUrl].filter(
+    Boolean,
+  );
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'PodcastSeries',
+    '@id': `${siteConfig.url}/podcast/${show.slug}#podcast`,
+    name: show.name,
+    description: show.description,
+    url: absoluteUrl(`/podcast/${show.slug}`),
+    inLanguage: 'fr',
+    webFeed: show.rssUrl,
+    author: { '@id': `${siteConfig.url}/#person` },
+    ...(imageUrl ? { image: imageUrl } : {}),
+    ...(platforms.length ? { sameAs: platforms } : {}),
+  };
+};
 
 export const breadcrumbSchema = (items: { name: string; href: string }[]) => ({
   '@context': 'https://schema.org',
