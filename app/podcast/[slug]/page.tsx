@@ -127,10 +127,12 @@ export default async function PodcastShowPage({ params }: { params: Params }) {
             </div>
           ) : (
             episodes.map((ep, index) => {
-              const listenHref =
-                (hasPublicSpotify ? ep.spotifyEpisodeUrl : undefined) ??
-                show.youtubePlaylistUrl ??
-                show.rssUrl;
+              const spotifyHref = hasPublicSpotify ? ep.spotifyEpisodeUrl : undefined;
+              // Sans lien audio direct (Spotify), on renvoie vers la vidéo YouTube :
+              // le libellé devient « Regarder » plutôt qu'« Écouter ».
+              const isVideo = !spotifyHref && Boolean(show.youtubePlaylistUrl);
+              const listenHref = spotifyHref ?? show.youtubePlaylistUrl ?? show.rssUrl;
+              const listenLabel = isVideo ? "Regarder l'épisode" : "Écouter l'épisode";
               const art = ep.imageUrl ?? showImage;
               return (
                 <article className="ep reveal" key={ep.id}>
@@ -164,7 +166,7 @@ export default async function PodcastShowPage({ params }: { params: Params }) {
                       </audio>
                     ) : null}
                     <a className="listen" href={listenHref} target="_blank" rel="noopener noreferrer">
-                      Écouter l&apos;épisode <span aria-hidden="true">→</span>
+                      {listenLabel} <span aria-hidden="true">→</span>
                     </a>
                   </div>
                 </article>
