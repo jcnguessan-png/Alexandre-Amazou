@@ -41,7 +41,6 @@ export default async function PodcastShowPage({ params }: { params: Params }) {
   const feed = await safeGetPodcastFeed(show.rssUrl);
   const episodes = feed?.episodes ?? [];
   const showImage = feed?.show.imageUrl;
-  const hasPublicSpotify = Boolean(show.spotifyShowUrl);
 
   return (
     <div className="dyn dyn-podcast" data-page="podcast">
@@ -106,7 +105,7 @@ export default async function PodcastShowPage({ params }: { params: Params }) {
           <div className="pc-plat">
             <PlatformRow label="Spotify" href={show.spotifyShowUrl || undefined} />
             <PlatformRow label="Apple Podcasts" href={show.applePodcastUrl || undefined} />
-            <PlatformRow label="Deezer" href={show.deezerUrl || undefined} />
+            <PlatformRow label="Amazon Music" href={show.amazonMusicUrl || undefined} />
             {show.youtubePlaylistUrl ? <PlatformRow label="YouTube" href={show.youtubePlaylistUrl} /> : null}
             <PlatformRow label="Flux RSS" href={show.rssUrl} withRss />
           </div>
@@ -127,10 +126,11 @@ export default async function PodcastShowPage({ params }: { params: Params }) {
             </div>
           ) : (
             episodes.map((ep, index) => {
-              const listenHref =
-                (hasPublicSpotify ? ep.spotifyEpisodeUrl : undefined) ??
-                show.youtubePlaylistUrl ??
-                show.rssUrl;
+              // Le lien d'épisode privilégie la vidéo YouTube (« Regarder ») ; à
+              // défaut, la page de l'épisode ou le flux (« Écouter »).
+              const hasVideo = Boolean(show.youtubePlaylistUrl);
+              const episodeHref = show.youtubePlaylistUrl ?? ep.spotifyEpisodeUrl ?? show.rssUrl;
+              const episodeLabel = hasVideo ? "Regarder l'épisode" : "Écouter l'épisode";
               const art = ep.imageUrl ?? showImage;
               return (
                 <article className="ep reveal" key={ep.id}>
@@ -163,8 +163,8 @@ export default async function PodcastShowPage({ params }: { params: Params }) {
                         Votre navigateur ne supporte pas la lecture audio.
                       </audio>
                     ) : null}
-                    <a className="listen" href={listenHref} target="_blank" rel="noopener noreferrer">
-                      Écouter l&apos;épisode <span aria-hidden="true">→</span>
+                    <a className="listen" href={episodeHref} target="_blank" rel="noopener noreferrer">
+                      {episodeLabel} <span aria-hidden="true">→</span>
                     </a>
                   </div>
                 </article>

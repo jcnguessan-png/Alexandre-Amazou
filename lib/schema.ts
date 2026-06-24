@@ -178,9 +178,13 @@ export const eventSchema = (event: Event) => ({
 });
 
 export const podcastSchema = (show: PodcastShow, imageUrl?: string) => {
-  const platforms = [show.spotifyShowUrl, show.applePodcastUrl, show.deezerUrl, show.youtubePlaylistUrl].filter(
-    Boolean,
-  );
+  const platforms = [
+    show.spotifyShowUrl,
+    show.applePodcastUrl,
+    show.amazonMusicUrl,
+    show.deezerUrl,
+    show.youtubePlaylistUrl,
+  ].filter(Boolean);
   return {
     '@context': 'https://schema.org',
     '@type': 'PodcastSeries',

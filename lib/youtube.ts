@@ -3,6 +3,8 @@
  * Docs : https://developers.google.com/youtube/v3
  */
 
+import { XMLParser } from 'fast-xml-parser';
+
 const API_BASE = 'https://www.googleapis.com/youtube/v3';
 const REVALIDATE_SECONDS = 3600; // 1h — préserve le quota gratuit (10 000 unités/jour)
 
@@ -305,4 +307,53 @@ export async function safeGetFeaturedPlaylistVideos(maxResults = 50): Promise<Vi
     return safeGetLatestVideos(maxResults);
   }
   return safeGetVideosByPlaylistId(playlistId, maxResults);
+}
+
+/** Vidéo minimale issue du flux RSS public d'une chaîne YouTube. */
+export type ChannelVideo = {
+  id: string;
+  title: string;
+  publishedAt: string;
+  thumbnailUrl: string;
+};
+
+/**
+ * Dernières vidéos publiées sur la chaîne, via le flux RSS public de YouTube.
+ * Gratuit, sans clé API ni quota (≠ getLatestVideos qui coûte 100 unités).
+ */
+export async function getChannelUploads(channelId: string, maxResults = 3): Promise<ChannelVideo[]> {
+  if (!channelId) throw new YouTubeError('channelId manquant');
+
+  const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, {
+    next: { revalidate: REVALIDATE_SECONDS },
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!res.ok) throw new YouTubeError(`YouTube RSS ${res.status}`, res.status);
+
+  const xml = await res.text();
+  const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' });
+  const raw = parser.parse(xml)?.feed?.entry;
+  const entries = (Array.isArray(raw) ? raw : raw ? [raw] : []) as Record<string, unknown>[];
+
+  return entries
+    .slice(0, maxResults)
+    .map((e) => {
+      const group = e['media:group'] as { 'media:thumbnail'?: { '@_url'?: string } } | undefined;
+      return {
+        id: String(e['yt:videoId'] ?? ''),
+        title: String(e.title ?? ''),
+        publishedAt: String(e.published ?? ''),
+        thumbnailUrl: group?.['media:thumbnail']?.['@_url'] ?? '',
+      };
+    })
+    .filter((v) => v.id);
+}
+
+export async function safeGetChannelUploads(channelId: string, maxResults = 3): Promise<ChannelVideo[]> {
+  try {
+    return await getChannelUploads(channelId, maxResults);
+  } catch (err) {
+    console.warn('[youtube] safeGetChannelUploads failed:', err instanceof Error ? err.message : err);
+    return [];
+  }
 }

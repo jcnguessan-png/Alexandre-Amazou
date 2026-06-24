@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { safeGetFeaturedPlaylistVideos } from '@/lib/youtube';
+import { safeGetFeaturedPlaylistVideos, safeGetChannelUploads } from '@/lib/youtube';
 import { videoObjectSchema, breadcrumbSchema } from '@/lib/schema';
 import { siteConfig } from '@/lib/site-config';
+import { formatDateFR } from '@/lib/utils';
 import { YouTubeFacade } from '@/components/home/dynamic/YouTubeFacade';
 import './mes-enseignements.css';
 
@@ -50,7 +51,10 @@ const THEMES = [
 ];
 
 export default async function TeachingsPage() {
-  const videos = await safeGetFeaturedPlaylistVideos(50);
+  const [videos, latest] = await Promise.all([
+    safeGetFeaturedPlaylistVideos(50),
+    safeGetChannelUploads(siteConfig.youtube.channelId, 3),
+  ]);
   const poster = videos[0]?.thumbnailHigh ?? videos[0]?.thumbnailUrl;
   const channel = siteConfig.youtube.channelUrl;
   const channelVideos = `${channel}/videos`;
@@ -105,6 +109,35 @@ export default async function TeachingsPage() {
           />
         </div>
       </div>
+
+      {/* DERNIÈRES VIDÉOS DE LA CHAÎNE */}
+      {latest.length > 0 ? (
+        <section className="en-latest">
+          <div className="head reveal">
+            <p className="eyebrow eyebrow-gold">Dernières vidéos</p>
+            <h2>Les plus récentes de la chaîne</h2>
+          </div>
+          <div className="en-vgrid">
+            {latest.map((v, i) => (
+              <article className="en-vid reveal" data-delay={String(i % 3)} key={v.id}>
+                <div className="en-vid-thumb">
+                  <YouTubeFacade
+                    videoId={v.id}
+                    poster={v.thumbnailUrl}
+                    title=""
+                    subtitle=""
+                    ariaLabel={`Lire la vidéo : ${v.title}`}
+                  />
+                </div>
+                <h3>{v.title}</h3>
+                <time className="en-vid-date" dateTime={v.publishedAt}>
+                  {formatDateFR(v.publishedAt)}
+                </time>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {/* THÈMES */}
       <section className="en-themes">

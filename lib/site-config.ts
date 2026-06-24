@@ -49,6 +49,7 @@ export const siteConfig = {
   },
   youtube: {
     channelUrl: 'https://www.youtube.com/channel/UCi2WIBsPCQycQK2NYwKA61Q',
+    channelId: 'UCi2WIBsPCQycQK2NYwKA61Q',
     /** Playlist officielle affichée sur le site (curation du pasteur) */
     featuredPlaylistId: 'PL1j6au4j0Fs5oAbh6rg9SvMCi7AbUgVBI',
     featuredPlaylistUrl:
