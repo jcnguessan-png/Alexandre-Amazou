@@ -20,6 +20,7 @@ export type PodcastShow = {
    *  validée par la plateforme ; les boutons restent masqués dans ce cas. */
   spotifyShowUrl?: string;
   applePodcastUrl?: string;
+  amazonMusicUrl?: string;
   deezerUrl?: string;
   /** Version vidéo : playlist YouTube de l'émission. */
   youtubePlaylistId?: string;
@@ -36,8 +37,10 @@ export const podcasts: PodcastShow[] = [
     rssUrl:
       'https://media.rss.com/pasteur-j-ai-une-question-by-pasteur-alexandre-amazou/feed.xml',
     featured: true,
-    spotifyShowUrl: '',
-    applePodcastUrl: '',
+    spotifyShowUrl: 'https://open.spotify.com/show/033E4Yh4A0tS2fIzidJbkV',
+    applePodcastUrl: '', // distribution Apple en erreur côté rss.com — à brancher quand corrigée
+    amazonMusicUrl:
+      "https://music.amazon.fr/podcasts/7ca38e03-d531-4485-a14d-f7b53ecc3d43/pasteur-j'ai-une-question-by-pasteur-alexandre-amazou",
     deezerUrl: '',
     youtubePlaylistId: 'PL1j6au4j0Fs7SizoeI8Qa3Bg9LZ3X90jb',
     youtubePlaylistUrl:
