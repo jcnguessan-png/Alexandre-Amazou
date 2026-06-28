@@ -11,7 +11,7 @@ import { FinalCta } from '@/components/home/dynamic/FinalCta';
 import './dynamic-home.css';
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} — La Parole qui forme des leaders`,
+  title: `${siteConfig.name} — Transformer des gens ordinaires en véritables leaders`,
   description:
     "Site officiel du Pasteur Alexandre AMAZOU. Enseignements YouTube, onze ouvrages, biographie. Enseignant biblique, Bishop, fondateur de l'ABMCI.",
   alternates: { canonical: '/' },

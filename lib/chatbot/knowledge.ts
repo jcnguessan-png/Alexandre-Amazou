@@ -112,5 +112,6 @@ ${eventsSection()}
 - YouTube : ${c.social.youtube}
 - Facebook : ${c.social.facebook}
 - Instagram : ${c.social.instagram}
-- WhatsApp : ${c.social.whatsapp}`;
+- WhatsApp (contact direct) : ${c.social.whatsapp}
+- Chaîne WhatsApp officielle (diffusion d'annonces, enseignements et actualités, à recommander pour rester informé) : ${c.social.whatsappChannel}`;
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { safeGetFeaturedPlaylistVideos, safeGetChannelUploads } from '@/lib/youtube';
+import { safeGetFeaturedPlaylistVideos } from '@/lib/youtube';
 import { videoObjectSchema, breadcrumbSchema } from '@/lib/schema';
 import { siteConfig } from '@/lib/site-config';
 import { formatDateFR } from '@/lib/utils';
@@ -51,11 +51,9 @@ const THEMES = [
 ];
 
 export default async function TeachingsPage() {
-  const [videos, latest] = await Promise.all([
-    safeGetFeaturedPlaylistVideos(50),
-    safeGetChannelUploads(siteConfig.youtube.channelId, 3),
-  ]);
+  const videos = await safeGetFeaturedPlaylistVideos(50);
   const poster = videos[0]?.thumbnailHigh ?? videos[0]?.thumbnailUrl;
+  const latest = videos.slice(0, 3);
   const channel = siteConfig.youtube.channelUrl;
   const channelVideos = `${channel}/videos`;
 
@@ -110,12 +108,12 @@ export default async function TeachingsPage() {
         </div>
       </div>
 
-      {/* DERNIÈRES VIDÉOS DE LA CHAÎNE */}
+      {/* DERNIÈRES VIDÉOS DE LA PLAYLIST */}
       {latest.length > 0 ? (
         <section className="en-latest">
           <div className="head reveal">
             <p className="eyebrow eyebrow-gold">Dernières vidéos</p>
-            <h2>Les plus récentes de la chaîne</h2>
+            <h2>Les plus récentes de la playlist</h2>
           </div>
           <div className="en-vgrid">
             {latest.map((v, i) => (
@@ -123,7 +121,7 @@ export default async function TeachingsPage() {
                 <div className="en-vid-thumb">
                   <YouTubeFacade
                     videoId={v.id}
-                    poster={v.thumbnailUrl}
+                    poster={v.thumbnailHigh ?? v.thumbnailUrl}
                     title=""
                     subtitle=""
                     ariaLabel={`Lire la vidéo : ${v.title}`}

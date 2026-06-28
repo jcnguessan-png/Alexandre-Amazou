@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Youtube, Instagram, MessageCircle } from 'lucide-react';
+import { Facebook, Youtube, Instagram, MessageCircle, Megaphone } from 'lucide-react';
 import { siteConfig } from '@/lib/site-config';
 
 const footerNav = {
@@ -84,7 +84,27 @@ export function Footer() {
                   <MessageCircle aria-hidden="true" size={18} />
                 </a>
               </li>
+              <li>
+                <a
+                  href={siteConfig.social.whatsappChannel}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Rejoindre la chaîne WhatsApp officielle"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/20 text-primary-foreground transition hover:border-secondary hover:text-secondary"
+                >
+                  <Megaphone aria-hidden="true" size={18} />
+                </a>
+              </li>
             </ul>
+            <a
+              href={siteConfig.social.whatsappChannel}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
+            >
+              <Megaphone aria-hidden="true" size={16} />
+              Rejoindre la chaîne WhatsApp
+            </a>
           </div>
 
           <FooterColumn title="Navigation" items={footerNav.navigation} />
