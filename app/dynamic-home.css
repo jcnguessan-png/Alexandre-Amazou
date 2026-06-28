@@ -161,28 +161,31 @@
   position: relative;
   justify-self: center;
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
 }
-/* Halo doré discret derrière le portrait détouré — l'intègre au héros sans cadre. */
+/* Halo doré discret derrière le portrait, pour l'asseoir dans le héros. */
 .dyn-home .c-portrait::before {
   content: '';
   position: absolute;
-  inset: -8% -6% 0;
+  inset: -10% -8%;
   z-index: 0;
-  background: radial-gradient(ellipse 62% 58% at 50% 42%, rgba(201, 168, 76, 0.22), transparent 70%);
-  filter: blur(8px);
+  background: radial-gradient(ellipse 62% 58% at 50% 42%, rgba(201, 168, 76, 0.2), transparent 70%);
+  filter: blur(10px);
   pointer-events: none;
 }
-.dyn-home .c-portrait img {
+.dyn-home .c-portrait .ph {
   position: relative;
   z-index: 1;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+}
+.dyn-home .c-portrait .ph img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.5));
-  /* Fond du portrait fondu en dégradé dans le héros (pas de bord net). */
-  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 99%);
-  mask-image: linear-gradient(to bottom, #000 80%, transparent 99%);
 }
 
 /* ====== MARQUEE ====== */

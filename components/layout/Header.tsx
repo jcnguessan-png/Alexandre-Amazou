@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
@@ -52,46 +53,14 @@ export function Header() {
           aria-label={`${siteConfig.shortName} — accueil`}
           className="inline-flex items-center"
         >
-          {/* Mobile : marque seule (M stylisé) */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 130 50"
-            className="h-9 w-auto lg:hidden"
-            aria-hidden="true"
-            fill="none"
-          >
-            <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 45 L35 5 L65 45" />
-              <path d="M65 45 L95 5 L125 45" />
-              <path d="M35 5 Q65 35 95 5" />
-            </g>
-          </svg>
-
-          {/* Desktop : signature complète (marque + nom) */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 240 80"
-            className="hidden h-12 w-auto lg:block"
-            aria-hidden="true"
-            fill="none"
-          >
-            <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M55 50 L75 15 L95 50" />
-              <path d="M95 50 L115 15 L135 50" />
-              <path d="M75 15 Q95 40 115 15" />
-            </g>
-            <text
-              x="120"
-              y="73"
-              textAnchor="middle"
-              fontSize="9"
-              fontFamily="Georgia, serif"
-              fill="currentColor"
-              letterSpacing="2.5"
-            >
-              ALEXANDRE AMAZOU
-            </text>
-          </svg>
+          <Image
+            src="/images/logo-amazou.png"
+            alt="Alexandre AMAZOU"
+            width={221}
+            height={264}
+            priority
+            className="h-11 w-auto lg:h-14"
+          />
         </Link>
 
         <nav aria-label="Navigation principale" className="hidden lg:block">
