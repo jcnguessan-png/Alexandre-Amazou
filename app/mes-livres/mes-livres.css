@@ -162,7 +162,7 @@
   display: block;
 }
 .dyn-livres .lv-card .book-cover {
-  aspect-ratio: 3 / 2.1;
+  aspect-ratio: 2 / 3;
 }
 .dyn-livres .lv-card .body {
   padding: 26px 26px 30px;
