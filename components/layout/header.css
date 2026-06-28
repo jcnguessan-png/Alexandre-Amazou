@@ -1,0 +1,58 @@
+/* En-tête : couleurs pilotées par variables pour basculer clair/sombre.
+   Sombre (défaut) : texte crème, transparent sur les héros sombres.
+   Clair (html.light) : texte encre, fond translucide clair une fois scrollé. */
+.site-header {
+  --hdr-fg: #f4eedf;
+  --hdr-fg-dim: rgba(244, 238, 223, 0.7);
+  --hdr-solid-bg: rgba(10, 10, 20, 0.85);
+  --hdr-border: rgba(201, 168, 76, 0.2);
+  --hdr-menu-bg: #0a0a14;
+  color: var(--hdr-fg);
+}
+html.light .site-header {
+  --hdr-fg: #1c1830;
+  --hdr-fg-dim: rgba(28, 24, 48, 0.64);
+  --hdr-solid-bg: rgba(250, 247, 239, 0.88);
+  --hdr-border: rgba(20, 18, 38, 0.1);
+  --hdr-menu-bg: #faf7ef;
+}
+
+.site-header.is-solid {
+  background: var(--hdr-solid-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hdr-border);
+}
+
+.site-header .nav-lnk {
+  color: var(--hdr-fg-dim);
+  transition: color 0.2s ease;
+}
+.site-header .nav-lnk:hover,
+.site-header .nav-lnk[aria-current='page'] {
+  color: var(--hdr-fg);
+}
+
+.site-header .mnav {
+  background: var(--hdr-menu-bg);
+  border-top: 1px solid var(--hdr-border);
+}
+
+/* Bouton bascule de thème */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--hdr-border);
+  color: var(--hdr-fg);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+.theme-toggle:hover {
+  border-color: var(--hdr-fg);
+}
