@@ -22,9 +22,18 @@ export function BentoSection({
         </h2>
       </div>
 
+      <div className="c-player reveal">
+        <YouTubeFacade
+          playlistId={playlistId}
+          poster={poster}
+          ariaLabel="Lancer la lecture des enseignements"
+        />
+      </div>
+
       <div className="bento">
-        <div className="tile tile-video reveal">
-          <YouTubeFacade playlistId={playlistId} poster={poster} />
+        <div className="tile tile-book reveal">
+          <BookCover book={book} badge={book.bestseller ? 'Best-seller' : undefined} />
+          <span className="lbl">{book.title}</span>
         </div>
 
         <div className="tile tile-stat reveal" data-delay="1">
@@ -37,19 +46,6 @@ export function BentoSection({
           <div className="l">pays de présence</div>
         </div>
 
-        <div className="tile tile-book reveal" data-delay="2">
-          <BookCover book={book} badge={book.bestseller ? 'Best-seller' : undefined} />
-          <span className="lbl">{book.title}</span>
-        </div>
-
-        <div className="tile tile-quote reveal" data-delay="1">
-          <p className="q">
-            « La Parole de Dieu enseignée avec exactitude et révélation, dans la droite ligne
-            de la doctrine. »
-          </p>
-          <p className="src">— Vision du ministère</p>
-        </div>
-
         <Link className="tile tile-cta reveal" data-delay="2" href="/a-propos">
           <span className="big">
             Qui est le
@@ -58,6 +54,14 @@ export function BentoSection({
           </span>
           <span className="ar">→</span>
         </Link>
+
+        <div className="tile tile-quote reveal" data-delay="1">
+          <p className="q">
+            « La Parole de Dieu enseignée avec exactitude et révélation, dans la droite ligne
+            de la doctrine. »
+          </p>
+          <p className="src">— Vision du ministère</p>
+        </div>
       </div>
     </section>
   );

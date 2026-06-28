@@ -35,3 +35,6 @@ import.env
 
 # vercel
 .vercel
+
+# Espace de production podcast (médias volumineux, scripts locaux) — hors site
+Podcasts/

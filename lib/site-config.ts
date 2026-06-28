@@ -27,6 +27,8 @@ export const siteConfig = {
     youtube: 'https://www.youtube.com/channel/UCi2WIBsPCQycQK2NYwKA61Q',
     instagram: 'https://instagram.com/alexandreamazou',
     whatsapp: 'https://wa.me/22507682221272',
+    /** Chaîne WhatsApp officielle (diffusion) — différente du contact wa.me */
+    whatsappChannel: 'https://whatsapp.com/channel/0029VarFFjX2P59jtDUjwF3y',
   },
   ministries: {
     abmci: { name: 'ABMCI', url: 'https://abmci.com', founded: '2003' },
@@ -34,7 +36,7 @@ export const siteConfig = {
     isolm: { name: 'International Seed of Life Ministry' },
   },
   bookstoreUrl: 'https://librairie.abmci.com',
-  donationUrl: 'https://abmci.com/dons',
+  donationUrl: 'https://abmci.com/don',
   bookOrder: {
     /** Numéro WhatsApp dédié à la commande de livres (Librairie Alliance, Abidjan) */
     whatsappNumber: '2250705320607',

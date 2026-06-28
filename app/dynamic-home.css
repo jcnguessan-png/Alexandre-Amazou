@@ -161,39 +161,28 @@
   position: relative;
   justify-self: center;
   width: 100%;
-  max-width: 380px;
+  max-width: 400px;
 }
-.dyn-home .c-portrait .panel {
-  position: relative;
-  border: 1px solid rgba(201, 168, 76, 0.4);
-  background: linear-gradient(180deg, rgba(34, 34, 72, 0.5), rgba(10, 10, 20, 0.2));
-  padding: 14px 14px 0;
-}
-.dyn-home .c-portrait .panel::before,
-.dyn-home .c-portrait .panel::after {
+/* Halo doré discret derrière le portrait détouré — l'intègre au héros sans cadre. */
+.dyn-home .c-portrait::before {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--gold);
-}
-.dyn-home .c-portrait .panel::before {
-  top: -1px;
-  left: -1px;
-  border-right: 0;
-  border-bottom: 0;
-}
-.dyn-home .c-portrait .panel::after {
-  bottom: -1px;
-  right: -1px;
-  border-left: 0;
-  border-top: 0;
+  inset: -8% -6% 0;
+  z-index: 0;
+  background: radial-gradient(ellipse 62% 58% at 50% 42%, rgba(201, 168, 76, 0.22), transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
 }
 .dyn-home .c-portrait img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: auto;
   display: block;
   filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.5));
+  /* Fond du portrait fondu en dégradé dans le héros (pas de bord net). */
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 99%);
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 99%);
 }
 
 /* ====== MARQUEE ====== */
@@ -308,6 +297,33 @@
   font-style: normal;
   color: var(--gold);
 }
+/* Lecteur principal pleine largeur (16/9), au-dessus des autres ressources. */
+.dyn-home .c-player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 18px;
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  background: linear-gradient(135deg, rgba(34, 34, 72, 0.9), rgba(10, 10, 20, 0.95)),
+    repeating-linear-gradient(135deg, transparent 0 24px, rgba(201, 168, 76, 0.04) 24px 25px);
+  overflow: hidden;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5);
+}
+.dyn-home .c-player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.dyn-home .c-player .play {
+  width: 88px;
+  height: 88px;
+}
+.dyn-home .c-player .play svg {
+  width: 32px;
+  height: 32px;
+  margin-left: 4px;
+}
 .dyn-home .bento {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -331,20 +347,6 @@
 /* Restaure le « lift » au survol des tuiles, que .reveal.in écraserait sinon. */
 html.js-reveal .dyn-home .tile.reveal.in:hover {
   transform: translateY(-4px);
-}
-.dyn-home .tile-video {
-  grid-column: span 2;
-  grid-row: span 2;
-  padding: 0;
-  cursor: pointer;
-  background: linear-gradient(135deg, rgba(34, 34, 72, 0.9), rgba(10, 10, 20, 0.95));
-}
-.dyn-home .tile-video iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
 }
 .dyn-home .tile-stat {
   display: flex;
@@ -409,6 +411,7 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
   margin-top: 16px;
 }
 .dyn-home .tile-cta {
+  grid-row: span 2;
   background: var(--gold);
   color: var(--navy-900);
   display: flex;
@@ -576,9 +579,12 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
   .dyn-home .bento {
     grid-template-columns: repeat(2, 1fr);
   }
-  .dyn-home .tile-video,
   .dyn-home .tile-quote {
     grid-column: span 2;
+  }
+  .dyn-home .tile-cta {
+    grid-column: span 2;
+    grid-row: auto;
   }
 }
 @media (max-width: 720px) {
@@ -594,9 +600,13 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
   .dyn-home .bento {
     grid-template-columns: 1fr;
   }
-  .dyn-home .tile-video,
-  .dyn-home .tile-quote {
+  .dyn-home .tile-quote,
+  .dyn-home .tile-cta {
     grid-column: span 1;
+  }
+  .dyn-home .tile-cta {
+    grid-row: auto;
+    min-height: 160px;
   }
   .dyn-home .tile-book {
     grid-row: span 2;

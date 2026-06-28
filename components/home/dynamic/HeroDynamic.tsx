@@ -37,11 +37,11 @@ export function HeroDynamic() {
             Site officiel · Pasteur Alexandre AMAZOU
           </span>
           <h1 className="c-h1">
-            La Parole qui forme
+            Transformer des gens
             <br />
-            des gens ordinaires
+            ordinaires en
             <br />
-            en <span className="sweep">leaders</span>
+            <span className="sweep">véritables leaders</span>
           </h1>
           <p className="c-sub">
             Enseignant biblique, Bishop, fondateur de l&apos;ABMCI, auteur de onze ouvrages.
@@ -59,16 +59,14 @@ export function HeroDynamic() {
         </div>
 
         <div className="c-portrait">
-          <div className="panel">
-            <Image
-              src="/images/bishop-sans-fond.png"
-              alt="Portrait du Bishop Alexandre AMAZOU"
-              width={660}
-              height={1080}
-              priority
-              sizes="(max-width: 940px) 300px, 380px"
-            />
-          </div>
+          <Image
+            src="/images/bishop-sans-fond.png"
+            alt="Portrait du Bishop Alexandre AMAZOU"
+            width={660}
+            height={1080}
+            priority
+            sizes="(max-width: 940px) 300px, 400px"
+          />
         </div>
       </div>
 

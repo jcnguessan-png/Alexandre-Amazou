@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Mail, Phone, MapPin, Youtube, Facebook, Instagram, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Youtube, Facebook, Instagram, MessageCircle, Megaphone } from 'lucide-react';
 import { ContactForm } from '@/components/ui/ContactForm';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { contactPageSchema, localBusinessSchema, breadcrumbSchema } from '@/lib/schema';
@@ -71,6 +71,20 @@ export default function ContactPage() {
               </div>
               <div className="ct-item">
                 <span className="ic">
+                  <Megaphone aria-hidden="true" />
+                </span>
+                <div>
+                  <div className="k">Chaîne WhatsApp officielle</div>
+                  <div className="v">
+                    <a href={social.whatsappChannel} target="_blank" rel="noopener noreferrer">
+                      Rejoindre la chaîne
+                    </a>
+                  </div>
+                  <div className="sub">Annonces, enseignements et actualités du ministère</div>
+                </div>
+              </div>
+              <div className="ct-item">
+                <span className="ic">
                   <MapPin aria-hidden="true" />
                 </span>
                 <div>
@@ -96,6 +110,14 @@ export default function ContactPage() {
               </a>
               <a href={social.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <MessageCircle aria-hidden="true" />
+              </a>
+              <a
+                href={social.whatsappChannel}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chaîne WhatsApp officielle"
+              >
+                <Megaphone aria-hidden="true" />
               </a>
             </div>
           </div>
