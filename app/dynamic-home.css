@@ -161,17 +161,17 @@
   position: relative;
   justify-self: center;
   width: 100%;
-  max-width: 380px;
+  max-width: 500px;
 }
-/* Halo doré derrière le portrait : la photo (bords fondus en transparence) en
-   émerge et se fond dans le fond du site, sans cadre. */
+/* Halo doré derrière le portrait détouré : le pasteur « émerge » du fond du
+   site, sans cadre (transparence → compatible thème clair et sombre). */
 .dyn-home .c-portrait::before {
   content: '';
   position: absolute;
-  inset: -12% -10%;
+  inset: -6% -8% -10%;
   z-index: 0;
-  background: radial-gradient(ellipse 60% 56% at 50% 42%, rgba(201, 168, 76, 0.24), transparent 70%);
-  filter: blur(12px);
+  background: radial-gradient(ellipse 66% 60% at 50% 46%, rgba(201, 168, 76, 0.24), transparent 70%);
+  filter: blur(14px);
   pointer-events: none;
 }
 .dyn-home .c-portrait img {
@@ -570,7 +570,7 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
     padding-top: 130px;
   }
   .dyn-home .c-portrait {
-    max-width: 300px;
+    max-width: 400px;
     order: -1;
   }
   .dyn-home .bento {

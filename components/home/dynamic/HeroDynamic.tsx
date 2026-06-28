@@ -62,8 +62,8 @@ export function HeroDynamic() {
           <Image
             src="/images/bishop-hero.webp"
             alt="Portrait du Bishop Alexandre AMAZOU"
-            width={800}
-            height={1000}
+            width={1000}
+            height={835}
             priority
             sizes="(max-width: 940px) 300px, 380px"
           />
