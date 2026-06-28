@@ -19,6 +19,7 @@ import { RevealOnScroll } from '@/components/home/dynamic/RevealOnScroll';
 import { ChatWidget } from '@/components/chat/ChatWidget';
 import './globals.css';
 import './theme-dyn.css';
+import './theme-light.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -162,6 +163,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${playfair.variable} ${lora.variable} ${spaceGrotesk.variable} ${cormorant.variable} ${sourceSerif.variable} ${archivo.variable}`}
     >
       <head>
+        {/* Pose le thème clair avant le paint (pas de flash) si l'utilisateur l'a choisi. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light')}catch(e){}",
+          }}
+        />
         <JsonLd data={personSchema()} />
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />

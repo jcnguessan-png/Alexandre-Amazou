@@ -7,6 +7,8 @@ import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { navItems, siteConfig } from '@/lib/site-config';
 import { Button } from '@/components/ui/Button';
+import { ThemeToggle } from './ThemeToggle';
+import './header.css';
 
 // Direction C : nav sombre fixe sur tout le site. Transparente au-dessus du
 // héros (sombre) de chaque page, fond nuit flouté dès qu'on scrolle.
@@ -40,17 +42,15 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed top-0 z-50 w-full text-[#F4EEDF] transition-all',
-        solid
-          ? 'border-b border-secondary/20 bg-[#0A0A14]/85 backdrop-blur-md'
-          : 'bg-transparent',
+        'site-header fixed top-0 z-50 w-full transition-all',
+        solid ? 'is-solid' : 'bg-transparent',
       )}
     >
       <div className="container flex h-16 items-center justify-between gap-4 lg:h-20">
         <Link
           href="/"
           aria-label={`${siteConfig.shortName} — accueil`}
-          className="inline-flex items-center text-[#F4EEDF]"
+          className="inline-flex items-center"
         >
           {/* Mobile : marque seule (M stylisé) */}
           <svg
@@ -106,10 +106,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     aria-current={isActive ? 'page' : undefined}
-                    className={cn(
-                      'relative rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                      isActive ? 'text-[#F4EEDF]' : 'text-[#F4EEDF]/70 hover:text-[#F4EEDF]',
-                    )}
+                    className="nav-lnk relative rounded-md px-3 py-2 text-sm font-medium"
                   >
                     {item.label}
                     {isActive ? (
@@ -125,30 +122,30 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggle />
           <Button asChild variant="primary" size="sm">
             <Link href="/faire-un-don">Soutenir le ministère</Link>
           </Button>
         </div>
 
-        <button
-          type="button"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-[#F4EEDF] lg:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </button>
+        <div className="flex items-center gap-1 lg:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-md"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
-      <div
-        id="mobile-menu"
-        hidden={!open}
-        className="border-t border-secondary/20 bg-[#0A0A14] lg:hidden"
-      >
+      <div id="mobile-menu" hidden={!open} className="mnav lg:hidden">
         <nav aria-label="Navigation mobile" className="container py-6">
           <ul className="flex flex-col gap-1">
             {navItems.map((item) => {
@@ -162,8 +159,8 @@ export function Header() {
                     href={item.href}
                     aria-current={isActive ? 'page' : undefined}
                     className={cn(
-                      'block rounded-md px-3 py-3 text-base font-medium',
-                      isActive ? 'bg-white/5 text-[#F4EEDF]' : 'text-[#F4EEDF]/80',
+                      'nav-lnk block rounded-md px-3 py-3 text-base font-medium',
+                      isActive ? 'bg-secondary/10' : '',
                     )}
                   >
                     {item.label}

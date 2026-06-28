@@ -1,0 +1,101 @@
+/* =========================================================
+   MODE CLAIR — surcouche du thème Direction C.
+   Tout est scopé sous html.light pour ne JAMAIS affecter le
+   thème sombre (par défaut). Activé via le bouton 🌙/☀️ (ThemeToggle)
+   qui pose/retire la classe `light` sur <html> (persistance localStorage).
+
+   Stratégie : le site alterne des sections sombres (var(--ink)/--navy-900,
+   texte crème) et des sections déjà claires (var(--paper), texte sombre —
+   elles restent inchangées). --navy-900 sert AUSSI d'encre sombre sur l'or
+   (boutons, badges) : on ne flippe donc PAS ce token, on cible les sections.
+   ========================================================= */
+
+/* ---- 1. Bascule des tokens « sûrs » (fond de base + texte) ---- */
+html.light .dyn {
+  --ink: #faf7ef; /* fond de base + sections var(--ink) → blanc cassé chaud */
+  --cream: #211c30; /* texte principal des sections sombres → encre */
+  --muted-on-dark: rgba(33, 28, 48, 0.64); /* texte secondaire → encre atténuée */
+}
+html.light body {
+  background: #faf7ef;
+}
+
+/* ---- 2. Sections « bande sombre » (var(--navy-900)) → bande claire ---- */
+html.light .dyn-home .c-stats,
+html.light .dyn-home .c-books,
+html.light .dyn-home .c-final,
+html.light .dyn-home .marquee,
+html.light .dyn-apropos .ab-time,
+html.light .dyn-apropos .ab-cta,
+html.light .dyn-ens .en-sub,
+html.light .dyn-livres .lv-feat {
+  background: #f1e9d6;
+}
+/* Anneau du point de timeline : doit suivre le fond de la section */
+html.light .dyn-apropos .tl .item::before {
+  box-shadow: 0 0 0 5px #f1e9d6;
+}
+/* Halo « bleu nuit » du héros d'accueil → halo doré discret sur fond clair */
+html.light .dyn-home .c-hero-bg .g2 {
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.16), transparent 60%);
+}
+
+/* ---- 3. Cartes (dégradé bleu nuit translucide) → cartes blanches ---- */
+html.light .dyn .dcard,
+html.light .dyn-home .tile:not(.tile-cta),
+html.light .dyn-ens .en-card,
+html.light .dyn-podcast .pc-aside,
+html.light .dyn-podcast .ep,
+html.light .dyn-podcast-hub .pod-card {
+  background: #ffffff;
+  border-color: rgba(20, 18, 38, 0.1);
+  box-shadow: 0 10px 30px rgba(20, 18, 38, 0.05);
+}
+
+/* ---- 4. Filets / séparateurs crème (invisibles sur fond clair) → encre ---- */
+html.light .dyn-home .c-stats .s {
+  border-right-color: rgba(20, 18, 38, 0.1);
+}
+html.light .dyn-podcast .pc-plat {
+  border-top-color: rgba(20, 18, 38, 0.12);
+}
+html.light .dyn-podcast .pc-plat .row {
+  border-bottom-color: rgba(20, 18, 38, 0.1);
+}
+
+/* ---- 5. Prose / pages utilitaires & légales (couleurs crème littérales) ---- */
+html.light .dyn .prose-dark {
+  color: rgba(33, 28, 48, 0.84);
+}
+html.light .dyn .prose-dark h2,
+html.light .dyn .prose-dark strong {
+  color: #211c30;
+}
+html.light .dyn .dcard .note {
+  color: rgba(33, 28, 48, 0.55);
+}
+html.light .dyn .updated {
+  color: rgba(33, 28, 48, 0.5);
+}
+
+/* ---- 6. Exceptions : surfaces qui RESTENT sombres (vidéos, boutons,
+        encarts sur image) → on y garde le texte clair ---- */
+html.light .dyn .yt-facade {
+  color: #f4eedf;
+}
+html.light .dyn .yt-facade .s {
+  color: rgba(244, 238, 223, 0.62);
+}
+html.light .dyn .btn-dark {
+  color: #f4eedf;
+}
+html.light .dyn-home .tile-book .lbl {
+  color: #f4eedf;
+}
+html.light .dyn-apropos .ab-hero .portrait .cap .n {
+  color: #f4eedf;
+}
+/* Filtre « actif » des livres = pastille bleu nuit → texte clair conservé */
+html.light .dyn-livres .lv-filters button.active {
+  color: #f4eedf;
+}
