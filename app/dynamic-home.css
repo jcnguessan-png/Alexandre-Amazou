@@ -81,7 +81,7 @@
   width: 100%;
   padding: 150px 40px 40px;
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-columns: 1.12fr 0.88fr;
   gap: 40px;
   align-items: center;
 }
@@ -161,7 +161,7 @@
   position: relative;
   justify-self: center;
   width: 100%;
-  max-width: 500px;
+  max-width: 560px;
 }
 /* Halo doré derrière le portrait détouré : le pasteur « émerge » du fond du
    site, sans cadre (transparence → compatible thème clair et sombre). */
