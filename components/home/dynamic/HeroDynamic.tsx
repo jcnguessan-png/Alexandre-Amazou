@@ -59,16 +59,14 @@ export function HeroDynamic() {
         </div>
 
         <div className="c-portrait">
-          <div className="ph">
-            <Image
-              src="/images/bishop-hero.jpg"
-              alt="Portrait du Bishop Alexandre AMAZOU"
-              width={800}
-              height={1000}
-              priority
-              sizes="(max-width: 940px) 300px, 380px"
-            />
-          </div>
+          <Image
+            src="/images/bishop-hero.webp"
+            alt="Portrait du Bishop Alexandre AMAZOU"
+            width={800}
+            height={1000}
+            priority
+            sizes="(max-width: 940px) 300px, 380px"
+          />
         </div>
       </div>
 
