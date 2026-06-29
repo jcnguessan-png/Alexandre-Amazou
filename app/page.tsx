@@ -7,7 +7,11 @@ import { StatsBand } from '@/components/home/dynamic/StatsBand';
 import { BentoSection } from '@/components/home/dynamic/BentoSection';
 import { BooksStrip } from '@/components/home/dynamic/BooksStrip';
 import { ConferenceBand } from '@/components/home/dynamic/ConferenceBand';
+import { FaqSection } from '@/components/home/dynamic/FaqSection';
 import { FinalCta } from '@/components/home/dynamic/FinalCta';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { faqPageSchema } from '@/lib/schema';
+import { faq } from '@/data/faq';
 import './dynamic-home.css';
 
 export const metadata: Metadata = {
@@ -26,6 +30,7 @@ export default async function HomePage() {
 
   return (
     <div className="dyn dyn-home" data-page="accueil">
+      <JsonLd data={faqPageSchema(faq)} />
       <HeroDynamic />
       <StatsBand />
       <BentoSection
@@ -35,6 +40,7 @@ export default async function HomePage() {
       />
       <BooksStrip books={books} />
       <ConferenceBand />
+      <FaqSection />
       <FinalCta youtubeUrl={siteConfig.youtube.channelUrl} />
     </div>
   );
