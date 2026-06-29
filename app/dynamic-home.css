@@ -536,6 +536,66 @@ html.js-reveal .dyn-home .tile.reveal.in:hover {
   font-size: 18px;
 }
 
+/* ====== FAQ ====== */
+.dyn-home .c-faq {
+  background: var(--navy-900);
+}
+.dyn-home .c-faq-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 40px;
+}
+.dyn-home .c-faq .c-head {
+  text-align: center;
+  margin-bottom: 44px;
+}
+.dyn-home .c-faq-list {
+  display: grid;
+  gap: 14px;
+}
+.dyn-home .c-faq-item {
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  background: linear-gradient(180deg, rgba(34, 34, 72, 0.3), rgba(13, 13, 30, 0.3));
+  transition: border-color 0.3s var(--ease);
+}
+.dyn-home .c-faq-item[open] {
+  border-color: rgba(201, 168, 76, 0.4);
+}
+.dyn-home .c-faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 22px 26px;
+  font-family: var(--grotesk);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--cream);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.dyn-home .c-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.dyn-home .c-faq-item summary::after {
+  content: '+';
+  font-family: var(--serif);
+  font-size: 26px;
+  line-height: 1;
+  color: var(--gold);
+  flex: none;
+}
+.dyn-home .c-faq-item[open] summary::after {
+  content: '−';
+}
+.dyn-home .c-faq-item p {
+  margin: 0;
+  padding: 0 26px 24px;
+  color: var(--muted-on-dark);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
 /* ====== FINAL ====== */
 .dyn-home .c-final {
   text-align: center;

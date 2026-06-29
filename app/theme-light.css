@@ -24,6 +24,7 @@ html.light body {
 html.light .dyn-home .c-stats,
 html.light .dyn-home .c-books,
 html.light .dyn-home .c-final,
+html.light .dyn-home .c-faq,
 html.light .dyn-home .marquee,
 html.light .dyn-apropos .ab-time,
 html.light .dyn-apropos .ab-cta,
@@ -43,6 +44,7 @@ html.light .dyn-home .c-hero-bg .g2 {
 /* ---- 3. Cartes (dégradé bleu nuit translucide) → cartes blanches ---- */
 html.light .dyn .dcard,
 html.light .dyn-home .tile:not(.tile-cta),
+html.light .dyn-home .c-faq-item,
 html.light .dyn-ens .en-card,
 html.light .dyn-podcast .pc-aside,
 html.light .dyn-podcast .ep,

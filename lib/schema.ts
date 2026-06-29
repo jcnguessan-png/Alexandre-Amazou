@@ -2,7 +2,7 @@ import { siteConfig } from './site-config';
 import type { Book } from '@/data/books';
 import type { Event } from '@/data/events';
 import type { Video } from './youtube';
-import type { PodcastShow } from '@/data/podcasts';
+import { featuredPodcast, type PodcastShow } from '@/data/podcasts';
 
 const absoluteUrl = (path: string) =>
   path.startsWith('http') ? path : `${siteConfig.url.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}`;
@@ -16,7 +16,16 @@ export const personSchema = () => ({
   jobTitle: 'Pasteur, enseignant biblique, auteur',
   description: siteConfig.description,
   url: siteConfig.url,
-  image: absoluteUrl('/images/alexandre-amazou-portrait.jpg'),
+  image: absoluteUrl('/images/pasteur-amazou-portrait.jpg'),
+  knowsAbout: [
+    'Enseignement biblique',
+    'Théologie chrétienne',
+    'Leadership chrétien',
+    'Prière et intercession',
+    'Combat spirituel',
+    'Vie chrétienne et famille',
+  ],
+  nationality: { '@type': 'Country', name: "Côte d'Ivoire" },
   alumniOf: [
     {
       '@type': 'EducationalOrganization',
@@ -37,7 +46,9 @@ export const personSchema = () => ({
     siteConfig.social.facebook,
     siteConfig.social.youtube,
     siteConfig.social.instagram,
-  ],
+    siteConfig.bookOrder.amazonAuthorUrl,
+    featuredPodcast.spotifyShowUrl,
+  ].filter(Boolean),
 });
 
 export const organizationSchema = () => ({
@@ -208,5 +219,15 @@ export const breadcrumbSchema = (items: { name: string; href: string }[]) => ({
     position: idx + 1,
     name: item.name,
     item: absoluteUrl(item.href),
+  })),
+});
+
+export const faqPageSchema = (items: { question: string; answer: string }[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((it) => ({
+    '@type': 'Question',
+    name: it.question,
+    acceptedAnswer: { '@type': 'Answer', text: it.answer },
   })),
 });
