@@ -39,13 +39,13 @@ export function HeroDynamic() {
           <h1 className="c-h1">
             Transformer des gens
             <br />
-            ordinaires en
+            ordinaires en de
             <br />
             <span className="sweep">véritables leaders</span>
           </h1>
           <p className="c-sub">
             Enseignant biblique, Bishop, fondateur de l&apos;ABMCI, auteur de onze ouvrages.
-            Des centaines d&apos;enseignements pour transformer des personnes ordinaires en
+            Des centaines d&apos;enseignements pour transformer des personnes ordinaires en de
             véritables leaders.
           </p>
           <div className="c-hero-cta">

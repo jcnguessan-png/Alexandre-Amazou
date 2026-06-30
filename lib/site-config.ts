@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: 'Pasteur Alexandre AMAZOU',
   shortName: 'Alexandre AMAZOU',
-  baseline: 'Transformer des personnes ordinaires en véritables leaders',
+  baseline: 'Transformer des personnes ordinaires en de véritables leaders',
   description:
     "Site officiel du Pasteur Alexandre AMAZOU — enseignant biblique, Bishop, fondateur de l'ABMCI, auteur de onze ouvrages. Enseignements, livres et podcast.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://alexandreamazou.com',

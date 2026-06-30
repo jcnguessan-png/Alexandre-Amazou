@@ -9,7 +9,7 @@ export const faq: FaqItem[] = [
   {
     question: 'Qui est le Pasteur Alexandre AMAZOU ?',
     answer:
-      "Alexandre AMAZOU est un pasteur, enseignant biblique et Bishop ivoirien, fondateur de l'Alliance Biblique Missionnaire Côte d'Ivoire (ABMCI) en 2003. Auteur de onze ouvrages, il forme des leaders chrétiens à travers le monde, avec la vision de transformer des gens ordinaires en véritables leaders.",
+      "Alexandre AMAZOU est un pasteur, enseignant biblique et Bishop ivoirien, fondateur de l'Alliance Biblique Missionnaire Côte d'Ivoire (ABMCI) en 2003. Auteur de onze ouvrages, il forme des leaders chrétiens à travers le monde, avec la vision de transformer des gens ordinaires en de véritables leaders.",
   },
   {
     question: 'Où suivre les enseignements du Pasteur Alexandre AMAZOU ?',
