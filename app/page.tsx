@@ -15,7 +15,7 @@ import { faq } from '@/data/faq';
 import './dynamic-home.css';
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} — Transformer des gens ordinaires en véritables leaders`,
+  title: `${siteConfig.name} — Transformer des gens ordinaires en de véritables leaders`,
   description:
     "Site officiel du Pasteur Alexandre AMAZOU. Enseignements YouTube, onze ouvrages, biographie. Enseignant biblique, Bishop, fondateur de l'ABMCI.",
   alternates: { canonical: '/' },
