@@ -4,6 +4,7 @@ import { ContactForm } from '@/components/ui/ContactForm';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { contactPageSchema, localBusinessSchema, breadcrumbSchema } from '@/lib/schema';
 import { siteConfig } from '@/lib/site-config';
+import { INVITATION_SUBJECT } from '@/lib/contact-options';
 import './me-contacter.css';
 
 export const metadata: Metadata = {
@@ -18,8 +19,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default function ContactPage({
+  searchParams,
+}: {
+  searchParams: { objet?: string };
+}) {
   const { contact, social } = siteConfig;
+  const defaultSubject =
+    searchParams.objet === 'invitation'
+      ? INVITATION_SUBJECT
+      : searchParams.objet === 'presse'
+        ? 'demande-presse'
+        : '';
 
   return (
     <div className="dyn dyn-contact" data-page="contact">
@@ -122,12 +133,12 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="ct-form reveal" data-delay="1">
-            <h2>Envoyer un message</h2>
+          <div className="ct-form reveal" data-delay="1" id="formulaire">
+            <h2>{defaultSubject === INVITATION_SUBJECT ? 'Inviter le Pasteur' : 'Envoyer un message'}</h2>
             <p className="note">
               Vos données ne sont utilisées que pour répondre à votre demande.
             </p>
-            <ContactForm />
+            <ContactForm defaultSubject={defaultSubject} />
           </div>
         </div>
       </section>

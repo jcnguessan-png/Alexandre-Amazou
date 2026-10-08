@@ -61,9 +61,10 @@ export default function PressPage() {
               <span className="bar" aria-hidden="true" />
             </div>
             <p className="reveal" style={{ marginTop: '18px', maxWidth: '62ch', color: 'var(--muted-on-dark)' }}>
-              Le kit presse complet (PDF + photos HD + logos) est en cours de finalisation. En
-              attendant, contactez-nous directement pour recevoir les éléments dont vous avez
-              besoin.
+              Les biographies, photos officielles et la vidéo de présentation sont regroupées dans
+              un <Link href="/kit-communication" style={{ color: 'var(--gold)', textDecoration: 'underline', textUnderlineOffset: '3px' }}>kit de communication</Link>{' '}
+              réservé aux organisateurs et aux médias. Faites votre demande : après validation
+              par le secrétariat, vous recevrez un lien d&apos;accès personnel par email.
             </p>
             <div className="dgrid cols-2" style={{ marginTop: '30px' }}>
               {mediaKit.map((item) => (
@@ -95,7 +96,7 @@ export default function PressPage() {
               <a className="btn btn-gold" href={`mailto:${siteConfig.contact.email}?subject=Demande%20presse`}>
                 <Mail size={16} aria-hidden="true" /> Contacter le secrétariat
               </a>
-              <Link className="btn btn-ghost-gold" href="/me-contacter">
+              <Link className="btn btn-ghost-gold" href="/me-contacter?objet=presse#formulaire">
                 <Download size={16} aria-hidden="true" /> Demander le media kit complet
               </Link>
             </div>
