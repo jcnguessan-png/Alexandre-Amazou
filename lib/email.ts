@@ -1,13 +1,13 @@
 /**
- * Envoi d'emails transactionnels via l'API Brevo (même clé que la newsletter).
- * Docs : https://developers.brevo.com/reference/sendtransacemail
+ * Envoi d'emails transactionnels via l'API Resend.
+ * Docs : https://resend.com/docs/api-reference/emails/send-email
  *
- * Prérequis : BREVO_API_KEY renseignée et l'expéditeur CONTACT_EMAIL_FROM validé
- * dans Brevo (Expéditeurs & domaines). Sans clé, en développement, l'email est
- * simplement affiché dans la console pour pouvoir tester le parcours.
+ * Prérequis : RESEND_API_KEY renseignée et le domaine de CONTACT_EMAIL_FROM
+ * (alexandreamazou.com) vérifié dans Resend > Domains. Sans clé, en développement,
+ * l'email est simplement affiché dans la console pour pouvoir tester le parcours.
  */
 
-const BREVO_API = 'https://api.brevo.com/v3';
+const RESEND_API = 'https://api.resend.com/emails';
 
 export type EmailPayload = {
   to: { email: string; name?: string };
@@ -16,43 +16,47 @@ export type EmailPayload = {
   replyTo?: { email: string; name?: string };
 };
 
+/** « Nom <email> » — format d'adresse attendu par Resend. */
+function formatAddress({ email, name }: { email: string; name?: string }): string {
+  return name ? `${name.replace(/["<>]/g, '')} <${email}>` : email;
+}
+
 export async function sendEmail(payload: EmailPayload): Promise<{ ok: boolean; error?: string }> {
-  const apiKey = process.env.BREVO_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.CONTACT_EMAIL_FROM ?? 'no-reply@alexandreamazou.com';
 
   if (!apiKey) {
     if (process.env.NODE_ENV !== 'production') {
-      console.info('[email] BREVO_API_KEY absente — email non envoyé (dev) :', {
+      console.info('[email] RESEND_API_KEY absente — email non envoyé (dev) :', {
         to: payload.to.email,
         subject: payload.subject,
         text: htmlToText(payload.html),
       });
       return { ok: true };
     }
-    console.error('[email] BREVO_API_KEY manquante — impossible d’envoyer « %s »', payload.subject);
-    return { ok: false, error: 'BREVO_API_KEY manquante' };
+    console.error('[email] RESEND_API_KEY manquante — impossible d’envoyer « %s »', payload.subject);
+    return { ok: false, error: 'RESEND_API_KEY manquante' };
   }
 
   try {
-    const res = await fetch(`${BREVO_API}/smtp/email`, {
+    const res = await fetch(RESEND_API, {
       method: 'POST',
       headers: {
-        accept: 'application/json',
         'content-type': 'application/json',
-        'api-key': apiKey,
+        authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        sender: { email: fromEmail, name: 'Pasteur Alexandre AMAZOU' },
-        to: [payload.to],
-        replyTo: payload.replyTo,
+        from: formatAddress({ email: fromEmail, name: 'Pasteur Alexandre AMAZOU' }),
+        to: [formatAddress(payload.to)],
+        reply_to: payload.replyTo ? formatAddress(payload.replyTo) : undefined,
         subject: payload.subject,
-        htmlContent: payload.html,
+        html: payload.html,
       }),
     });
     if (res.ok) return { ok: true };
     const data = await res.json().catch(() => ({}));
-    console.error('[email] Brevo %s : %s', res.status, data?.message ?? '');
-    return { ok: false, error: `Erreur Brevo ${res.status}` };
+    console.error('[email] Resend %s : %s', res.status, data?.message ?? '');
+    return { ok: false, error: `Erreur Resend ${res.status}` };
   } catch (err) {
     console.error('[email] erreur réseau', err);
     return { ok: false, error: 'Erreur réseau' };
