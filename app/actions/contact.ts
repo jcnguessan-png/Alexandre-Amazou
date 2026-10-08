@@ -213,7 +213,7 @@ export async function contactAction(
   }
 
   const notify = await sendEmail({
-    to: { email: process.env.CONTACT_EMAIL_TO ?? 'contact@alexandreamazou.com' },
+    to: { email: process.env.CONTACT_EMAIL_TO || 'contact@alexandreamazou.com' },
     replyTo: { email: d.email, name: fullName },
     subject: isInvitation
       ? `Invitation — ${d.organisation} (${d.city}) — ${formatDate(d.dateStart)}`

@@ -163,7 +163,7 @@ export function daysFromNow(days: number): number {
 }
 
 export function siteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://alexandreamazou.com').replace(/\/$/, '');
+  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://alexandreamazou.com').replace(/\/$/, '');
 }
 
 export function accessUrl(token: string): string {

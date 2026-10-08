@@ -23,7 +23,7 @@ function formatAddress({ email, name }: { email: string; name?: string }): strin
 
 export async function sendEmail(payload: EmailPayload): Promise<{ ok: boolean; error?: string }> {
   const apiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.CONTACT_EMAIL_FROM ?? 'no-reply@alexandreamazou.com';
+  const fromEmail = process.env.CONTACT_EMAIL_FROM || 'no-reply@alexandreamazou.com';
 
   if (!apiKey) {
     if (process.env.NODE_ENV !== 'production') {

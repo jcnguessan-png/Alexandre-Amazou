@@ -46,7 +46,7 @@ export async function approveKitAction(
 
   const sent = await sendEmail({
     to: { email: request.email, name: request.name },
-    replyTo: { email: process.env.CONTACT_EMAIL_TO ?? 'contact@alexandreamazou.com' },
+    replyTo: { email: process.env.CONTACT_EMAIL_TO || 'contact@alexandreamazou.com' },
     subject: 'Votre accès au kit de communication du Pasteur Alexandre AMAZOU',
     html: emailLayout(
       'Votre kit de communication',
