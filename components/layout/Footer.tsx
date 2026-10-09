@@ -15,6 +15,7 @@ const footerNav = {
     { href: '/a-propos#leadership', label: 'Plateforme Leadership' },
     { href: '/temoignages', label: 'Témoignages' },
     { href: '/presse', label: 'Presse & médias' },
+    { href: '/me-contacter?objet=invitation#formulaire', label: 'Inviter le Pasteur' },
   ],
   legal: [
     { href: '/me-contacter', label: 'Me contacter' },
