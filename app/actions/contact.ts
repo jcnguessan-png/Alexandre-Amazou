@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
 import { verifyTurnstile } from '@/lib/brevo';
-import { sendEmail, emailLayout, emailButton, emailTable, escapeHtml } from '@/lib/email';
+import { sendEmail, teamRecipients, emailLayout, emailButton, emailTable, escapeHtml } from '@/lib/email';
 import { createToken, approvalUrl, daysFromNow, KIT_APPROVAL_DAYS } from '@/lib/kit';
 import {
   subjectValues,
@@ -213,7 +213,7 @@ export async function contactAction(
   }
 
   const notify = await sendEmail({
-    to: { email: process.env.CONTACT_EMAIL_TO || 'contact@alexandreamazou.com' },
+    to: teamRecipients(),
     replyTo: { email: d.email, name: fullName },
     subject: isInvitation
       ? `Invitation — ${d.organisation} (${d.city}) — ${formatDate(d.dateStart)}`

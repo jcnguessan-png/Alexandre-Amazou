@@ -9,12 +9,28 @@
 
 const RESEND_API = 'https://api.resend.com/emails';
 
+type Recipient = { email: string; name?: string };
+
 export type EmailPayload = {
-  to: { email: string; name?: string };
+  to: Recipient | Recipient[];
   subject: string;
   html: string;
   replyTo?: { email: string; name?: string };
 };
+
+/**
+ * Destinataires des demandes reçues par le site : CONTACT_EMAIL_TO (défaut contact@)
+ * + CONTACT_EMAIL_EXTRA_TO, liste séparée par des virgules (adresses gardées hors du
+ * dépôt public).
+ */
+export function teamRecipients(): Recipient[] {
+  const list = [process.env.CONTACT_EMAIL_TO || 'contact@alexandreamazou.com', process.env.CONTACT_EMAIL_EXTRA_TO ?? '']
+    .join(',')
+    .split(',')
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return Array.from(new Set(list)).map((email) => ({ email }));
+}
 
 /** « Nom <email> » — format d'adresse attendu par Resend. */
 function formatAddress({ email, name }: { email: string; name?: string }): string {
@@ -28,7 +44,7 @@ export async function sendEmail(payload: EmailPayload): Promise<{ ok: boolean; e
   if (!apiKey) {
     if (process.env.NODE_ENV !== 'production') {
       console.info('[email] RESEND_API_KEY absente — email non envoyé (dev) :', {
-        to: payload.to.email,
+        to: payload.to,
         subject: payload.subject,
         text: htmlToText(payload.html),
       });
@@ -47,7 +63,7 @@ export async function sendEmail(payload: EmailPayload): Promise<{ ok: boolean; e
       },
       body: JSON.stringify({
         from: formatAddress({ email: fromEmail, name: 'Pasteur Alexandre AMAZOU' }),
-        to: [formatAddress(payload.to)],
+        to: (Array.isArray(payload.to) ? payload.to : [payload.to]).map(formatAddress),
         reply_to: payload.replyTo ? formatAddress(payload.replyTo) : undefined,
         subject: payload.subject,
         html: payload.html,
