@@ -220,7 +220,12 @@ export default async function KitPage({ searchParams }: { searchParams: { acces?
             <li>Aucun usage commercial ni diffusion de ces fichiers en dehors de votre communication.</li>
             <li>
               Une question ou un visuel à faire valider : écrivez à{' '}
-              <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.
+              <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a> ou
+              au secrétariat :{' '}
+              <a href={`mailto:${siteConfig.contact.secretariatEmail}`}>
+                {siteConfig.contact.secretariatEmail}
+              </a>
+              .
             </li>
           </ul>
         </section>
