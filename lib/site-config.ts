@@ -8,6 +8,8 @@ export const siteConfig = {
   locale: 'fr_FR',
   contact: {
     email: 'contact@alexandreamazou.com',
+    /** Secrétariat ABMCI — contact pour les organisateurs (kit de communication) */
+    secretariatEmail: 'secretariatabmci@gmail.com',
     phone: '+225 07 68 22 12 72',
     phoneIntl: '+22507682221272',
     whatsapp: 'https://wa.me/22507682221272',
