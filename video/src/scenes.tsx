@@ -555,7 +555,7 @@ export const SceneEndCard: React.FC = () => {
           style={{ height: (vertical ? 210 : 150) * u, opacity: logo, transform: `scale(${0.9 + logo * 0.1})` }}
         />
         <GoldTitle size={(vertical ? 78 : 70) * u} start={10}>
-          Rejoignez le mouvement
+          Rejoignez-nous
         </GoldTitle>
         <GoldTitle size={(vertical ? 36 : 32) * u} start={22} font="sans" tracking={0.16}>
           alexandreamazou.com

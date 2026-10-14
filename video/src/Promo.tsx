@@ -20,21 +20,28 @@ import {
 export const FEATURED_BOOKS: Book[] = [
   { cover: 'livres/realite-monde-esprits-2026.png', title: 'La Réalité du Monde des Esprits', flat: false },
   { cover: 'livres/40-jours-combat-spirituel.png', title: '40 Jours de Combat Spirituel', flat: false },
-  { cover: 'livres/protocole-gloire.png', title: 'Le Protocole d’accès à la Gloire de Dieu', flat: true },
+  {
+    cover: 'livres/preparer-et-reussir-une-nouvelle-annee.jpg',
+    title: 'Comment préparer et réussir une nouvelle année ?',
+    flat: true,
+  },
   { cover: 'livres/mon-journal-de-victoire.png', title: 'Mon Journal de Victoire', flat: true },
 ];
 
-/** Couvertures à plat pour l'éventail « bibliothèque ». */
+/**
+ * Couvertures à plat pour l'éventail « bibliothèque ». Les titres récents sont au centre
+ * (la version verticale n'utilise que les 7 premières, les plus anciens sont en fin de liste).
+ */
 const LIBRARY = [
   'livres/la-faveur-des-peres-face.png',
   'livres/devenir-riche-pour-dieu-face.png',
   'livres/la-verite-sur-les-prieres-non-exaucees-face.png',
-  'livres/protocole-gloire.png',
-  'livres/preparer-et-reussir-une-nouvelle-annee.jpg',
   'livres/mon-journal-de-victoire.png',
+  'livres/preparer-et-reussir-une-nouvelle-annee.jpg',
   'livres/les-hommes-de-la-race-de-dieu-face.png',
   'livres/reussir-sa-vie-face.png',
   'livres/le-transfert-de-l-iniquite-face.png',
+  'livres/protocole-gloire.png',
 ];
 
 type Shot = { at: number; dur: number; el: React.ReactNode };
@@ -132,7 +139,7 @@ export const VO_9x16 = [
   { from: 10.3, to: 19, text: 'Des enseignements qui se vivent.' },
   { from: 19.2, to: 22, text: 'Sur Amazon, à la Librairie Alliance et sur alexandreamazou.com.' },
   { from: 22.3, to: 25.4, text: 'Votre histoire n’est pas terminée.' },
-  { from: 25.6, to: 29.6, text: 'Abonnez-vous. Rejoignez le mouvement.' },
+  { from: 25.6, to: 29.6, text: 'Abonnez-vous. Rejoignez-nous.' },
 ];
 
 export const Promo9x16: React.FC = () => (

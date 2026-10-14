@@ -56,7 +56,7 @@ Il se vit. <break time="8.5s" />
 Onze ouvrages pour bâtir votre victoire. Sur Amazon, à la Librairie Alliance, et sur alexandreamazou.com. <break time="3.0s" />
 Votre histoire... n'est pas terminée. <break time="2.5s" />
 Enseignements. Livres. Podcast. <break time="0.5s" />
-Rejoignez le mouvement.
+Rejoignez-nous.
 ```
 Si le Pasteur enregistre lui-même « Votre histoire n'est pas terminée », retirer cette phrase de la
 voix off et déposer son enregistrement dans `pasteur-fin.mp3`.
@@ -70,7 +70,7 @@ Dix mille personnes chaque année. <break time="0.6s" />
 Des enseignements qui se vivent. <break time="6.5s" />
 Sur Amazon, à la Librairie Alliance et sur alexandreamazou.com. <break time="0.5s" />
 Votre histoire n'est pas terminée. <break time="0.8s" />
-Abonnez-vous. Rejoignez le mouvement.
+Abonnez-vous. Rejoignez-nous.
 ```
 
 ### Enregistrement du Pasteur (recommandé)
