@@ -56,22 +56,64 @@ const Timeline: React.FC<{ shots: Shot[] }> = ({ shots }) => (
   </>
 );
 
-const Soundtrack: React.FC<{ vo: string | null; finAt: number }> = ({ vo, finAt }) => (
+/**
+ * Voix off découpée phrase par phrase : chaque phrase (from→to dans le MP3, en secondes) est
+ * posée à `at` sur la timeline. Repères mesurés par détection de silences (ffmpeg silencedetect).
+ * La phrase marquée `fin` est remplacée par l'enregistrement du Pasteur s'il est fourni.
+ */
+type VoClip = { at: number; from: number; to: number; text: string; fin?: boolean };
+
+const Voice: React.FC<{ src: string | null; clips: VoClip[] }> = ({ src, clips }) => (
   <>
-    {MEDIA.musique ? <Audio src={staticFile(MEDIA.musique)} volume={0.8} /> : null}
-    {vo ? <Audio src={staticFile(vo)} /> : null}
-    {MEDIA.pasteurFin ? (
-      <Sequence from={s(finAt)}>
-        <Audio src={staticFile(MEDIA.pasteurFin)} />
-      </Sequence>
-    ) : null}
+    {clips.map((c, i) => {
+      const usePasteur = Boolean(c.fin && MEDIA.pasteurFin);
+      const file = usePasteur ? MEDIA.pasteurFin : src;
+      if (!file) return null;
+      return (
+        <Sequence key={i} from={s(c.at)} durationInFrames={usePasteur ? s(4) : s(c.to - c.from) + 3}>
+          {usePasteur ? (
+            <Audio src={staticFile(file)} />
+          ) : (
+            <Audio src={staticFile(file)} trimBefore={s(c.from)} trimAfter={s(c.to) + 3} />
+          )}
+        </Sequence>
+      );
+    })}
   </>
 );
+
+const Music: React.FC = () =>
+  MEDIA.musique ? <Audio src={staticFile(MEDIA.musique)} volume={0.8} /> : null;
+
+/** Sous-titres alignés sur les phrases placées. */
+const toSubtitles = (clips: VoClip[]) =>
+  clips.map((c) => ({ from: c.at, to: c.at + (c.to - c.from) + 0.35, text: c.text }));
 
 /* ------------------------------------------------------------------ */
 /* 16:9 — 60 s                                                         */
 /* ------------------------------------------------------------------ */
 export const PROMO_16x9_SECONDS = 60;
+
+const VO_16x9: VoClip[] = [
+  { at: 0.8, from: 0, to: 1.76, text: 'Il y a des voix… qu’on entend.' },
+  { at: 4.6, from: 3.18, to: 5.41, text: 'Et il y a des voix… qui changent une vie.' },
+  { at: 9.0, from: 7.19, to: 9.65, text: 'Depuis plus de trente ans, une mission…' },
+  { at: 14.2, from: 10.59, to: 14.19, text: 'transformer des personnes ordinaires… en de véritables leaders.' },
+  { at: 20.4, from: 15.43, to: 18.85, text: 'D’Abidjan à Montréal. De Paris à Genève.' },
+  { at: 25.15, from: 19.84, to: 21.35, text: 'Dix mille personnes chaque année.' },
+  { at: 26.75, from: 21.68, to: 22.88, text: 'Mille cinq cents leaders formés.' },
+  { at: 29.0, from: 23.9, to: 25.89, text: 'Un enseignement… qui ne s’écoute pas seulement.' },
+  { at: 31.15, from: 26.67, to: 27.08, text: 'Il se vit.' },
+  {
+    at: 41.1,
+    from: 29.69,
+    to: 35.46,
+    text: 'Onze ouvrages pour bâtir votre victoire. Sur Amazon, à la Librairie Alliance, et sur alexandreamazou.com.',
+  },
+  { at: 49.4, from: 38.03, to: 39.98, text: 'Votre histoire… n’est pas terminée.', fin: true },
+  { at: 55.0, from: 42.71, to: 44.87, text: 'Enseignements. Livres. Podcast.' },
+  { at: 57.8, from: 45.61, to: 46.53, text: 'Rejoignez-nous.' },
+];
 
 export const Promo16x9: React.FC = () => (
   <AbsoluteFill style={{ background: '#000' }}>
@@ -101,10 +143,10 @@ export const Promo16x9: React.FC = () => (
         { at: 25, dur: 4, el: <SceneCounters /> },
         { at: 29, dur: 2, el: <SceneBroll src={MEDIA.broll.pupitre} label="B4 · LIVRE SUR UN PUPITRE" /> },
         { at: 31, dur: 10, el: <SceneBooks books={FEATURED_BOOKS} /> },
-        { at: 41, dur: 5, el: <SceneLibrary covers={LIBRARY} /> },
-        { at: 46, dur: 1.5, el: <SceneBlack /> },
+        { at: 41, dur: 6, el: <SceneLibrary covers={LIBRARY} /> },
+        { at: 47, dur: 1.2, el: <SceneBlack /> },
         {
-          at: 47.5,
+          at: 48.2,
           dur: 6,
           el: (
             <ScenePortrait
@@ -115,14 +157,15 @@ export const Promo16x9: React.FC = () => (
               burst
               zoomFrom={1.18}
               zoomTo={1.02}
-              titleStart={30}
+              titleStart={36}
             />
           ),
         },
-        { at: 53.5, dur: 6.5, el: <SceneEndCard /> },
+        { at: 54.2, dur: 5.8, el: <SceneEndCard /> },
       ]}
     />
-    <Soundtrack vo={MEDIA.vo16x9} finAt={48} />
+    <Music />
+    <Voice src={MEDIA.vo16x9} clips={VO_16x9} />
   </AbsoluteFill>
 );
 
@@ -131,15 +174,16 @@ export const Promo16x9: React.FC = () => (
 /* ------------------------------------------------------------------ */
 export const PROMO_9x16_SECONDS = 30;
 
-export const VO_9x16 = [
-  { from: 0.2, to: 2, text: 'Trente ans. Une mission.' },
-  { from: 2, to: 4, text: 'Transformer des personnes ordinaires en véritables leaders.' },
-  { from: 4.2, to: 7, text: 'D’Abidjan à Montréal, de Paris à Genève.' },
-  { from: 7, to: 10, text: 'Dix mille personnes chaque année.' },
-  { from: 10.3, to: 19, text: 'Des enseignements qui se vivent.' },
-  { from: 19.2, to: 22, text: 'Sur Amazon, à la Librairie Alliance et sur alexandreamazou.com.' },
-  { from: 22.3, to: 25.4, text: 'Votre histoire n’est pas terminée.' },
-  { from: 25.6, to: 29.6, text: 'Abonnez-vous. Rejoignez-nous.' },
+const VO_9x16: VoClip[] = [
+  { at: 0.15, from: 0, to: 1.69, text: 'Trente ans. Une mission.' },
+  { at: 2.1, from: 2.21, to: 5.48, text: 'Transformer des personnes ordinaires en véritables leaders.' },
+  { at: 5.5, from: 6.08, to: 9.18, text: 'D’Abidjan à Montréal, de Paris à Genève.' },
+  { at: 8.8, from: 9.7, to: 11.12, text: 'Dix mille personnes chaque année.' },
+  { at: 10.4, from: 11.96, to: 13.53, text: 'Des enseignements qui se vivent.' },
+  { at: 19.1, from: 16.73, to: 21.11, text: 'Sur Amazon, à la Librairie Alliance et sur alexandreamazou.com.' },
+  { at: 23.8, from: 21.82, to: 23.35, text: 'Votre histoire n’est pas terminée.', fin: true },
+  { at: 27.0, from: 24.37, to: 24.94, text: 'Abonnez-vous.' },
+  { at: 27.75, from: 25.24, to: 25.93, text: 'Rejoignez-nous.' },
 ];
 
 export const Promo9x16: React.FC = () => (
@@ -162,36 +206,37 @@ export const Promo9x16: React.FC = () => (
         },
         {
           at: 2,
-          dur: 2,
+          dur: 3.4,
           el: (
             <SceneBroll
               src={MEDIA.broll.foule9x16 ?? MEDIA.broll.foule}
               label="B3 · FOULE"
               title="De l’ordinaire à l’extraordinaire"
-              titleStart={1}
+              titleStart={8}
             />
           ),
         },
-        { at: 4, dur: 3, el: <SceneCities /> },
-        { at: 7, dur: 3, el: <SceneCounters stats={[{ value: 10000, label: 'personnes / an' }]} /> },
-        { at: 10, dur: 9, el: <SceneBooks books={FEATURED_BOOKS.slice(0, 3)} /> },
-        { at: 19, dur: 3, el: <SceneLibrary covers={LIBRARY.slice(0, 7)} /> },
+        { at: 5.4, dur: 3.2, el: <SceneCities /> },
+        { at: 8.6, dur: 1.7, el: <SceneCounters stats={[{ value: 10000, label: 'personnes / an' }]} /> },
+        { at: 10.3, dur: 8.7, el: <SceneBooks books={FEATURED_BOOKS.slice(0, 3)} /> },
+        { at: 19, dur: 4.6, el: <SceneLibrary covers={LIBRARY.slice(0, 7)} /> },
         {
-          at: 22,
-          dur: 3.5,
+          at: 23.6,
+          dur: 3,
           el: (
             <ScenePortrait
               src="bishop-sans-fond.png"
               title="Votre histoire n’est pas terminée."
               subtitle="Pasteur Alexandre AMAZOU"
-              titleStart={8}
+              titleStart={6}
             />
           ),
         },
-        { at: 25.5, dur: 4.5, el: <SceneEndCard /> },
+        { at: 26.6, dur: 3.4, el: <SceneEndCard /> },
       ]}
     />
-    <Subtitles lines={VO_9x16} />
-    <Soundtrack vo={MEDIA.vo9x16} finAt={22.3} />
+    <Subtitles lines={toSubtitles(VO_9x16)} />
+    <Music />
+    <Voice src={MEDIA.vo9x16} clips={VO_9x16} />
   </AbsoluteFill>
 );

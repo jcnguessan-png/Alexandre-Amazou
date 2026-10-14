@@ -285,7 +285,7 @@ export const SceneCounters: React.FC<{ stats?: { value: number; suffix?: string;
           }}
         >
           {stats.map((st, i) => {
-            const start = i * Math.round(per * 0.55);
+            const start = i * Math.round(fps * 1.6);
             const sp = spring({ frame: frame - start, fps, config: { damping: 200 }, durationInFrames: 40 });
             const hit = interpolate(frame, [start, start + 3, start + 14], [1.25, 1.25, 1], {
               extrapolateLeft: 'clamp',

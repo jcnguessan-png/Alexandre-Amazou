@@ -11,17 +11,17 @@
  */
 export const MEDIA = {
   broll: {
-    bible: null as string | null, // B1 — Bible, pages qui tournent dans la lumière
-    abidjan: null as string | null, // B2 — Abidjan au lever du soleil, vue drone
-    foule: null as string | null, // B3 — foule en louange, de dos, contre-jour (16:9)
-    foule9x16: null as string | null, // B3 — même plan en vertical (version 9:16)
-    pupitre: null as string | null, // B4 — livre fermé sur un pupitre, lumière entre les pages
+    bible: 'private/broll/bible.mp4' as string | null, // B1 — Bible, pages qui tournent dans la lumière
+    abidjan: 'private/broll/abidjan.mp4' as string | null, // B2 — Abidjan au lever du soleil, vue drone
+    foule: 'private/broll/foule.mp4' as string | null, // B3 — foule en louange, de dos, contre-jour (16:9)
+    foule9x16: 'private/broll/foule-9x16.mp4' as string | null, // B3 — même plan en vertical (version 9:16)
+    pupitre: 'private/broll/pupitre.mp4' as string | null, // B4 — livre fermé sur un pupitre, lumière entre les pages
   },
-  vo16x9: null as string | null,
-  vo9x16: null as string | null,
+  vo16x9: 'private/vo-16x9.mp3' as string | null,
+  vo9x16: 'private/vo-9x16.mp3' as string | null,
   pasteurFin: null as string | null,
   musique: null as string | null,
 };
 
 /** Affiche le nom du plan IA attendu sur les plans d'attente (à passer à false pour le rendu final). */
-export const SHOW_PLACEHOLDER_LABELS = true;
+export const SHOW_PLACEHOLDER_LABELS = false;
