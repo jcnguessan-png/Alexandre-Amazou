@@ -3,6 +3,7 @@
  * Tant qu'un média vaut null, la vidéo affiche un plan d'attente stylisé à la place.
  *
  *   public/private/broll/<id>.mp4   ← plans IA (Higgsfield / Veo), voir PROMPTS.md
+ *   (déclarer ici le chemin relatif à public/, ex. 'private/broll/bible.mp4')
  *   public/private/vo-16x9.mp3      ← voix off ElevenLabs (version 60 s)
  *   public/private/vo-9x16.mp3      ← voix off ElevenLabs (version 30 s)
  *   public/private/pasteur-fin.mp3  ← « Votre histoire n'est pas terminée » dite par le Pasteur
@@ -12,7 +13,8 @@ export const MEDIA = {
   broll: {
     bible: null as string | null, // B1 — Bible, pages qui tournent dans la lumière
     abidjan: null as string | null, // B2 — Abidjan au lever du soleil, vue drone
-    foule: null as string | null, // B3 — foule en louange, de dos, contre-jour
+    foule: null as string | null, // B3 — foule en louange, de dos, contre-jour (16:9)
+    foule9x16: null as string | null, // B3 — même plan en vertical (version 9:16)
     pupitre: null as string | null, // B4 — livre fermé sur un pupitre, lumière entre les pages
   },
   vo16x9: null as string | null,

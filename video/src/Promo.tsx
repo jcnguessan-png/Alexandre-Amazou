@@ -165,7 +165,7 @@ export const Promo9x16: React.FC = () => (
           dur: 2,
           el: (
             <SceneBroll
-              src={MEDIA.broll.foule}
+              src={MEDIA.broll.foule9x16 ?? MEDIA.broll.foule}
               label="B3 · FOULE"
               title="De l’ordinaire à l’extraordinaire"
               titleStart={1}

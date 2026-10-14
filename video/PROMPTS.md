@@ -1,8 +1,69 @@
 # Vidéo promo — prompts de production
 
 Concept A : « De l'ordinaire à l'extraordinaire ». Deux formats : 16:9 (60 s) et 9:16 (30 s).
-Une fois générés, déposer les fichiers dans `video/public/private/` (non commité) puis les
-déclarer dans `src/media.ts`.
+
+---
+
+## 0. Instructions pour Claude (exécution des prompts)
+
+Tu vas générer les médias de cette vidéo avec les connecteurs **Higgsfield** (plans vidéo) et
+**ElevenLabs** (voix off), puis les déposer dans le projet. Suis ces étapes dans l'ordre.
+
+### Dossier de destination (le seul où écrire)
+```
+C:\Users\jcngu\OneDrive\Desktop\Projets Claude\Alexandre-Amazou\video\public\private\
+```
+Ce dossier est exclu de Git (médias privés) : n'écris rien ailleurs, ne commite rien.
+
+### Fichiers attendus — noms exacts
+| Fichier | Contenu | Source | Format |
+|---|---|---|---|
+| `broll\bible.mp4` | Plan B1 (section 1) | Higgsfield | 16:9, ≥ 1080p, 5–8 s |
+| `broll\abidjan.mp4` | Plan B2 | Higgsfield | 16:9, ≥ 1080p, 5–8 s |
+| `broll\foule.mp4` | Plan B3 | Higgsfield | 16:9, ≥ 1080p, 5–8 s |
+| `broll\foule-9x16.mp4` | Plan B3, même prompt | Higgsfield | **9:16**, ≥ 1080×1920, 5–8 s |
+| `broll\pupitre.mp4` | Plan B4 | Higgsfield | 16:9, ≥ 1080p, 5–8 s |
+| `vo-16x9.mp3` | Voix off version 60 s (section 2) | ElevenLabs | MP3 44,1 kHz |
+| `vo-9x16.mp3` | Voix off version 30 s (section 2) | ElevenLabs | MP3 44,1 kHz |
+
+Ne génère **pas** `musique.mp3` ni `pasteur-fin.mp3` : JC les fournit lui-même.
+
+### Déroulé
+1. **Plans vidéo** : pour chaque plan de la section 1, lance la génération Higgsfield avec le
+   prompt **tel quel** (en anglais), en choisissant un modèle vidéo haut de gamme et le ratio
+   indiqué ci-dessus. Génère 2 variantes par plan et garde la meilleure (mouvement fluide, pas de
+   déformation, pas de texte ni de logo, aucun visage reconnaissable).
+2. **Voix off** : pour chaque texte de la section 2, génère avec ElevenLabs en respectant la voix
+   et les réglages indiqués, **avec les balises `<break>`** (modèle qui les prend en charge,
+   par ex. *Multilingual v2*). Langue : français.
+3. **Téléchargement** : les connecteurs renvoient en général une URL de résultat. Télécharge
+   chaque fichier dans le dossier de destination sous son **nom exact**, par exemple :
+   ```
+   curl -L "<url>" -o "C:\Users\jcngu\OneDrive\Desktop\Projets Claude\Alexandre-Amazou\video\public\private\broll\bible.mp4"
+   ```
+4. **Vérification** de chaque fichier (doit exister, ne pas être vide, avoir le bon ratio) :
+   ```
+   ffprobe -v error -show_entries format=duration:stream=width,height -of compact "<fichier>"
+   ```
+5. **Déclaration dans le projet** : dans `video\src\media.ts`, remplace `null` par le chemin
+   relatif à `public\` (barres obliques), uniquement pour les fichiers réellement déposés :
+   ```ts
+   bible: 'private/broll/bible.mp4',
+   abidjan: 'private/broll/abidjan.mp4',
+   foule: 'private/broll/foule.mp4',
+   foule9x16: 'private/broll/foule-9x16.mp4',
+   pupitre: 'private/broll/pupitre.mp4',
+   // …
+   vo16x9: 'private/vo-16x9.mp3',
+   vo9x16: 'private/vo-9x16.mp3',
+   ```
+6. **Compte rendu** à JC : liste des fichiers déposés (durée, résolution), plans écartés et
+   pourquoi, tout ce qui a échoué. Ne lance pas le rendu final : JC le fera valider d'abord.
+
+### Interdits
+- Ne jamais générer ni animer le visage ou le corps du Pasteur Alexandre AMAZOU (pas d'image
+  vers vidéo à partir de ses photos). Les plans IA sont uniquement des plans d'ambiance.
+- Ne modifier aucun autre fichier du projet que `video\src\media.ts`.
 
 ---
 
@@ -24,7 +85,7 @@ Cinematic macro shot of an old leather Bible lying open on a dark wooden table, 
 Epic aerial drone shot at sunrise over a modern West African coastal city with a lagoon and skyscrapers (Abidjan, Plateau district, Côte d'Ivoire), golden hour light breaking through morning haze, sun rays over the water, slow forward drone push with gentle descent, cinematic teal-and-gold color grade, anamorphic lens flare, majestic and hopeful mood, film trailer look, ultra detailed, 24fps. No text.
 ```
 
-### B3 — Foule en louange → `broll/foule.mp4` (0:17–0:20 et version verticale 0:02–0:04)
+### B3 — Foule en louange → `broll/foule.mp4` (16:9, 0:17–0:20) + `broll/foule-9x16.mp4` (9:16, version verticale 0:02–0:04)
 ```
 Cinematic wide shot from behind a large crowd in a dark stadium-sized church, thousands of people raising their hands in worship, silhouettes against powerful golden stage lights and volumetric haze, light beams sweeping slowly, slow-motion, camera slowly rising (crane up), emotional and triumphant atmosphere, warm gold and deep navy color grade, anamorphic flares, film grain, 24fps. Faces not visible, no text, no logos.
 ```
