@@ -1,0 +1,25 @@
+/**
+ * Médias externes à brancher au fur et à mesure (fichiers dans public/private/, non commités).
+ * Tant qu'un média vaut null, la vidéo affiche un plan d'attente stylisé à la place.
+ *
+ *   public/private/broll/<id>.mp4   ← plans IA (Higgsfield / Veo), voir PROMPTS.md
+ *   public/private/vo-16x9.mp3      ← voix off ElevenLabs (version 60 s)
+ *   public/private/vo-9x16.mp3      ← voix off ElevenLabs (version 30 s)
+ *   public/private/pasteur-fin.mp3  ← « Votre histoire n'est pas terminée » dite par le Pasteur
+ *   public/private/musique.mp3      ← musique (Artlist / Epidemic Sound)
+ */
+export const MEDIA = {
+  broll: {
+    bible: null as string | null, // B1 — Bible, pages qui tournent dans la lumière
+    abidjan: null as string | null, // B2 — Abidjan au lever du soleil, vue drone
+    foule: null as string | null, // B3 — foule en louange, de dos, contre-jour
+    pupitre: null as string | null, // B4 — livre fermé sur un pupitre, lumière entre les pages
+  },
+  vo16x9: null as string | null,
+  vo9x16: null as string | null,
+  pasteurFin: null as string | null,
+  musique: null as string | null,
+};
+
+/** Affiche le nom du plan IA attendu sur les plans d'attente (à passer à false pour le rendu final). */
+export const SHOW_PLACEHOLDER_LABELS = true;

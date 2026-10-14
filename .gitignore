@@ -43,3 +43,7 @@ Podcasts/
 
 # Kit de communication — sources des fichiers privés (servis depuis Vercel Blob privé, jamais commités)
 /kit-communication/
+
+# Vidéo Remotion — rendus et médias privés (photo HD, vidéo bio, voix off, musique, plans IA)
+/video/out/
+/video/public/private/
