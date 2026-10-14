@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   AbsoluteFill,
+  Img,
   Easing,
   OffthreadVideo,
   interpolate,
@@ -175,6 +176,30 @@ export const Broll: React.FC<{ src: string | null; label: string; tint?: string 
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const zoom = interpolate(frame, [0, durationInFrames], [1.04, 1.14]);
+  if (src && /\.(jpe?g|png|webp)$/i.test(src)) {
+    // Image fixe animée façon drone : avancée lente + légère dérive, lumière et poussière dorées.
+    const push = interpolate(frame, [0, durationInFrames], [1.06, 1.2], {
+      easing: Easing.bezier(0.33, 0, 0.2, 1),
+    });
+    const driftX = interpolate(frame, [0, durationInFrames], [-1.5, 1.5]);
+    const driftY = interpolate(frame, [0, durationInFrames], [1, -1]);
+    return (
+      <AbsoluteFill style={{ overflow: 'hidden', background: C.ink }}>
+        <Img
+          src={staticFile(src)}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            transform: `scale(${push}) translate(${driftX}%, ${driftY}%)`,
+          }}
+        />
+        <LightRays intensity={0.45} />
+        <GoldDust count={30} seed={label} opacity={0.6} />
+        <AbsoluteFill style={{ background: 'linear-gradient(180deg, rgba(5,5,12,0.1), rgba(5,5,12,0.5))' }} />
+      </AbsoluteFill>
+    );
+  }
   if (src) {
     return (
       <AbsoluteFill style={{ overflow: 'hidden', background: C.ink }}>
