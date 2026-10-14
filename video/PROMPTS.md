@@ -4,62 +4,61 @@ Concept A : « De l'ordinaire à l'extraordinaire ». Deux formats : 16:9 (60 s)
 
 ---
 
-## 0. Instructions pour Claude — mission en cours : la musique
+## 0. Instructions pour Claude — mission en cours : nouvelle voix off dynamique
+
+### Pourquoi
+La première voix off a été refusée : **trop molle, trop lente**. On veut une voix **dynamique,
+rapide, vivante**, qui donne de l'élan, comme une bande-annonce de film américain.
+La musique est validée : on n'y touche pas.
 
 ### État du projet (ne pas refaire)
-Déjà livrés et branchés dans le montage — **ne rien régénérer, ne rien écraser, ne rien déplacer** :
-- `broll\bible.mp4`, `broll\abidjan.mp4`, `broll\foule.mp4`, `broll\foule-9x16.mp4`, `broll\pupitre.mp4`
-- `vo-16x9.mp3`, `vo-9x16.mp3`
-- le dossier `_alt\` (variantes de secours)
+Déjà livrés — **ne rien régénérer, ne rien écraser, ne rien déplacer** : tous les plans de
+`broll\`, `musique.mp3`, `musique-9x16.mp3`, le dossier `_alt\`, et les anciennes voix
+`vo-16x9.mp3` / `vo-9x16.mp3` (abandonnées mais conservées).
 
 ### Ta mission
-Générer **les deux pistes musicales instrumentales** de la section 3 avec le connecteur
-**ElevenLabs** (ElevenLabs Music), les déposer dans le projet et les déclarer.
+Générer avec le connecteur **ElevenLabs** **une phrase par fichier** (section 2) : 19 phrases
+pour la version 16:9 et 10 pour la 9:16. Chaque phrase est posée au montage à un instant précis :
+elle doit **tenir dans sa durée maximale**.
 
 ### Dossier de destination (le seul où écrire)
 ```
-C:\Users\jcngu\OneDrive\Desktop\Projets Claude\Alexandre-Amazou\video\public\private\
+C:\Users\jcngu\OneDrive\Desktop\Projets Claude\Alexandre-Amazou\video\public\private\vo2\
 ```
-Ce dossier est exclu de Git (médias privés) : n'écris rien ailleurs, ne commite rien.
+Créer `vo2\` s'il n'existe pas. Exclu de Git : n'écris rien ailleurs, ne commite rien.
 
-### Fichiers attendus — noms exacts
-| Fichier | Contenu | Durée | Format |
-|---|---|---|---|
-| `musique.mp3` | Piste 16:9 (section 3) | **60 s** | MP3 44,1 kHz, stéréo |
-| `musique-9x16.mp3` | Piste 9:16 (section 3) | **30 s** | MP3 44,1 kHz, stéréo |
-| `_alt\musique-alt.mp3`, `_alt\musique-9x16-alt.mp3` | Meilleure variante non retenue | — | idem |
-
-Ne génère **pas** `pasteur-fin.mp3` : JC le fournit.
+### Noms de fichiers — exacts
+- Version 16:9 : `16x9-01.mp3` … `16x9-19.mp3`
+- Version 9:16 : `9x16-01.mp3` … `9x16-10.mp3`
+- Prises non retenues (facultatif) : `vo2\_alt\<même nom>`
 
 ### Déroulé
-1. **Génération** : pour chaque piste, colle le prompt de la section 3 **tel quel** (en anglais),
-   règle la durée exacte (60 s puis 30 s) et force le mode **instrumental** (aucune parole).
-   Si l'outil propose un plan de composition par sections, reprends les sections et leurs
-   durées. Génère **3 versions** de chaque piste.
-2. **Choix** : garde la version dont l'impact principal tombe le plus près du repère
-   (**0:31** pour la piste 16:9, **0:10** pour la 9:16), qui a bien le silence prévu
-   (0:47–0:48 en 16:9, 0:23 en 9:16), et sans voix chantée. La deuxième meilleure va dans `_alt\`.
-3. **Téléchargement** sous le nom exact, par exemple :
+1. **Choix de la voix** (une seule pour les 29 fichiers) : dans la Voice Library, une voix
+   masculine **française**, énergique, chaleureuse et assurée, style « promo / bande-annonce /
+   annonceur ». Fais 2 essais sur la phrase 16x9-04 avec 2 ou 3 voix et garde la plus vivante.
+   Indique à JC laquelle tu as choisie.
+2. **Réglages** (identiques pour tous les fichiers, pour un rendu homogène) :
+   - Modèle : *Eleven Multilingual v2* (ou *Eleven v3* si disponible, plus expressif) ;
+   - Stability ≈ **30 %**, Similarity ≈ 80 %, Style ≈ **60 %**, Speaker boost activé ;
+   - Vitesse (*speed*) ≈ **1,12** ;
+   - Intention : débit soutenu, attaque nette, sourire dans la voix, montée d'énergie sur les
+     points d'exclamation. Pas de pauses longues, pas de ton solennel ni chuchoté.
+3. **Génération** : un fichier par ligne du tableau, texte **exact** (sans les guillemets).
+   Pas de silence en début de fichier (moins de 0,1 s), ni plus de 0,3 s à la fin.
+4. **Contrôle de durée** : chaque fichier doit durer **au plus** sa colonne « Max ».
    ```
-   curl -L "<url>" -o "C:\Users\jcngu\OneDrive\Desktop\Projets Claude\Alexandre-Amazou\video\public\private\musique.mp3"
+   ffprobe -v error -show_entries format=duration -of csv=p=0 "<fichier>"
    ```
-4. **Vérification** (le fichier existe, n'est pas vide, durée correcte à ±1 s) :
-   ```
-   ffprobe -v error -show_entries format=duration -of compact "<fichier>"
-   ```
-5. **Déclaration** dans `video\src\media.ts` — remplacer **uniquement** ces deux lignes :
-   ```ts
-   musique: 'private/musique.mp3' as string | null, // 60 s, version 16:9
-   musique9x16: 'private/musique-9x16.mp3' as string | null, // 30 s, version 9:16
-   ```
-6. **Compte rendu** à JC : pour chaque piste retenue, sa durée, l'instant réel de l'impact
-   principal et du silence (à l'oreille ou par analyse), et ce qui a échoué. Ne lance aucun rendu
-   vidéo : c'est fait de l'autre côté.
+   Trop long ? Régénère avec une vitesse plus élevée (jusqu'à 1,2), sinon signale-le.
+5. **Déclaration** : dans `video\src\media.ts`, passer `voixDynamique: false` à
+   `voixDynamique: true`. Ne modifier rien d'autre.
+6. **Compte rendu** à JC : voix choisie, réglages, et la liste des 29 fichiers avec leur durée
+   (en signalant ceux qui dépassent). Ne lance aucun rendu vidéo.
 
 ### Interdits
-- Ne modifier aucun autre fichier que `video\src\media.ts` (et seulement les deux lignes ci-dessus).
-- Ne pas écraser ni supprimer les plans vidéo et voix off existants.
-- Pas de musique avec paroles, ni imitant un artiste ou une œuvre existante.
+- Ne modifier aucun autre fichier que la ligne `voixDynamique` de `video\src\media.ts`.
+- Ne pas imiter la voix d'une personne réelle (ni celle du Pasteur).
+- Ne pas écraser la musique ni les plans existants.
 
 ---
 
@@ -93,46 +92,51 @@ Dramatic close-up of a closed hardcover book standing on a dark wooden pulpit in
 
 ---
 
-## 2. Voix off — ElevenLabs
+## 2. Voix off — ElevenLabs, version dynamique (une phrase par fichier)
 
-Voix : homme, français, grave, chaleureux, posé — type « bande-annonce ».
-Réglages de départ : Stability ≈ 40 %, Similarity ≈ 75 %, Style ≈ 30 %, Speaker boost activé.
-Exporter en MP3 44,1 kHz. Générer 2 ou 3 prises et garder la plus habitée.
+Voix masculine française énergique, débit soutenu, vivante (voir réglages en section 0).
+Les textes et les instants de pose sont aussi dans `src/voix.ts` (source de vérité du montage).
 
-### Version 16:9 (60 s) → `vo-16x9.mp3`
-Les `<break>` calent la voix sur l'image. Si le rythme diffère, j'ajuste le montage.
-```
-Il y a des voix... qu'on entend. <break time="1.2s" />
-Et il y a des voix... qui changent une vie. <break time="1.5s" />
-Depuis plus de trente ans, une mission... <break time="0.6s" />
-transformer des personnes ordinaires... en de véritables leaders. <break time="1.0s" />
-D'Abidjan à Montréal. De Paris à Genève. <break time="0.8s" />
-Dix mille personnes chaque année. Mille cinq cents leaders formés. <break time="1.0s" />
-Un enseignement... qui ne s'écoute pas seulement. <break time="0.7s" />
-Il se vit. <break time="8.5s" />
-Onze ouvrages pour bâtir votre victoire. Sur Amazon, à la Librairie Alliance, et sur alexandreamazou.com. <break time="3.0s" />
-Votre histoire... n'est pas terminée. <break time="2.5s" />
-Enseignements. Livres. Podcast. <break time="0.5s" />
-Rejoignez-nous.
-```
-Si le Pasteur enregistre lui-même « Votre histoire n'est pas terminée », retirer cette phrase de la
-voix off et déposer son enregistrement dans `pasteur-fin.mp3`.
+### Version 16:9 (60 s) → `vo2\16x9-XX.mp3`
+| Fichier | Posée à | Max | Texte |
+|---|---|---|---|
+| 16x9-01 | 0:00,3 | 2,0 s | Certaines voix passent. |
+| 16x9-02 | 0:02,6 | 2,8 s | D'autres… transforment des vies ! |
+| 16x9-03 | 0:05,6 | 2,3 s | Depuis plus de trente ans, une mission : |
+| 16x9-04 | 0:08,0 | 3,5 s | transformer des personnes ordinaires en de véritables leaders ! |
+| 16x9-05 | 0:11,8 | 4,5 s | Partie d'Abidjan, cette voix résonne aujourd'hui dans les nations. |
+| 16x9-06 | 0:18,6 | 4,8 s | De Montréal à Paris, de Genève à Kinshasa. |
+| 16x9-07 | 0:24,0 | 1,7 s | Dix mille personnes chaque année. |
+| 16x9-08 | 0:25,8 | 2,4 s | Plus de mille cinq cents leaders formés. |
+| 16x9-09 | 0:28,5 | 2,3 s | Son enseignement ne s'écoute pas seulement… |
+| 16x9-10 | 0:30,9 | 0,9 s | Il se vit ! |
+| 16x9-11 | 0:31,9 | 2,3 s | La Réalité du Monde des Esprits. |
+| 16x9-12 | 0:34,3 | 2,3 s | Quarante jours de combat spirituel. |
+| 16x9-13 | 0:36,7 | 2,4 s | Comment préparer et réussir une nouvelle année. |
+| 16x9-14 | 0:39,2 | 1,9 s | Mon Journal de victoire. |
+| 16x9-15 | 0:41,2 | 2,3 s | Onze ouvrages pour bâtir votre victoire ! |
+| 16x9-16 | 0:43,6 | 3,3 s | Sur Amazon, à la Librairie Alliance et sur alexandreamazou.com. |
+| 16x9-17 | 0:49,0 | 2,6 s | Votre histoire n'est pas terminée. |
+| 16x9-18 | 0:54,6 | 2,2 s | Enseignements, livres, podcast… |
+| 16x9-19 | 0:57,0 | 2,5 s | Abonnez-vous. Rejoignez-nous ! |
 
-### Version 9:16 (30 s) → `vo-9x16.mp3`
-```
-Trente ans. Une mission. <break time="0.3s" />
-Transformer des personnes ordinaires en véritables leaders. <break time="0.4s" />
-D'Abidjan à Montréal, de Paris à Genève. <break time="0.3s" />
-Dix mille personnes chaque année. <break time="0.6s" />
-Des enseignements qui se vivent. <break time="6.5s" />
-Sur Amazon, à la Librairie Alliance et sur alexandreamazou.com. <break time="0.5s" />
-Votre histoire n'est pas terminée. <break time="0.8s" />
-Abonnez-vous. Rejoignez-nous.
-```
+### Version 9:16 (30 s) → `vo2\9x16-XX.mp3`
+| Fichier | Posée à | Max | Texte |
+|---|---|---|---|
+| 9x16-01 | 0:00,1 | 1,8 s | Trente ans. Une mission. |
+| 9x16-02 | 0:02,0 | 3,3 s | Transformer des personnes ordinaires en véritables leaders ! |
+| 9x16-03 | 0:05,5 | 3,0 s | D'Abidjan à Montréal, de Paris à Genève. |
+| 9x16-04 | 0:08,6 | 1,3 s | Dix mille personnes par an ! |
+| 9x16-05 | 0:10,1 | 2,6 s | La Réalité du Monde des Esprits. |
+| 9x16-06 | 0:13,1 | 2,6 s | Quarante jours de combat spirituel. |
+| 9x16-07 | 0:16,1 | 2,8 s | Comment préparer et réussir une nouvelle année. |
+| 9x16-08 | 0:19,1 | 4,4 s | Sur Amazon, à la Librairie Alliance et sur alexandreamazou.com. |
+| 9x16-09 | 0:23,8 | 2,4 s | Votre histoire n'est pas terminée. |
+| 9x16-10 | 0:26,8 | 2,9 s | Abonnez-vous. Rejoignez-nous ! |
 
 ### Enregistrement du Pasteur (recommandé)
-Au téléphone, pièce calme, à 20 cm du micro, 3 prises lentes avec une pause entre chaque :
-« Votre histoire... n'est pas terminée. »
+Au téléphone, pièce calme, à 20 cm du micro, 3 prises **avec énergie**, pas trop lentes
+(moins de 2,5 s) : « Votre histoire n'est pas terminée. » → `pasteur-fin.mp3`.
 
 ---
 

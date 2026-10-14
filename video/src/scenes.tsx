@@ -3,6 +3,7 @@ import {
   AbsoluteFill,
   Easing,
   Img,
+  OffthreadVideo,
   Sequence,
   interpolate,
   spring,
@@ -502,6 +503,42 @@ export const SceneLibrary: React.FC<{ covers: string[] }> = ({ covers }) => {
 /* Silence noir                                                        */
 /* ------------------------------------------------------------------ */
 export const SceneBlack: React.FC = () => <AbsoluteFill style={{ background: '#000' }} />;
+
+/* ------------------------------------------------------------------ */
+/* Vrai plan du Pasteur, extrait de la vidéo de biographie             */
+/* ------------------------------------------------------------------ */
+export const SceneClip: React.FC<{
+  src: string;
+  /** Début de l'extrait dans la source (s). */
+  from: number;
+  /** Recadrage : zoom et décalage (en % de l'image) pour sortir des habillages de la source. */
+  crop?: { scale: number; x?: number; y?: number };
+}> = ({ src, from, crop = { scale: 1.04 } }) => {
+  const frame = useCurrentFrame();
+  const { durationInFrames, fps } = useVideoConfig();
+  const push = interpolate(frame, [0, durationInFrames], [1, 1.05]);
+  const flash = interpolate(frame, [0, 4], [0.55, 0], { extrapolateRight: 'clamp' });
+  return (
+    <AbsoluteFill style={{ background: C.ink, overflow: 'hidden' }}>
+      <OffthreadVideo
+        src={staticFile(src)}
+        muted
+        trimBefore={Math.round(from * fps)}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transform: `scale(${crop.scale * push}) translate(${crop.x ?? 0}%, ${crop.y ?? 0}%)`,
+          filter: 'saturate(0.9) contrast(1.08) sepia(0.12)',
+        }}
+      />
+      {/* Étalonnage chaud + éclair blanc à la coupe */}
+      <AbsoluteFill style={{ background: 'linear-gradient(180deg, rgba(201,168,76,0.10), rgba(5,5,12,0.35))', mixBlendMode: 'multiply' }} />
+      <AbsoluteFill style={{ background: '#fff4d6', opacity: flash }} />
+      <FilmFinish />
+    </AbsoluteFill>
+  );
+};
 
 /* ------------------------------------------------------------------ */
 /* Carte de fin : réseaux sociaux                                      */
