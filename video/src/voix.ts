@@ -1,5 +1,5 @@
 /**
- * Voix off « dynamique » — une phrase par fichier (public/private/vo2/<format>-<id>.mp3).
+ * Voix off « dynamique » — une phrase par fichier (public/private/<DOSSIER_VOIX>/<format>-<id>.mp3).
  * `at` = instant où la phrase démarre dans la vidéo (s), calé sur les images et la musique.
  * `max` = durée maximale de la phrase pour ne pas déborder sur la suivante (s).
  * Les durées réelles mesurées après génération vont dans `DUREES` (sinon `max` est utilisé).
@@ -17,12 +17,12 @@ export const VOIX_16x9: Ligne[] = [
   { id: '08', at: 25.8, max: 2.4, text: 'Plus de mille cinq cents leaders formés.' },
   { id: '09', at: 28.5, max: 2.3, text: 'Son enseignement ne s’écoute pas seulement…' },
   { id: '10', at: 30.9, max: 0.9, text: 'Il se vit !' },
-  { id: '11', at: 31.9, max: 2.3, text: 'La Réalité du Monde des Esprits.' },
+  { id: '11', at: 32.0, max: 2.3, text: 'La Réalité du Monde des Esprits.' },
   { id: '12', at: 34.3, max: 2.3, text: 'Quarante jours de combat spirituel.' },
   { id: '13', at: 36.7, max: 2.4, text: 'Comment préparer et réussir une nouvelle année.' },
   { id: '14', at: 39.2, max: 1.9, text: 'Mon Journal de victoire.' },
-  { id: '15', at: 41.2, max: 2.3, text: 'Onze ouvrages pour bâtir votre victoire !' },
-  { id: '16', at: 43.6, max: 3.3, text: 'Sur Amazon, à la Librairie Alliance et sur alexandreamazou.com.' },
+  { id: '15', at: 41.0, max: 2.3, text: 'Onze ouvrages pour bâtir votre victoire !' },
+  { id: '16', at: 43.42, max: 3.6, text: 'Sur Amazon, à la Librairie Alliance et sur alexandreamazou.com.' },
   { id: '17', at: 49.0, max: 2.6, text: 'Votre histoire n’est pas terminée.', fin: true },
   { id: '18', at: 54.6, max: 2.2, text: 'Enseignements, livres, podcast…' },
   { id: '19', at: 57.0, max: 2.5, text: 'Abonnez-vous. Rejoignez-nous !' },
@@ -43,35 +43,38 @@ export const VOIX_9x16: Ligne[] = [
 
 /** Durées réelles mesurées (s), par fichier — renseignées après génération. */
 export const DUREES: Record<string, number> = {
-  'private/vo2/16x9-01.mp3': 1.45,
-  'private/vo2/16x9-02.mp3': 1.92,
-  'private/vo2/16x9-03.mp3': 1.92,
-  'private/vo2/16x9-04.mp3': 3.12,
-  'private/vo2/16x9-05.mp3': 3.12,
-  'private/vo2/16x9-06.mp3': 2.96,
-  'private/vo2/16x9-07.mp3': 1.52,
-  'private/vo2/16x9-08.mp3': 1.70,
-  'private/vo2/16x9-09.mp3': 2.01,
-  'private/vo2/16x9-10.mp3': 0.80,
-  'private/vo2/16x9-11.mp3': 2.03,
-  'private/vo2/16x9-12.mp3': 2.03,
-  'private/vo2/16x9-13.mp3': 2.19,
-  'private/vo2/16x9-14.mp3': 1.71,
-  'private/vo2/16x9-15.mp3': 2.21,
-  'private/vo2/16x9-16.mp3': 3.25,
-  'private/vo2/16x9-17.mp3': 1.56,
-  'private/vo2/16x9-18.mp3': 2.11,
-  'private/vo2/16x9-19.mp3': 1.68,
-  'private/vo2/9x16-01.mp3': 1.68,
-  'private/vo2/9x16-02.mp3': 2.96,
-  'private/vo2/9x16-03.mp3': 2.40,
-  'private/vo2/9x16-04.mp3': 1.24,
-  'private/vo2/9x16-05.mp3': 2.03,
-  'private/vo2/9x16-06.mp3': 2.03,
-  'private/vo2/9x16-07.mp3': 2.19,
-  'private/vo2/9x16-08.mp3': 3.41,
-  'private/vo2/9x16-09.mp3': 1.56,
-  'private/vo2/9x16-10.mp3': 1.68,
+  'private/vo3/16x9-01.mp3': 1.47,
+  'private/vo3/16x9-02.mp3': 2.37,
+  'private/vo3/16x9-03.mp3': 2.39,
+  'private/vo3/16x9-04.mp3': 3.55,
+  'private/vo3/16x9-05.mp3': 3.95,
+  'private/vo3/16x9-06.mp3': 3.00,
+  'private/vo3/16x9-07.mp3': 1.60,
+  'private/vo3/16x9-08.mp3': 2.07,
+  'private/vo3/16x9-09.mp3': 1.90,
+  'private/vo3/16x9-10.mp3': 1.08,
+  'private/vo3/16x9-11.mp3': 2.10,
+  'private/vo3/16x9-12.mp3': 1.94,
+  'private/vo3/16x9-13.mp3': 2.47,
+  'private/vo3/16x9-14.mp3': 1.69,
+  'private/vo3/16x9-15.mp3': 2.38,
+  'private/vo3/16x9-16.mp3': 3.67,
+  'private/vo3/16x9-17.mp3': 2.68,
+  'private/vo3/16x9-18.mp3': 2.15,
+  'private/vo3/16x9-19.mp3': 1.96,
+  'private/vo3/9x16-01.mp3': 1.77,
+  'private/vo3/9x16-02.mp3': 3.38,
+  'private/vo3/9x16-03.mp3': 2.80,
+  'private/vo3/9x16-04.mp3': 1.34,
+  'private/vo3/9x16-05.mp3': 2.10,
+  'private/vo3/9x16-06.mp3': 1.94,
+  'private/vo3/9x16-07.mp3': 2.47,
+  'private/vo3/9x16-08.mp3': 3.67,
+  'private/vo3/9x16-09.mp3': 2.68,
+  'private/vo3/9x16-10.mp3': 1.96,
 };
 
-export const fichierVoix = (format: '16x9' | '9x16', id: string) => `private/vo2/${format}-${id}.mp3`;
+/** Dossier de la voix en service : vo2 = voix masculine (refusée), vo3 = voix féminine ElevenLabs v3. */
+export const DOSSIER_VOIX = 'vo3';
+
+export const fichierVoix = (format: '16x9' | '9x16', id: string) => `private/${DOSSIER_VOIX}/${format}-${id}.mp3`;
