@@ -1,6 +1,6 @@
 import React from 'react';
 import { AbsoluteFill, Audio, Sequence, staticFile } from 'remotion';
-import { s } from './theme';
+import { FPS, s } from './theme';
 import { MEDIA } from './media';
 import {
   SceneBlack,
@@ -82,8 +82,50 @@ const Voice: React.FC<{ src: string | null; clips: VoClip[] }> = ({ src, clips }
   </>
 );
 
-const Music: React.FC<{ src: string | null }> = ({ src }) =>
-  src ? <Audio src={staticFile(src)} volume={0.8} /> : null;
+/**
+ * Musique recalée et mixée :
+ * - `offset` (s) : > 0 retarde la piste, < 0 l'avance (on coupe son début) pour caler l'impact ;
+ * - baisse automatique sous la voix (ducking) ;
+ * - `silences` : coupures franches créées au mixage (la piste générée n'en a pas).
+ */
+const Music: React.FC<{
+  src: string | null;
+  clips: VoClip[];
+  offset?: number;
+  silences?: [number, number][];
+}> = ({ src, clips, offset = 0, silences = [] }) => {
+  if (!src) return null;
+  const BASE = 0.85;
+  const DUCK = 0.38;
+  const RAMP = 0.2;
+  const volumeAt = (t: number) => {
+    for (const [a, b] of silences) {
+      if (t >= a && t <= b) return 0;
+      if (t > a - 0.12 && t < a) return BASE * ((a - t) / 0.12);
+      if (t > b && t < b + 0.15) return BASE * ((t - b) / 0.15);
+    }
+    let v = BASE;
+    for (const c of clips) {
+      const start = c.at - RAMP;
+      const end = c.at + (c.to - c.from) + RAMP;
+      if (t >= start && t <= end) {
+        const k = Math.min(1, (t - start) / RAMP, (end - t) / RAMP);
+        v = Math.min(v, BASE - (BASE - DUCK) * Math.max(0, k));
+      }
+    }
+    return v;
+  };
+  const from = Math.max(0, s(offset));
+  return (
+    <Sequence from={from}>
+      <Audio
+        src={staticFile(src)}
+        trimBefore={offset < 0 ? s(-offset) : undefined}
+        volume={(f) => volumeAt((f + from) / FPS)}
+      />
+    </Sequence>
+  );
+};
 
 /** Sous-titres alignés sur les phrases placées. */
 const toSubtitles = (clips: VoClip[]) =>
@@ -164,7 +206,7 @@ export const Promo16x9: React.FC = () => (
         { at: 54.2, dur: 5.8, el: <SceneEndCard /> },
       ]}
     />
-    <Music src={MEDIA.musique} />
+    <Music src={MEDIA.musique} clips={VO_16x9} offset={-1} silences={[[47.0, 48.15]]} />
     <Voice src={MEDIA.vo16x9} clips={VO_16x9} />
   </AbsoluteFill>
 );
@@ -217,8 +259,8 @@ export const Promo9x16: React.FC = () => (
           ),
         },
         { at: 5.4, dur: 3.2, el: <SceneCities /> },
-        { at: 8.6, dur: 1.7, el: <SceneCounters stats={[{ value: 10000, label: 'personnes / an' }]} /> },
-        { at: 10.3, dur: 8.7, el: <SceneBooks books={FEATURED_BOOKS.slice(0, 3)} /> },
+        { at: 8.6, dur: 1.2, el: <SceneCounters stats={[{ value: 10000, label: 'personnes / an' }]} /> },
+        { at: 9.8, dur: 9.2, el: <SceneBooks books={FEATURED_BOOKS.slice(0, 3)} /> },
         { at: 19, dur: 4.6, el: <SceneLibrary covers={LIBRARY.slice(0, 7)} /> },
         {
           at: 23.6,
@@ -236,7 +278,7 @@ export const Promo9x16: React.FC = () => (
       ]}
     />
     <Subtitles lines={toSubtitles(VO_9x16)} />
-    <Music src={MEDIA.musique9x16} />
+    <Music src={MEDIA.musique9x16} clips={VO_9x16} offset={0.4} />
     <Voice src={MEDIA.vo9x16} clips={VO_9x16} />
   </AbsoluteFill>
 );

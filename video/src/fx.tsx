@@ -192,11 +192,12 @@ export const Broll: React.FC<{ src: string | null; label: string; tint?: string 
             height: '100%',
             objectFit: 'cover',
             transform: `scale(${push}) translate(${driftX}%, ${driftY}%)`,
+            transformOrigin: '62% 28%', // vers le soleil, pour ne pas le couper
           }}
         />
         <LightRays intensity={0.45} />
         <GoldDust count={30} seed={label} opacity={0.6} />
-        <AbsoluteFill style={{ background: 'linear-gradient(180deg, rgba(5,5,12,0.1), rgba(5,5,12,0.5))' }} />
+        <AbsoluteFill style={{ background: 'linear-gradient(180deg, rgba(5,5,12,0), rgba(5,5,12,0.35))' }} />
       </AbsoluteFill>
     );
   }
