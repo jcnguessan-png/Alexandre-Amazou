@@ -26,7 +26,10 @@ export const siteConfig = {
   },
   social: {
     facebook: 'https://www.facebook.com/PasteurAlexandreAmazouABMCI',
+    /** Chaîne de l'Église ABMCI (@EGLISEABMCI) */
     youtube: 'https://www.youtube.com/channel/UCi2WIBsPCQycQK2NYwKA61Q',
+    /** Chaîne personnelle du Pasteur (@AlexandreAmazou) */
+    youtubePasteur: 'https://www.youtube.com/@AlexandreAmazou',
     instagram: 'https://instagram.com/alexandreamazou',
     whatsapp: 'https://wa.me/22507682221272',
     /** Chaîne WhatsApp officielle (diffusion) — différente du contact wa.me */

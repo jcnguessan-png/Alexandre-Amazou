@@ -109,7 +109,8 @@ ${eventsSection()}
 - Newsletter (méditation hebdomadaire + chapitre 1 offert) : /newsletter
 
 ## Réseaux sociaux
-- YouTube : ${c.social.youtube}
+- YouTube du Pasteur (@AlexandreAmazou) : ${c.social.youtubePasteur}
+- YouTube de l'Église ABMCI (@EGLISEABMCI) : ${c.social.youtube}
 - Facebook : ${c.social.facebook}
 - Instagram : ${c.social.instagram}
 - WhatsApp (contact direct) : ${c.social.whatsapp}

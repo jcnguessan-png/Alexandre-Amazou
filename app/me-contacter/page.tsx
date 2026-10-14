@@ -110,7 +110,22 @@ export default function ContactPage({
             </div>
 
             <div className="ct-social reveal" data-delay="3">
-              <a href={social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <a
+                href={social.youtubePasteur}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube — Pasteur Alexandre AMAZOU"
+                title="YouTube — Pasteur Alexandre AMAZOU"
+              >
+                <Youtube aria-hidden="true" />
+              </a>
+              <a
+                href={social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube — Église ABMCI"
+                title="YouTube — Église ABMCI"
+              >
                 <Youtube aria-hidden="true" />
               </a>
               <a href={social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">

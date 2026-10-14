@@ -44,6 +44,7 @@ export const personSchema = () => ({
   },
   sameAs: [
     siteConfig.social.facebook,
+    siteConfig.social.youtubePasteur,
     siteConfig.social.youtube,
     siteConfig.social.instagram,
     siteConfig.bookOrder.amazonAuthorUrl,
