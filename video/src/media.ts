@@ -18,7 +18,7 @@ export const MEDIA = {
     pupitre: 'private/broll/pupitre.mp4' as string | null, // B4 — livre fermé sur un pupitre, lumière entre les pages
   },
   /** Voix off dynamique phrase par phrase (public/private/vo2/, voir src/voix.ts) : passer à true une fois livrée. */
-  voixDynamique: false,
+  voixDynamique: true,
   /** Ancienne voix off (abandonnée, gardée pour mémoire). */
   vo16x9: 'private/vo-16x9.mp3' as string | null,
   vo9x16: 'private/vo-9x16.mp3' as string | null,

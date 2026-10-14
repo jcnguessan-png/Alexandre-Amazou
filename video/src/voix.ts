@@ -42,6 +42,36 @@ export const VOIX_9x16: Ligne[] = [
 ];
 
 /** Durées réelles mesurées (s), par fichier — renseignées après génération. */
-export const DUREES: Record<string, number> = {};
+export const DUREES: Record<string, number> = {
+  'private/vo2/16x9-01.mp3': 1.45,
+  'private/vo2/16x9-02.mp3': 1.92,
+  'private/vo2/16x9-03.mp3': 1.92,
+  'private/vo2/16x9-04.mp3': 3.12,
+  'private/vo2/16x9-05.mp3': 3.12,
+  'private/vo2/16x9-06.mp3': 2.96,
+  'private/vo2/16x9-07.mp3': 1.52,
+  'private/vo2/16x9-08.mp3': 1.70,
+  'private/vo2/16x9-09.mp3': 2.01,
+  'private/vo2/16x9-10.mp3': 0.80,
+  'private/vo2/16x9-11.mp3': 2.03,
+  'private/vo2/16x9-12.mp3': 2.03,
+  'private/vo2/16x9-13.mp3': 2.19,
+  'private/vo2/16x9-14.mp3': 1.71,
+  'private/vo2/16x9-15.mp3': 2.21,
+  'private/vo2/16x9-16.mp3': 3.25,
+  'private/vo2/16x9-17.mp3': 1.56,
+  'private/vo2/16x9-18.mp3': 2.11,
+  'private/vo2/16x9-19.mp3': 1.68,
+  'private/vo2/9x16-01.mp3': 1.68,
+  'private/vo2/9x16-02.mp3': 2.96,
+  'private/vo2/9x16-03.mp3': 2.40,
+  'private/vo2/9x16-04.mp3': 1.24,
+  'private/vo2/9x16-05.mp3': 2.03,
+  'private/vo2/9x16-06.mp3': 2.03,
+  'private/vo2/9x16-07.mp3': 2.19,
+  'private/vo2/9x16-08.mp3': 3.41,
+  'private/vo2/9x16-09.mp3': 1.56,
+  'private/vo2/9x16-10.mp3': 1.68,
+};
 
 export const fichierVoix = (format: '16x9' | '9x16', id: string) => `private/vo2/${format}-${id}.mp3`;
