@@ -20,7 +20,8 @@ export const MEDIA = {
   vo16x9: 'private/vo-16x9.mp3' as string | null,
   vo9x16: 'private/vo-9x16.mp3' as string | null,
   pasteurFin: null as string | null,
-  musique: null as string | null,
+  musique: null as string | null, // 60 s, version 16:9
+  musique9x16: null as string | null, // 30 s, version 9:16
 };
 
 /** Affiche le nom du plan IA attendu sur les plans d'attente (à passer à false pour le rendu final). */

@@ -82,8 +82,8 @@ const Voice: React.FC<{ src: string | null; clips: VoClip[] }> = ({ src, clips }
   </>
 );
 
-const Music: React.FC = () =>
-  MEDIA.musique ? <Audio src={staticFile(MEDIA.musique)} volume={0.8} /> : null;
+const Music: React.FC<{ src: string | null }> = ({ src }) =>
+  src ? <Audio src={staticFile(src)} volume={0.8} /> : null;
 
 /** Sous-titres alignés sur les phrases placées. */
 const toSubtitles = (clips: VoClip[]) =>
@@ -164,7 +164,7 @@ export const Promo16x9: React.FC = () => (
         { at: 54.2, dur: 5.8, el: <SceneEndCard /> },
       ]}
     />
-    <Music />
+    <Music src={MEDIA.musique} />
     <Voice src={MEDIA.vo16x9} clips={VO_16x9} />
   </AbsoluteFill>
 );
@@ -236,7 +236,7 @@ export const Promo9x16: React.FC = () => (
       ]}
     />
     <Subtitles lines={toSubtitles(VO_9x16)} />
-    <Music />
+    <Music src={MEDIA.musique9x16} />
     <Voice src={MEDIA.vo9x16} clips={VO_9x16} />
   </AbsoluteFill>
 );

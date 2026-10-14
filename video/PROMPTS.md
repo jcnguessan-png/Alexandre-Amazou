@@ -26,7 +26,7 @@ Ce dossier est exclu de Git (médias privés) : n'écris rien ailleurs, ne commi
 | `vo-16x9.mp3` | Voix off version 60 s (section 2) | ElevenLabs | MP3 44,1 kHz |
 | `vo-9x16.mp3` | Voix off version 30 s (section 2) | ElevenLabs | MP3 44,1 kHz |
 
-Ne génère **pas** `musique.mp3` ni `pasteur-fin.mp3` : JC les fournit lui-même.
+Pour la musique, voir la section 3 (`musique.mp3`, `musique-9x16.mp3`). Ne génère **pas** `pasteur-fin.mp3` : JC le fournit.
 
 ### Déroulé
 1. **Plans vidéo** : pour chaque plan de la section 1, lance la génération Higgsfield avec le
@@ -140,11 +140,52 @@ Au téléphone, pièce calme, à 20 cm du micro, 3 prises lentes avec une pause 
 
 ---
 
-## 3. Musique (Artlist / Epidemic Sound) → `musique.mp3`
+## 3. Musique — ElevenLabs Music (ou Gemini) → `musique.mp3` + `musique-9x16.mp3`
 
-Mots-clés : *epic inspirational trailer, hybrid orchestral, cinematic build, emotional piano intro*.
-Structure recherchée : intro calme (0–8 s) → montée avec percussions (8–29 s) → impact (31 s) →
-section épique (31–45 s) → **coupure nette** (46 s) → résolution chorale (47–60 s).
+Deux pistes **instrumentales** (aucune parole), calées sur le montage. Les repères en secondes
+correspondent aux images : les respecter à ±0,5 s. La voix off est mixée par-dessus : garder les
+médiums dégagés pendant qu'elle parle (pas de lead mélodique chargé).
+
+Déposer dans `video\public\private\` puis déclarer dans `video\src\media.ts` :
+`musique: 'private/musique.mp3'` et `musique9x16: 'private/musique-9x16.mp3'`.
+
+### Piste 16:9 — 60 s exactement → `musique.mp3`
+```
+Instrumental cinematic trailer score, exactly 60 seconds, no vocals, no lyrics (wordless choir "ah" allowed only at the end). Style: Hollywood epic inspirational trailer, hybrid orchestral — strings, low brass, piano, deep taiko and hybrid percussion, sub-bass braams, risers, airy pads. Mood: reverent, hopeful, majestic, spiritual, goosebumps. Key: D minor resolving to D major at the end. Tempo 90 BPM with a half-time feel. Leave the mid-range clear for a male French voice-over: no busy lead melody.
+
+Structure (timestamps are strict):
+0:00–0:08 Intro — near silence, low drone, slow heartbeat pulse, soft felt-piano notes, distant shimmer. A deep sub "braam" at 0:04.
+0:08–0:20 Rise — warm string ostinato enters, gentle pulse, piano motif, steady build of hope.
+0:20–0:29 Momentum — tom and taiko groove enters, strings swell; two clean percussive hits at 0:25 and 0:27.
+0:29–0:31 Tension — reverse swell and riser, everything sucks out.
+0:31 MASSIVE IMPACT — huge hit plus braam, then full epic section.
+0:31–0:47 Epic — driving hybrid percussion, soaring strings and brass, triumphant and powerful, intensity growing to a peak at 0:46.
+0:47–0:48 Hard stop — complete silence for about 1 second.
+0:48–0:54 Resolution — one big emotional major chord, wordless choir and strings bloom, slow and majestic.
+0:54–0:60 Outro — warm sustained chord with a final gentle hit at 0:54, then a soft fade to silence by 0:60.
+```
+
+### Piste 9:16 — 30 s exactement → `musique-9x16.mp3`
+```
+Instrumental cinematic trailer score, exactly 30 seconds, no vocals, no lyrics. Same style as an epic inspirational Hollywood trailer: hybrid orchestral strings, low brass, piano, taiko and hybrid percussion, braams, risers. Reverent, hopeful, majestic. D minor resolving to D major. 90 BPM, half-time feel. Keep the mid-range clear for a voice-over.
+
+Structure (timestamps are strict):
+0:00 Immediate impact hit with a bright shimmer (hook, no slow intro).
+0:00–0:10 Fast build — string ostinato and pulse, percussion grows.
+0:10 Big impact plus braam.
+0:10–0:23 Epic section — driving percussion, soaring strings and brass, triumphant.
+0:23–0:24 Short stop, half a second of silence.
+0:24–0:30 Resolution — big emotional major chord with wordless choir, final hit at 0:27, fade out by 0:30.
+```
+
+### Conseils de génération
+- **ElevenLabs Music** : coller le prompt, régler la durée sur 60 s (puis 30 s), forcer
+  l'instrumental. Si l'outil propose un plan de composition par sections, reprendre les
+  sections et durées ci-dessus. Générer 3 versions et garder celle dont l'impact tombe le plus
+  près de 0:31 (16:9) ou 0:10 (9:16).
+- **Gemini** : la génération musicale y est limitée à des pistes courtes (environ 30 s). Elle
+  convient pour la piste 9:16, pas pour celle de 60 s.
+- Vérifier la durée avec `ffprobe` ; si la piste dépasse légèrement, je la recale au montage.
 
 ---
 
