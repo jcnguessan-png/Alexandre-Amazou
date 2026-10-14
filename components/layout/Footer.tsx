@@ -54,10 +54,23 @@ export function Footer() {
               </li>
               <li>
                 <a
+                  href={siteConfig.social.youtubePasteur}
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                  aria-label="S'abonner à la chaîne YouTube du Pasteur Alexandre AMAZOU"
+                  title="YouTube — Pasteur Alexandre AMAZOU"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/20 text-primary-foreground transition hover:border-secondary hover:text-secondary"
+                >
+                  <Youtube aria-hidden="true" size={18} />
+                </a>
+              </li>
+              <li>
+                <a
                   href={siteConfig.social.youtube}
                   target="_blank"
                   rel="noopener noreferrer me"
-                  aria-label="S'abonner à la chaîne YouTube officielle"
+                  aria-label="S'abonner à la chaîne YouTube de l'Église ABMCI"
+                  title="YouTube — Église ABMCI"
                   className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/20 text-primary-foreground transition hover:border-secondary hover:text-secondary"
                 >
                   <Youtube aria-hidden="true" size={18} />
