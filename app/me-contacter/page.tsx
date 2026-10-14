@@ -30,7 +30,9 @@ export default function ContactPage({
       ? INVITATION_SUBJECT
       : searchParams.objet === 'presse'
         ? 'demande-presse'
-        : '';
+        : searchParams.objet === 'commande-groupee'
+          ? 'commande-groupee'
+          : '';
 
   return (
     <div className="dyn dyn-contact" data-page="contact">
