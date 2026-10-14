@@ -7,7 +7,7 @@
  *   public/private/vo-16x9.mp3      ← voix off ElevenLabs (version 60 s)
  *   public/private/vo-9x16.mp3      ← voix off ElevenLabs (version 30 s)
  *   public/private/pasteur-fin.mp3  ← « Votre histoire n'est pas terminée » dite par le Pasteur
- *   public/private/musique.mp3      ← musique (Artlist / Epidemic Sound)
+ *   public/private/musique.mp3      ← musique 60 s (ElevenLabs Music), + musique-9x16.mp3 (30 s)
  */
 export const MEDIA = {
   broll: {

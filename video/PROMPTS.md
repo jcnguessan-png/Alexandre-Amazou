@@ -4,10 +4,17 @@ Concept A : « De l'ordinaire à l'extraordinaire ». Deux formats : 16:9 (60 s)
 
 ---
 
-## 0. Instructions pour Claude (exécution des prompts)
+## 0. Instructions pour Claude — mission en cours : la musique
 
-Tu vas générer les médias de cette vidéo avec les connecteurs **Higgsfield** (plans vidéo) et
-**ElevenLabs** (voix off), puis les déposer dans le projet. Suis ces étapes dans l'ordre.
+### État du projet (ne pas refaire)
+Déjà livrés et branchés dans le montage — **ne rien régénérer, ne rien écraser, ne rien déplacer** :
+- `broll\bible.mp4`, `broll\abidjan.mp4`, `broll\foule.mp4`, `broll\foule-9x16.mp4`, `broll\pupitre.mp4`
+- `vo-16x9.mp3`, `vo-9x16.mp3`
+- le dossier `_alt\` (variantes de secours)
+
+### Ta mission
+Générer **les deux pistes musicales instrumentales** de la section 3 avec le connecteur
+**ElevenLabs** (ElevenLabs Music), les déposer dans le projet et les déclarer.
 
 ### Dossier de destination (le seul où écrire)
 ```
@@ -16,54 +23,43 @@ C:\Users\jcngu\OneDrive\Desktop\Projets Claude\Alexandre-Amazou\video\public\pri
 Ce dossier est exclu de Git (médias privés) : n'écris rien ailleurs, ne commite rien.
 
 ### Fichiers attendus — noms exacts
-| Fichier | Contenu | Source | Format |
+| Fichier | Contenu | Durée | Format |
 |---|---|---|---|
-| `broll\bible.mp4` | Plan B1 (section 1) | Higgsfield | 16:9, ≥ 1080p, 5–8 s |
-| `broll\abidjan.mp4` | Plan B2 | Higgsfield | 16:9, ≥ 1080p, 5–8 s |
-| `broll\foule.mp4` | Plan B3 | Higgsfield | 16:9, ≥ 1080p, 5–8 s |
-| `broll\foule-9x16.mp4` | Plan B3, même prompt | Higgsfield | **9:16**, ≥ 1080×1920, 5–8 s |
-| `broll\pupitre.mp4` | Plan B4 | Higgsfield | 16:9, ≥ 1080p, 5–8 s |
-| `vo-16x9.mp3` | Voix off version 60 s (section 2) | ElevenLabs | MP3 44,1 kHz |
-| `vo-9x16.mp3` | Voix off version 30 s (section 2) | ElevenLabs | MP3 44,1 kHz |
+| `musique.mp3` | Piste 16:9 (section 3) | **60 s** | MP3 44,1 kHz, stéréo |
+| `musique-9x16.mp3` | Piste 9:16 (section 3) | **30 s** | MP3 44,1 kHz, stéréo |
+| `_alt\musique-alt.mp3`, `_alt\musique-9x16-alt.mp3` | Meilleure variante non retenue | — | idem |
 
-Pour la musique, voir la section 3 (`musique.mp3`, `musique-9x16.mp3`). Ne génère **pas** `pasteur-fin.mp3` : JC le fournit.
+Ne génère **pas** `pasteur-fin.mp3` : JC le fournit.
 
 ### Déroulé
-1. **Plans vidéo** : pour chaque plan de la section 1, lance la génération Higgsfield avec le
-   prompt **tel quel** (en anglais), en choisissant un modèle vidéo haut de gamme et le ratio
-   indiqué ci-dessus. Génère 2 variantes par plan et garde la meilleure (mouvement fluide, pas de
-   déformation, pas de texte ni de logo, aucun visage reconnaissable).
-2. **Voix off** : pour chaque texte de la section 2, génère avec ElevenLabs en respectant la voix
-   et les réglages indiqués, **avec les balises `<break>`** (modèle qui les prend en charge,
-   par ex. *Multilingual v2*). Langue : français.
-3. **Téléchargement** : les connecteurs renvoient en général une URL de résultat. Télécharge
-   chaque fichier dans le dossier de destination sous son **nom exact**, par exemple :
+1. **Génération** : pour chaque piste, colle le prompt de la section 3 **tel quel** (en anglais),
+   règle la durée exacte (60 s puis 30 s) et force le mode **instrumental** (aucune parole).
+   Si l'outil propose un plan de composition par sections, reprends les sections et leurs
+   durées. Génère **3 versions** de chaque piste.
+2. **Choix** : garde la version dont l'impact principal tombe le plus près du repère
+   (**0:31** pour la piste 16:9, **0:10** pour la 9:16), qui a bien le silence prévu
+   (0:47–0:48 en 16:9, 0:23 en 9:16), et sans voix chantée. La deuxième meilleure va dans `_alt\`.
+3. **Téléchargement** sous le nom exact, par exemple :
    ```
-   curl -L "<url>" -o "C:\Users\jcngu\OneDrive\Desktop\Projets Claude\Alexandre-Amazou\video\public\private\broll\bible.mp4"
+   curl -L "<url>" -o "C:\Users\jcngu\OneDrive\Desktop\Projets Claude\Alexandre-Amazou\video\public\private\musique.mp3"
    ```
-4. **Vérification** de chaque fichier (doit exister, ne pas être vide, avoir le bon ratio) :
+4. **Vérification** (le fichier existe, n'est pas vide, durée correcte à ±1 s) :
    ```
-   ffprobe -v error -show_entries format=duration:stream=width,height -of compact "<fichier>"
+   ffprobe -v error -show_entries format=duration -of compact "<fichier>"
    ```
-5. **Déclaration dans le projet** : dans `video\src\media.ts`, remplace `null` par le chemin
-   relatif à `public\` (barres obliques), uniquement pour les fichiers réellement déposés :
+5. **Déclaration** dans `video\src\media.ts` — remplacer **uniquement** ces deux lignes :
    ```ts
-   bible: 'private/broll/bible.mp4',
-   abidjan: 'private/broll/abidjan.mp4',
-   foule: 'private/broll/foule.mp4',
-   foule9x16: 'private/broll/foule-9x16.mp4',
-   pupitre: 'private/broll/pupitre.mp4',
-   // …
-   vo16x9: 'private/vo-16x9.mp3',
-   vo9x16: 'private/vo-9x16.mp3',
+   musique: 'private/musique.mp3' as string | null, // 60 s, version 16:9
+   musique9x16: 'private/musique-9x16.mp3' as string | null, // 30 s, version 9:16
    ```
-6. **Compte rendu** à JC : liste des fichiers déposés (durée, résolution), plans écartés et
-   pourquoi, tout ce qui a échoué. Ne lance pas le rendu final : JC le fera valider d'abord.
+6. **Compte rendu** à JC : pour chaque piste retenue, sa durée, l'instant réel de l'impact
+   principal et du silence (à l'oreille ou par analyse), et ce qui a échoué. Ne lance aucun rendu
+   vidéo : c'est fait de l'autre côté.
 
 ### Interdits
-- Ne jamais générer ni animer le visage ou le corps du Pasteur Alexandre AMAZOU (pas d'image
-  vers vidéo à partir de ses photos). Les plans IA sont uniquement des plans d'ambiance.
-- Ne modifier aucun autre fichier du projet que `video\src\media.ts`.
+- Ne modifier aucun autre fichier que `video\src\media.ts` (et seulement les deux lignes ci-dessus).
+- Ne pas écraser ni supprimer les plans vidéo et voix off existants.
+- Pas de musique avec paroles, ni imitant un artiste ou une œuvre existante.
 
 ---
 
