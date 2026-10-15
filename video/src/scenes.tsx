@@ -55,6 +55,14 @@ export const SceneBroll: React.FC<{
     <AbsoluteFill style={{ opacity: useSceneFade(durationInFrames, 8, 8) }}>
       <Broll src={src} label={label} />
       {title ? (
+        // Voile sombre derrière le titre : lisible même sur un plan doré (horloge, échiquier).
+        <AbsoluteFill
+          style={{
+            background: `radial-gradient(ellipse ${vertical ? '95% 32%' : '70% 45%'} at 50% 50%, rgba(5,5,12,0.72), rgba(5,5,12,0.35) 55%, transparent 80%)`,
+          }}
+        />
+      ) : null}
+      {title ? (
         <Center style={{ padding: 80 * u }}>
           <GoldTitle size={(vertical ? 96 : 110) * u} start={titleStart}>
             {title}
