@@ -28,7 +28,7 @@ const Timeline: React.FC<{ shots: Shot[] }> = ({ shots }) => (
   </>
 );
 
-const toClips = (format: '30' | '15' | '6', lignes: Ligne[], dossier: DossierVoix = 'vo'): Clip[] =>
+const toClips = (format: '30' | '15' | '6', lignes: Ligne[], dossier: DossierVoix = 'vo-homme'): Clip[] =>
   lignes.map((l) => {
     const file = fichierVoixLivre(format, l.id, dossier);
     return { at: l.at, dur: DUREES_LIVRE[file] ?? l.max, text: l.text, file };
@@ -76,7 +76,7 @@ const ACCROCHE = `${ANNEES.prochaine} comme ${ANNEES.passee} ?`;
 /* ------------------------------------------------------------------ */
 export const LIVRE_30_SECONDS = 30;
 
-export const Livre30: React.FC<{ dossier?: DossierVoix }> = ({ dossier = 'vo' }) => {
+export const Livre30: React.FC<{ dossier?: DossierVoix }> = ({ dossier = 'vo-homme' }) => {
   const clips = toClips('30', VOIX_30, dossier);
   return (
     <AbsoluteFill style={{ background: '#000' }}>
@@ -146,8 +146,8 @@ export const Livre30: React.FC<{ dossier?: DossierVoix }> = ({ dossier = 'vo' })
 /* ------------------------------------------------------------------ */
 export const LIVRE_15_SECONDS = 15;
 
-export const Livre15: React.FC = () => {
-  const clips = toClips('15', VOIX_15);
+export const Livre15: React.FC<{ dossier?: DossierVoix }> = ({ dossier = 'vo-homme' }) => {
+  const clips = toClips('15', VOIX_15, dossier);
   return (
     <AbsoluteFill style={{ background: '#000' }}>
       <Timeline
@@ -166,7 +166,7 @@ export const Livre15: React.FC = () => {
           {
             at: 8.45,
             dur: 3.65,
-            el: <SceneImpact line1="Ne subissez plus votre année." line2="Commandez-la." line2At={s(1.75)} />,
+            el: <SceneImpact line1="Ne subissez plus votre année." line2="Commandez-la." line2At={s(1.6)} />,
           },
           { at: 12.1, dur: 2.9, el: <SceneEndLivre /> },
         ]}
@@ -183,8 +183,8 @@ export const Livre15: React.FC = () => {
 /* ------------------------------------------------------------------ */
 export const LIVRE_6_SECONDS = 6;
 
-export const Livre6: React.FC = () => {
-  const clips = toClips('6', VOIX_6);
+export const Livre6: React.FC<{ dossier?: DossierVoix }> = ({ dossier = 'vo-homme' }) => {
+  const clips = toClips('6', VOIX_6, dossier);
   return (
     <AbsoluteFill style={{ background: '#000' }}>
       <Timeline

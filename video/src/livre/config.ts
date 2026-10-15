@@ -50,8 +50,8 @@ export const VOIX_30: Ligne[] = [
 /** Voix off — version 15 s. */
 export const VOIX_15: Ligne[] = [
   { id: '01', at: 0.1, max: 2.1, text: 'Et si l’année prochaine ressemblait à celle-ci ?' },
-  { id: '02', at: 2.6, max: 2.8, text: 'Une nouvelle année est un champ de bataille spirituel.' },
-  { id: '03', at: 5.1, max: 3.4, text: 'Découvrez les quatre portes et les quatre armes pour la gagner.' },
+  { id: '02', at: 2.55, max: 2.8, text: 'Une nouvelle année est un champ de bataille spirituel.' },
+  { id: '03', at: 5.35, max: 3.4, text: 'Découvrez les quatre portes et les quatre armes pour la gagner.' },
   { id: '04', at: 8.5, max: 2.7, text: 'Ne subissez plus votre année. Commandez-la !' },
   { id: '05', at: 12.3, max: 2.4, text: 'Disponible sur Amazon.' },
 ];
@@ -95,10 +95,25 @@ export const DUREES_LIVRE: Record<string, number> = {
   'private/livre/vo-homme/30-09.mp3': 1.55,
   'private/livre/vo-homme/30-10.mp3': 0.81,
   'private/livre/vo-homme/30-11.mp3': 2.08,
+  'private/livre/vo-homme/15-01.mp3': 2.29,
+  'private/livre/vo-homme/15-02.mp3': 2.77,
+  'private/livre/vo-homme/15-03.mp3': 2.91,
+  'private/livre/vo-homme/15-04.mp3': 2.72,
+  'private/livre/vo-homme/15-05.mp3': 1.68,
+  'private/livre/vo-homme/6-01.mp3': 1.55,
+  'private/livre/vo-homme/6-02.mp3': 0.81,
+  'private/livre/vo-homme/6-03.mp3': 1.01,
+  'private/livre/noel/vo/N-01.mp3': 2.21,
+  'private/livre/noel/vo/N-02.mp3': 1.88,
+  'private/livre/noel/vo/N-03.mp3': 4.96,
+  'private/livre/noel/vo/N-04.mp3': 4.13,
+  'private/livre/noel/vo/N-05.mp3': 3.35,
+  'private/livre/noel/vo/N-06.mp3': 1.15,
+  'private/livre/noel/vo/N15-01.mp3': 4.16,
 };
 
-/** Dossier de voix : 'vo' = Sophie (femme), 'vo-homme' = Paul K (homme, 30 s seulement pour l'instant). */
+/** Dossier de voix : 'vo-homme' = Paul K (voix de la campagne), 'vo' = Sophie (variante). */
 export type DossierVoix = 'vo' | 'vo-homme';
 
-export const fichierVoixLivre = (format: '30' | '15' | '6', id: string, dossier: DossierVoix = 'vo') =>
+export const fichierVoixLivre = (format: '30' | '15' | '6', id: string, dossier: DossierVoix = 'vo-homme') =>
   `private/livre/${dossier}/${format}-${id}.mp3`;

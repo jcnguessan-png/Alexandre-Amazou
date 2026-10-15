@@ -226,7 +226,7 @@ export const SceneImpact: React.FC<{ line1: string; line2: string; line2At: numb
 /* ------------------------------------------------------------------ */
 /* Carte de fin : où l'acheter                                          */
 /* ------------------------------------------------------------------ */
-export const SceneEndLivre: React.FC = () => {
+export const SceneEndLivre: React.FC<{ cta?: string }> = ({ cta = 'Commander sur Amazon →' }) => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps } = useVideoConfig();
   const { u, height, tall } = useU();
@@ -264,7 +264,7 @@ export const SceneEndLivre: React.FC = () => {
             boxShadow: `0 0 ${40 * u}px rgba(228,201,119,0.45)`,
           }}
         >
-          Commander sur Amazon →
+          {cta}
         </div>
         <div style={{ fontFamily: C.sans, fontSize: 30 * u, color: C.cream, opacity: Math.min(1, btn), letterSpacing: '0.04em' }}>
           {LIVRE.url}
