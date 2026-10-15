@@ -83,13 +83,13 @@ export const Livre30: React.FC = () => {
         shots={[
           {
             at: 0,
-            dur: 2.4,
+            dur: 2.6,
             el: <SceneBroll src={MEDIA_LIVRE.broll.calendrier} label="L1 · CALENDRIER" title={ACCROCHE} titleStart={2} />,
           },
-          { at: 2.4, dur: 3.0, el: <SceneKinetic words={['Mêmes combats.', 'Mêmes blocages.', 'Mêmes déceptions.']} /> },
+          { at: 2.6, dur: 2.95, el: <SceneKinetic words={['Mêmes combats.', 'Mêmes blocages.', 'Mêmes déceptions.']} /> },
           {
-            at: 5.4,
-            dur: 2.9,
+            at: 5.55,
+            dur: 2.75,
             el: (
               <SceneBroll
                 src={MEDIA_LIVRE.broll.horloge}
@@ -101,18 +101,18 @@ export const Livre30: React.FC = () => {
           },
           {
             at: 8.3,
-            dur: 2.5,
+            dur: 2.6,
             el: <SceneBroll src={MEDIA_LIVRE.broll.echecs} label="L3 · ÉCHECS" title="Un champ de bataille spirituel" titleStart={3} />,
           },
-          { at: 10.8, dur: 3.6, el: <SceneBookHero /> },
+          { at: 10.9, dur: 3.4, el: <SceneBookHero /> },
           {
-            at: 14.4,
-            dur: 2.1,
+            at: 14.3,
+            dur: 1.95,
             el: <SceneBroll src={MEDIA_LIVRE.broll.portes} label="L4 · PORTES" title="Les 4 portes de l’année" titleStart={2} />,
           },
           {
-            at: 16.5,
-            dur: 2.4,
+            at: 16.25,
+            dur: 2.15,
             el: (
               <SceneList
                 title="Les 4 armes de commandement"
@@ -121,16 +121,16 @@ export const Livre30: React.FC = () => {
             ),
           },
           {
-            at: 18.9,
-            dur: 2.8,
+            at: 18.4,
+            dur: 2.5,
             el: <SceneList title="Un plan d’action" items={['Diagnostiquer', 'Combattre', 'Programmer']} />,
           },
           {
-            at: 21.7,
-            dur: 3.8,
-            el: <SceneImpact line1="Ne subissez plus votre année." line2="Commandez-la." line2At={s(2.1)} />,
+            at: 20.9,
+            dur: 4.4,
+            el: <SceneImpact line1="Ne subissez plus votre année." line2="Commandez-la." line2At={s(2.35)} />,
           },
-          { at: 25.5, dur: 4.5, el: <SceneEndLivre /> },
+          { at: 25.3, dur: 4.7, el: <SceneEndLivre /> },
         ]}
       />
       <Subtitles lines={subs(clips)} />
@@ -153,19 +153,19 @@ export const Livre15: React.FC = () => {
         shots={[
           {
             at: 0,
-            dur: 2.3,
+            dur: 2.55,
             el: <SceneBroll src={MEDIA_LIVRE.broll.calendrier} label="L1 · CALENDRIER" title={ACCROCHE} titleStart={1} />,
           },
           {
-            at: 2.3,
-            dur: 3.1,
+            at: 2.55,
+            dur: 2.45,
             el: <SceneBroll src={MEDIA_LIVRE.broll.echecs} label="L3 · ÉCHECS" title="Un champ de bataille spirituel" titleStart={4} />,
           },
-          { at: 5.4, dur: 3.7, el: <SceneBookHero kicker="4 portes · 4 armes" /> },
+          { at: 5.0, dur: 3.45, el: <SceneBookHero kicker="4 portes · 4 armes" /> },
           {
-            at: 9.1,
-            dur: 3.0,
-            el: <SceneImpact line1="Ne subissez plus votre année." line2="Commandez-la." line2At={s(1.4)} />,
+            at: 8.45,
+            dur: 3.65,
+            el: <SceneImpact line1="Ne subissez plus votre année." line2="Commandez-la." line2At={s(1.75)} />,
           },
           { at: 12.1, dur: 2.9, el: <SceneEndLivre /> },
         ]}
@@ -191,13 +191,13 @@ export const Livre6: React.FC = () => {
           {
             at: 0,
             dur: 3.8,
-            el: <SceneImpact line1="Ne subissez plus votre année." line2="Commandez-la." line2At={s(2.1)} />,
+            el: <SceneImpact line1="Ne subissez plus votre année." line2="Commandez-la." line2At={s(2.25)} />,
           },
           { at: 3.8, dur: 2.2, el: <SceneEndLivre /> },
         ]}
       />
       <Subtitles lines={subs(clips)} />
-      <Music src={MEDIA_LIVRE.musique15} clips={clips} trimStart={9} />
+      <Music src={MEDIA_LIVRE.musique30} clips={clips} trimStart={21.5} />
       <Voice clips={clips} />
     </AbsoluteFill>
   );
