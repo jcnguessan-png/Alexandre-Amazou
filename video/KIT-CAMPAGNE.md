@@ -2,7 +2,18 @@
 
 Campagne novembre 2026 → janvier 2027. Ciblage : 90 % Europe (France, Belgique, Suisse) + Canada,
 vente sur Amazon ; 10 % Côte d'Ivoire, consacrés à la séance de dédicace de décembre.
-Page de destination de toutes les publicités : **https://alexandreamazou.com/nouvelle-annee**
+**Où renvoyer les gens**
+| Source | Lien |
+|---|---|
+| Publicités France et Suisse | https://www.amazon.fr/dp/B0G349RCYM |
+| Publicités Belgique | https://www.amazon.com.be/dp/B0G349RCYM |
+| Publicités Canada | https://www.amazon.ca/dp/B0G349RCYM |
+| Publicités Côte d'Ivoire | https://alexandreamazou.com/nouvelle-annee#abidjan |
+| Publications, WhatsApp, bio Instagram, direct, pasteurs | https://alexandreamazou.com/nouvelle-annee |
+
+Les liens Amazon des publicités sont à remplacer par des liens **Amazon Attribution** s'ils sont
+disponibles pour le livre. Pendant la phase de test (2–15 novembre), la moitié du budget Europe
+renvoie vers la page au lieu d'Amazon, pour comparer ; on garde ensuite la meilleure destination.
 
 ---
 
@@ -43,6 +54,9 @@ Tous les fichiers sont dans `video/out/` (non commités : à téléverser dans M
 
 Règle Meta : le texte principal est coupé après ~125 caractères — l'accroche doit tenir avant.
 Bouton d'action conseillé : **« Acheter »** (ou « En savoir plus »).
+Créer **un ensemble de publicités par zone** (France + Suisse, Belgique, Canada, Côte d'Ivoire),
+chacun avec son lien de destination (tableau ci-dessus). Sans pixel sur Amazon, juger les
+publicités sur les ventes (KDP, Amazon Attribution), pas sur les clics.
 
 ### Angle A — Le constat
 - **Texte principal :** Et si l'année prochaine ressemblait à celle-ci ? Mêmes combats, mêmes blocages… Une nouvelle année ne se subit pas : elle se prépare. 📖 Le livre du Pasteur Alexandre AMAZOU vous montre comment.
