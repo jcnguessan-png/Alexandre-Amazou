@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>Plan de campagne — Comment préparer et réussir une nouvelle année ?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #12122b;
+    --navy-2: #222248;
+    --ink: #0a0a14;
+    --gold: #c9a84c;
+    --gold-deep: #9a7b2e;
+    --gold-soft: #f3ead2;
+    --text: #22222e;
+    --muted: #5e5b6b;
+    --line: #e2dbca;
+    --paper: #ffffff;
+  }
+  @page { size: A4; margin: 16mm 15mm 18mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--text); }
+  body { font-family: 'Archivo', system-ui, sans-serif; font-size: 10pt; line-height: 1.5; }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; color: var(--navy); margin: 0; }
+  h2 { font-size: 22pt; font-weight: 600; margin-top: 4mm; }
+  h2 .num { color: var(--gold-deep); margin-right: 3mm; }
+  h3 { font-size: 14pt; font-weight: 600; margin-top: 6mm; margin-bottom: 2mm; }
+  p { margin: 2mm 0; }
+  .lead { font-size: 11pt; color: var(--muted); }
+  .bar { width: 18mm; height: 0.7mm; background: var(--gold); margin: 3mm 0 5mm; }
+  section { page-break-before: always; }
+  section.nobreak { page-break-before: auto; }
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0; font-size: 9pt; page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th { text-align: left; background: var(--navy); color: #fff; font-weight: 600; padding: 2.2mm 2.5mm; font-size: 8.5pt; letter-spacing: 0.02em; }
+  td { padding: 2.2mm 2.5mm; border-bottom: 0.3mm solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #faf8f2; }
+  .num-col { text-align: right; white-space: nowrap; }
+  .tag { display: inline-block; font-size: 7.5pt; font-weight: 600; letter-spacing: 0.04em; padding: 0.4mm 1.8mm; border-radius: 1mm; margin: 0.3mm 0.6mm 0.3mm 0; white-space: nowrap; }
+  .t-ads { background: #12122b; color: #f3ead2; }
+  .t-org { background: #e8e3f5; color: #2e2e5a; }
+  .t-wa { background: #dcf3e3; color: #1d5a33; }
+  .t-yt { background: #fbe2e2; color: #7a1d1d; }
+  .t-noel { background: #f6e3e6; color: #8b1e2d; }
+  .file { font-family: 'Consolas', 'Courier New', monospace; font-size: 8pt; color: var(--gold-deep); }
+  .callout { border-left: 1.2mm solid var(--gold); background: var(--gold-soft); padding: 3mm 4mm; margin: 4mm 0; }
+  .callout.warn { border-color: #b23b3b; background: #fbecec; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .kpi { border: 0.3mm solid var(--line); padding: 3.5mm 4mm; }
+  .kpi .v { font-family: 'Cormorant Garamond', serif; font-size: 24pt; font-weight: 700; color: var(--navy); line-height: 1.1; }
+  .kpi .l { font-size: 8.5pt; color: var(--muted); }
+  ul { margin: 2mm 0; padding-left: 5mm; }
+  li { margin: 1mm 0; }
+
+  /* Couverture */
+  .cover { height: 263mm; background: radial-gradient(ellipse 80% 60% at 50% 35%, #2e2e5a, #0a0a14 75%); color: #f4eedf; padding: 22mm 18mm; display: flex; flex-direction: column; justify-content: space-between; margin: -16mm -15mm 0; width: calc(100% + 30mm); }
+  .cover .eyebrow { font-size: 9pt; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+  .cover h1 { color: #f4eedf; font-size: 40pt; line-height: 1.02; margin-top: 6mm; font-weight: 600; }
+  .cover h1 em { color: var(--gold); font-style: italic; }
+  .cover .sub { font-size: 12pt; color: rgba(244,238,223,0.75); margin-top: 6mm; max-width: 140mm; }
+  .cover .books { display: flex; gap: 8mm; align-items: flex-end; }
+  .cover .books img { height: 70mm; box-shadow: 0 6mm 14mm rgba(0,0,0,0.6); }
+  .cover .meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; border-top: 0.3mm solid rgba(201,168,76,0.4); padding-top: 6mm; }
+  .cover .meta .k { font-size: 7.5pt; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .cover .meta .v { font-family: 'Cormorant Garamond', serif; font-size: 15pt; margin-top: 1mm; }
+
+  /* Frise */
+  .timeline { display: grid; grid-template-columns: 0.9fr 0.7fr 1.6fr 1.05fr 1fr; margin: 5mm 0 3mm; font-size: 8pt; }
+  .timeline div { padding: 3mm 2.5mm; color: #fff; border-right: 0.5mm solid #fff; }
+  .timeline .p0 { background: #8a8698; }
+  .timeline .p1 { background: #2e2e5a; }
+  .timeline .p2 { background: #8b1e2d; }
+  .timeline .p3 { background: #9a7b2e; }
+  .timeline .p4 { background: #12122b; }
+  .timeline b { display: block; font-size: 9pt; }
+
+  /* Fichiers */
+  .thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; margin-top: 3mm; }
+  .thumb { text-align: center; page-break-inside: avoid; }
+  .thumb img { height: 38mm; max-width: 100%; object-fit: contain; border: 0.3mm solid var(--line); background: #0a0a14; }
+  .thumb .n { font-family: 'Consolas', monospace; font-size: 7pt; color: var(--gold-deep); margin-top: 1mm; word-break: break-all; }
+  .thumb .u { font-size: 7.5pt; color: var(--muted); }
+  .footer-note { font-size: 8pt; color: var(--muted); margin-top: 6mm; }
+</style>
+</head>
+<body>
+
+<!-- ===================== COUVERTURE ===================== -->
+<div class="cover">
+  <div>
+    <div class="eyebrow">Plan de campagne · Novembre 2026 → Janvier 2027</div>
+    <h1>Comment préparer et réussir<br />une nouvelle année ?<br /><em>Plan de lancement</em></h1>
+    <p class="sub">Calendrier daté, budget publicitaire, calendrier de publication et fichiers de référence de la campagne de promotion du livre du Pasteur Alexandre AMAZOU.</p>
+  </div>
+  <div class="books">
+    <img src="../out/plan/thumbs/Pub-4x5.jpg" alt="" />
+    <img src="../out/plan/thumbs/Noel-4x5.jpg" alt="" />
+    <img src="../out/plan/thumbs/Livre15-9x16.jpg" alt="" />
+  </div>
+  <div class="meta">
+    <div><div class="k">Objectif</div><div class="v">5 000 € de redevances</div></div>
+    <div><div class="k">Lancement</div><div class="v">Lundi 2 novembre 2026</div></div>
+    <div><div class="k">Budget recommandé</div><div class="v">1 500 € (ajustable)</div></div>
+  </div>
+</div>
+
+<!-- ===================== 1. SYNTHÈSE ===================== -->
+<section>
+  <h2><span class="num">1</span>Synthèse</h2>
+  <div class="bar"></div>
+  <p class="lead">Une campagne de 13 semaines, du lundi 2 novembre 2026 au dimanche 31 janvier 2027, en 4 temps : un test, la saison de Noël, le pic du Nouvel An, puis un reciblage. Toutes les publicités renvoient vers une page unique : <b>alexandreamazou.com/nouvelle-annee</b>.</p>
+
+  <div class="grid-2" style="margin-top:5mm">
+    <div class="kpi"><div class="v">≈ 420</div><div class="l">exemplaires brochés à vendre sur Amazon pour atteindre 5 000 € de redevances (≈ 12 € par livre, estimation)</div></div>
+    <div class="kpi"><div class="v">2 000 €</div><div class="l">redevances de la saison précédente : l'objectif revient à multiplier les ventes par 2,5</div></div>
+    <div class="kpi"><div class="v">90 / 10</div><div class="l">répartition du budget : Europe et Canada (vente Amazon) / Côte d'Ivoire (dédicace de décembre)</div></div>
+    <div class="kpi"><div class="v">&lt; 12 €</div><div class="l">coût publicitaire maximal d'une vente pour rester rentable (≈ redevance d'un broché)</div></div>
+  </div>
+
+  <h3>Les 4 phases</h3>
+  <div class="timeline">
+    <div class="p0"><b>Préparation</b>15 oct → 1er nov</div>
+    <div class="p1"><b>1 · Test</b>2 → 15 nov</div>
+    <div class="p2"><b>2 · Noël</b>16 nov → 20 déc<br />Black Friday 27 nov · Direct · Dédicace</div>
+    <div class="p3"><b>3 · Nouvel An</b>21 déc → 10 janv<br />Veillée du 31</div>
+    <div class="p4"><b>4 · Reciblage</b>11 → 31 janv</div>
+  </div>
+
+  <h3>Les leviers, par ordre d'impact attendu</h3>
+  <ul>
+    <li><b>La communauté existante</b> (chaînes YouTube, page Facebook, chaîne WhatsApp, Églises ABMCI de France, de Suisse et du Canada) : gratuite et la plus réceptive.</li>
+    <li><b>Les commandes groupées d'églises</b> via la Plateforme Leadership (plus de 1 500 serviteurs de Dieu) : un pasteur convaincu peut représenter des dizaines de ventes.</li>
+    <li><b>Le direct du Pasteur</b> en décembre, puis ses extraits réutilisés en publicité.</li>
+    <li><b>La publicité Facebook et Instagram</b>, qui amplifie les trois leviers ci-dessus et touche la diaspora au-delà de la communauté.</li>
+  </ul>
+
+  <div class="callout warn"><b>À retenir.</b> La publicité seule ne suffira pas à atteindre 5 000 € : elle doit s'appuyer sur la communauté, les églises et le direct. Les chiffres de ventes de ce document sont des estimations ; ils seront remplacés par les vrais résultats dès la fin de la phase de test.</div>
+</section>
+
+<!-- ===================== 2. BUDGET ===================== -->
+<section>
+  <h2><span class="num">2</span>Budget publicitaire</h2>
+  <div class="bar"></div>
+  <p class="lead">Budget recommandé : <b>1 500 €</b> sur 13 semaines, au lieu des 600 € envisagés au départ. Il reste ajustable à la hausse : on n'augmente que les publicités qui prouvent qu'elles vendent.</p>
+
+  <h3>Répartition par phase (scénario recommandé)</h3>
+  <table>
+    <tr><th>Phase</th><th>Dates</th><th class="num-col">Par jour</th><th class="num-col">Europe + Canada</th><th class="num-col">Côte d'Ivoire</th><th class="num-col">Total</th></tr>
+    <tr><td>1 · Test</td><td>2 → 15 nov (14 j)</td><td class="num-col">≈ 14 €</td><td class="num-col">180 €</td><td class="num-col">20 €</td><td class="num-col"><b>200 €</b></td></tr>
+    <tr><td>2 · Noël</td><td>16 nov → 20 déc (35 j)</td><td class="num-col">≈ 20 €</td><td class="num-col">620 €</td><td class="num-col">80 €</td><td class="num-col"><b>700 €</b></td></tr>
+    <tr><td>3 · Nouvel An</td><td>21 déc → 10 janv (21 j)</td><td class="num-col">≈ 21 €</td><td class="num-col">410 €</td><td class="num-col">40 €</td><td class="num-col"><b>450 €</b></td></tr>
+    <tr><td>4 · Reciblage</td><td>11 → 31 janv (21 j)</td><td class="num-col">≈ 7 €</td><td class="num-col">140 €</td><td class="num-col">10 €</td><td class="num-col"><b>150 €</b></td></tr>
+    <tr><td colspan="3"><b>Total</b></td><td class="num-col"><b>1 350 €</b></td><td class="num-col"><b>150 €</b></td><td class="num-col"><b>1 500 €</b></td></tr>
+  </table>
+
+  <h3>Trois scénarios (estimations à confirmer par le test)</h3>
+  <table>
+    <tr><th>Scénario</th><th class="num-col">Budget</th><th class="num-col">Ventes issues de la pub</th><th class="num-col">Redevances issues de la pub</th><th>Ce qui doit venir de l'organique</th></tr>
+    <tr><td>Minimal</td><td class="num-col">600 €</td><td class="num-col">50 à 100</td><td class="num-col">600 à 1 200 €</td><td>≈ 4 000 € : objectif peu probable</td></tr>
+    <tr><td><b>Recommandé</b></td><td class="num-col"><b>1 500 €</b></td><td class="num-col">125 à 250</td><td class="num-col">1 500 à 3 000 €</td><td>2 000 à 3 500 € : atteignable avec les églises et le direct</td></tr>
+    <tr><td>Accéléré</td><td class="num-col">2 500 €</td><td class="num-col">210 à 420</td><td class="num-col">2 500 à 5 000 €</td><td>Seulement si le coût par vente reste sous 10 €</td></tr>
+  </table>
+  <p class="footer-note">Hypothèses : redevance ≈ 12 € par broché vendu 30 € (estimation, à confirmer dans KDP) ; coût publicitaire d'une vente entre 6 et 12 € en Europe. Les ventes en Côte d'Ivoire (librairies, dédicace) s'ajoutent hors redevances Amazon.</p>
+
+  <h3>Règles pour augmenter (ou couper) le budget</h3>
+  <ul>
+    <li><b>Après 50 € dépensés</b> sur une publicité, couper celle dont le coût par clic vers Amazon dépasse 1 €, ou qui ne génère aucune vente visible.</li>
+    <li><b>Coût par vente sous 8 €</b> : augmenter le budget de cette publicité de 20 % tous les 3 jours.</li>
+    <li><b>Coût par vente entre 8 et 12 €</b> : maintenir, tester une nouvelle accroche.</li>
+    <li><b>Coût par vente au-dessus de 12 €</b> : la publicité perd de l'argent. La couper ou la réserver au reciblage.</li>
+    <li>Point budget <b>chaque lundi</b>, à partir des ventes KDP de la semaine et des clics mesurés sur la page.</li>
+  </ul>
+</section>
+
+<!-- ===================== 3. PRÉPARATION ===================== -->
+<section>
+  <h2><span class="num">3</span>Préparation — avant le 2 novembre</h2>
+  <div class="bar"></div>
+  <p class="lead">Rien ne doit être lancé tant que la page n'est pas en ligne et que les résultats ne sont pas mesurables.</p>
+  <table>
+    <tr><th>Tâche</th><th>Qui</th><th>Échéance</th><th>Pourquoi</th></tr>
+    <tr><td>Fusionner la PR #21 : mise en ligne de la page <b>/nouvelle-annee</b></td><td>Claude (validation JC)</td><td>Lun. 19 oct</td><td>Toutes les publicités y renvoient</td></tr>
+    <tr><td>Créer le pixel Meta et transmettre son identifiant</td><td>JC</td><td>Ven. 23 oct</td><td>Mesurer les visites et recibler</td></tr>
+    <tr><td>Installer le pixel et le bandeau de consentement aux cookies (RGPD)</td><td>Claude</td><td>Mar. 27 oct</td><td>Obligatoire en Europe</td></tr>
+    <tr><td>Créer les liens Amazon Attribution (console Amazon Ads) et les remplacer sur la page</td><td>JC + Claude</td><td>Mar. 27 oct</td><td>Savoir quelle publicité fait vendre</td></tr>
+    <tr><td>Fixer la date du direct et celle de la dédicace d'Abidjan</td><td>JC / Pasteur</td><td>Ven. 30 oct</td><td>Pour les annoncer à temps</td></tr>
+    <tr><td>Transmettre 2 ou 3 avis lecteurs Amazon à citer</td><td>JC</td><td>Ven. 30 oct</td><td>Preuve sociale sur la page</td></tr>
+    <tr><td>Créer les audiences Meta (diaspora africaine francophone chrétienne 30–60 ans ; FR, BE, CH, CA ; abonnés de la page)</td><td>JC</td><td>Dim. 1er nov</td><td>Ciblage du test</td></tr>
+    <tr><td>Envoyer le message aux pasteurs partenaires (KIT-CAMPAGNE.md, § 5)</td><td>JC</td><td>Lun. 16 nov</td><td>Commandes groupées avant Noël</td></tr>
+  </table>
+
+  <h3>Dates clés proposées</h3>
+  <table>
+    <tr><th>Date</th><th>Événement</th><th>Statut</th></tr>
+    <tr><td>Lundi 2 novembre 2026</td><td>Lancement de la campagne (phase de test)</td><td>Recommandé</td></tr>
+    <tr><td>Lundi 16 novembre 2026</td><td>Bascule sur les créations de Noël</td><td>Recommandé</td></tr>
+    <tr><td>Vendredi 27 → lundi 30 novembre</td><td>Black Friday et Cyber Monday : budget +50 %</td><td>Recommandé</td></tr>
+    <tr><td>Jeudi 10 décembre 2026, 20 h (Paris)</td><td>Direct du Pasteur sur le thème du livre (Facebook + YouTube)</td><td><b>À confirmer</b></td></tr>
+    <tr><td>Samedi 19 décembre 2026</td><td>Séance de dédicace à Abidjan</td><td><b>À confirmer</b></td></tr>
+    <tr><td>Dimanche 20 décembre 2026</td><td>Fin de l'argument « à offrir pour Noël » (délais Amazon)</td><td>Recommandé</td></tr>
+    <tr><td>Jeudi 31 décembre 2026</td><td>Veillée : pic de l'angle « Nouvelle année »</td><td>—</td></tr>
+    <tr><td>Dimanche 31 janvier 2027</td><td>Fin de campagne et bilan</td><td>—</td></tr>
+  </table>
+</section>
+
+<!-- ===================== 4. CALENDRIER DE PUBLICATION ===================== -->
+<section>
+  <h2><span class="num">4</span>Calendrier de publication</h2>
+  <div class="bar"></div>
+  <p class="lead">Semaine par semaine : les publicités actives et les publications gratuites. Légende :
+    <span class="tag t-ads">Publicité Meta</span><span class="tag t-org">Facebook / Instagram</span><span class="tag t-wa">WhatsApp</span><span class="tag t-yt">YouTube</span><span class="tag t-noel">Noël</span>
+  </p>
+  <table>
+    <tr><th style="width:17%">Semaine</th><th style="width:38%">Publicités actives</th><th style="width:45%">Publications (organique)</th></tr>
+
+    <tr><td><b>S1 · 2 → 8 nov</b><br />Test</td>
+      <td><span class="tag t-ads">Pub</span> Test de 3 angles (A, B, C — KIT § 2) :<br /><span class="file">Livre15-9x16.mp4</span>, <span class="file">Livre15-4x5.mp4</span>, <span class="file">Pub-4x5.png</span></td>
+      <td>Lun : <span class="tag t-org">FB/IG</span> <span class="file">Livre30-9x16.mp4</span> (Reel) · <span class="tag t-yt">YT</span> même vidéo en Short<br />Mer : <span class="tag t-org">FB/IG</span> carrousel <span class="file">Carrousel-1→6.png</span><br />Ven : <span class="tag t-org">FB/IG</span> <span class="file">Citation-1.png</span><br /><span class="tag t-wa">WA</span> Lun : message chaîne · Mar : <span class="file">Statut-1.png</span> · Jeu : <span class="file">Statut-2.png</span></td></tr>
+
+    <tr><td><b>S2 · 9 → 15 nov</b><br />Test</td>
+      <td><span class="tag t-ads">Pub</span> Couper l'angle le moins performant, garder les 2 meilleurs</td>
+      <td>Lun : <span class="file">Livre30-4x5.mp4</span> (fil) · Mer : <span class="file">Citation-2.png</span> · Ven : <span class="file">Pub-1x1.png</span><br /><span class="tag t-wa">WA</span> <span class="file">Statut-1.png</span> + message chaîne</td></tr>
+
+    <tr><td><b>S3 · 16 → 22 nov</b><br /><span class="tag t-noel">Noël</span></td>
+      <td><span class="tag t-ads">Pub</span> <span class="file">Noel15-9x16.mp4</span>, <span class="file">Noel15-4x5.mp4</span>, <span class="file">Noel-4x5.png</span> + le meilleur angle standard</td>
+      <td>Lun : <span class="file">Noel30-9x16.mp4</span> (Reel + Short) · Mer : <span class="file">Citation-3.png</span> · Ven : <span class="file">Noel-1x1.png</span><br /><span class="tag t-wa">WA</span> message Noël + <span class="file">Noel-9x16.png</span> · Message aux pasteurs partenaires</td></tr>
+
+    <tr><td><b>S4 · 23 → 29 nov</b><br />Black Friday</td>
+      <td><span class="tag t-ads">Pub</span> Créations Noël, <b>budget +50 % du ven. 27 au lun. 30</b></td>
+      <td>Mer : <span class="file">Noel30-4x5.mp4</span> · Ven 27 : <span class="file">Noel-4x5.png</span> « Black Friday : offrez une année victorieuse »<br /><span class="tag t-wa">WA</span> <span class="file">Noel-9x16.png</span> le vendredi</td></tr>
+
+    <tr><td><b>S5 · 30 nov → 6 déc</b><br />Annonce du direct</td>
+      <td><span class="tag t-ads">Pub</span> Noël + publicité d'annonce du direct (visuel à produire dès la date fixée)</td>
+      <td>Lun : annonce du direct · Mer : carrousel (republication) · Ven : <span class="file">Noel30-9x16.mp4</span><br /><span class="tag t-wa">WA</span> annonce du direct + rappel</td></tr>
+
+    <tr><td><b>S6 · 7 → 13 déc</b><br />Direct (jeu. 10)</td>
+      <td><span class="tag t-ads">Pub</span> Rappel du direct (mar–jeu), puis <b>extraits du direct</b> dès le vendredi (à monter après le direct)</td>
+      <td>Mar–jeu : comptes à rebours en story · Jeu 10 : direct · Ven–dim : 2 extraits courts<br /><span class="tag t-wa">WA</span> lien du direct le jeudi</td></tr>
+
+    <tr><td><b>S7 · 14 → 20 déc</b><br />Dernière chance Noël · Dédicace (sam. 19)</td>
+      <td><span class="tag t-ads">Pub</span> Noël « commandez tôt » + extraits du direct · <b>Côte d'Ivoire : promotion de la dédicace</b> (visuel à produire)</td>
+      <td>Lun : <span class="file">Noel15-9x16.mp4</span> · Mer : extrait du direct · Sam 19 : photos de la dédicace<br /><span class="tag t-wa">WA</span> annonce de la dédicace (Abidjan) + message Noël</td></tr>
+
+    <tr><td><b>S8 · 21 → 27 déc</b><br />Nouvel An</td>
+      <td><span class="tag t-ads">Pub</span> Retour à l'angle « Nouvelle année » : <span class="file">Livre15-9x16.mp4</span>, <span class="file">Livre30-4x5.mp4</span> + extraits du direct</td>
+      <td>Mer 23 : <span class="file">Citation-1.png</span> · Sam 26 : <span class="file">Livre30-9x16.mp4</span><br /><span class="tag t-wa">WA</span> <span class="file">Statut-2.png</span></td></tr>
+
+    <tr><td><b>S9 · 28 déc → 3 janv</b><br />Pic · Veillée du 31</td>
+      <td><span class="tag t-ads">Pub</span> <b>Budget maximal</b> sur les 2 meilleures publicités</td>
+      <td>Mar 29 : <span class="file">Citation-2.png</span> · Jeu 31 : <span class="file">Statut-1.png</span> + message de veillée · Ven 1er : vœux du Pasteur (vidéo à tourner)<br /><span class="tag t-wa">WA</span> message du 31</td></tr>
+
+    <tr><td><b>S10 · 4 → 10 janv</b><br />Rentrée</td>
+      <td><span class="tag t-ads">Pub</span> Meilleures publicités + début du reciblage <span class="file">Livre6-9x16.mp4</span></td>
+      <td>Lun 4 : « Il n'est pas trop tard » + <span class="file">Pub-1x1.png</span> · Jeu : <span class="file">Citation-3.png</span><br /><span class="tag t-wa">WA</span> <span class="file">Statut-1.png</span></td></tr>
+
+    <tr><td><b>S11 → S13 · 11 → 31 janv</b><br />Reciblage</td>
+      <td><span class="tag t-ads">Pub</span> Reciblage seul (vidéo vue, page visitée) : <span class="file">Livre6-9x16.mp4</span>, <span class="file">Pub-1x1.png</span></td>
+      <td>1 publication par semaine (citations, extraits du direct) · <b>Dim. 31 : bilan de campagne</b></td></tr>
+  </table>
+</section>
+
+<!-- ===================== 5. SUIVI ===================== -->
+<section>
+  <h2><span class="num">5</span>Suivi et pilotage</h2>
+  <div class="bar"></div>
+  <h3>Indicateurs suivis chaque lundi</h3>
+  <table>
+    <tr><th>Indicateur</th><th>Où le lire</th><th>Seuil d'alerte</th></tr>
+    <tr><td>Coût par clic vers la page</td><td>Gestionnaire de publicités Meta</td><td>&gt; 1 € en Europe</td></tr>
+    <tr><td>Taux de clic (CTR)</td><td>Meta</td><td>&lt; 1 % : changer l'accroche</td></tr>
+    <tr><td>Clics vers Amazon depuis la page</td><td>Pixel Meta / statistiques de la page</td><td>Moins d'1 visiteur sur 4</td></tr>
+    <tr><td>Ventes par publicité</td><td>Amazon Attribution</td><td>Coût par vente &gt; 12 €</td></tr>
+    <tr><td>Ventes et redevances totales</td><td>Tableau de bord KDP</td><td>Suivi de l'objectif : ≈ 32 ventes par semaine</td></tr>
+    <tr><td>Demandes de commande groupée</td><td>Formulaire de contact du site</td><td>—</td></tr>
+  </table>
+
+  <h3>Objectif de ventes par phase</h3>
+  <table>
+    <tr><th>Phase</th><th class="num-col">Ventes Amazon visées</th><th class="num-col">Redevances visées</th></tr>
+    <tr><td>1 · Test (2 semaines)</td><td class="num-col">30</td><td class="num-col">360 €</td></tr>
+    <tr><td>2 · Noël (5 semaines)</td><td class="num-col">170</td><td class="num-col">2 040 €</td></tr>
+    <tr><td>3 · Nouvel An (3 semaines)</td><td class="num-col">170</td><td class="num-col">2 040 €</td></tr>
+    <tr><td>4 · Reciblage (3 semaines)</td><td class="num-col">50</td><td class="num-col">600 €</td></tr>
+    <tr><td><b>Total</b></td><td class="num-col"><b>420</b></td><td class="num-col"><b>≈ 5 040 €</b></td></tr>
+  </table>
+  <div class="callout">Si les ventes de la phase de test sont nettement au-dessus de l'objectif (plus de 40 ventes avec un coût par vente sous 8 €), passer au scénario <b>accéléré</b> dès la phase Noël. Si elles sont en dessous, concentrer l'effort sur les églises et le direct plutôt que sur la publicité.</div>
+</section>
+
+<!-- ===================== 6. FICHIERS ===================== -->
+<section>
+  <h2><span class="num">6</span>Fichiers de référence</h2>
+  <div class="bar"></div>
+  <p class="lead">Fichiers dans <span class="file">video/out/livre/</span> (vidéos) et <span class="file">video/out/kit/</span> (images). Textes des publicités, publications et messages : <span class="file">video/KIT-CAMPAGNE.md</span>.</p>
+
+  <h3>Vidéos — campagne principale (voix Paul K)</h3>
+  <div class="thumbs">
+    <div class="thumb"><img src="../out/plan/thumbs/Livre30-9x16.jpg" /><div class="n">Livre30-9x16.mp4</div><div class="u">Reels · 30 s</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Livre15-9x16.jpg" /><div class="n">Livre15-9x16.mp4</div><div class="u">Pub Reels · 15 s</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Livre6-9x16.jpg" /><div class="n">Livre6-9x16.mp4</div><div class="u">Reciblage · 6 s</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Livre30-4x5.jpg" /><div class="n">Livre30-4x5.mp4</div><div class="u">Fil · 30 s</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Livre15-4x5.jpg" /><div class="n">Livre15-4x5.mp4</div><div class="u">Pub fil · 15 s</div></div>
+  </div>
+
+  <h3>Vidéos — Noël</h3>
+  <div class="thumbs">
+    <div class="thumb"><img src="../out/plan/thumbs/Noel30-9x16.jpg" /><div class="n">Noel30-9x16.mp4</div><div class="u">Reels · 30 s</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Noel15-9x16.jpg" /><div class="n">Noel15-9x16.mp4</div><div class="u">Pub Reels · 15 s</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Noel30-4x5.jpg" /><div class="n">Noel30-4x5.mp4</div><div class="u">Fil · 30 s</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Noel15-4x5.jpg" /><div class="n">Noel15-4x5.mp4</div><div class="u">Pub fil · 15 s</div></div>
+  </div>
+
+  <h3>Visuels — publicité et Noël</h3>
+  <div class="thumbs">
+    <div class="thumb"><img src="../out/plan/thumbs/Pub-1x1.jpg" /><div class="n">Pub-1x1.png</div><div class="u">Pub carré</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Pub-4x5.jpg" /><div class="n">Pub-4x5.png</div><div class="u">Pub fil</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Pub-9x16.jpg" /><div class="n">Pub-9x16.png</div><div class="u">Pub story</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Noel-1x1.jpg" /><div class="n">Noel-1x1.png</div><div class="u">Noël carré</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Noel-4x5.jpg" /><div class="n">Noel-4x5.png</div><div class="u">Noël fil</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Noel-9x16.jpg" /><div class="n">Noel-9x16.png</div><div class="u">Noël story</div></div>
+  </div>
+
+  <h3>Visuels — publications et WhatsApp</h3>
+  <div class="thumbs">
+    <div class="thumb"><img src="../out/plan/thumbs/Carrousel-1.jpg" /><div class="n">Carrousel-1.png</div><div class="u">Carrousel 1/6</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Carrousel-2.jpg" /><div class="n">Carrousel-2.png</div><div class="u">Carrousel 2/6</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Carrousel-3.jpg" /><div class="n">Carrousel-3.png</div><div class="u">Carrousel 3/6</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Carrousel-4.jpg" /><div class="n">Carrousel-4.png</div><div class="u">Carrousel 4/6</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Carrousel-5.jpg" /><div class="n">Carrousel-5.png</div><div class="u">Carrousel 5/6</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Carrousel-6.jpg" /><div class="n">Carrousel-6.png</div><div class="u">Carrousel 6/6</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Citation-1.jpg" /><div class="n">Citation-1.png</div><div class="u">Citation</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Citation-2.jpg" /><div class="n">Citation-2.png</div><div class="u">Citation</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Citation-3.jpg" /><div class="n">Citation-3.png</div><div class="u">Citation</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Statut-1.jpg" /><div class="n">Statut-1.png</div><div class="u">Statut WhatsApp</div></div>
+    <div class="thumb"><img src="../out/plan/thumbs/Statut-2.jpg" /><div class="n">Statut-2.png</div><div class="u">Statut WhatsApp</div></div>
+  </div>
+
+  <h3>À produire pendant la campagne</h3>
+  <ul>
+    <li>Visuels d'annonce du direct et comptes à rebours (dès la date fixée).</li>
+    <li>Extraits courts du direct, à monter le lendemain du direct.</li>
+    <li>Visuels de la dédicace d'Abidjan (dès la date et le lieu fixés).</li>
+    <li>Courte vidéo de vœux du Pasteur pour le 1er janvier (à tourner).</li>
+  </ul>
+  <p class="footer-note">Document préparé le 15 octobre 2026. Les chiffres de ventes sont des estimations à remplacer par les résultats réels après la phase de test.</p>
+</section>
+
+</body>
+</html>
