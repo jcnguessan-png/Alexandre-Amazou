@@ -12,6 +12,7 @@ export const Root: React.FC = () => (
 
     {/* Bande-annonce du livre « Nouvelle année » — 9:16 (Reels, Stories) et 4:5 (fil d'actualité) */}
     <Composition id="Livre30-9x16" component={Livre30} durationInFrames={LIVRE_30_SECONDS * FPS} fps={FPS} width={1080} height={1920} />
+    <Composition id="Livre30-9x16-homme" component={Livre30} defaultProps={{ dossier: 'vo-homme' as const }} durationInFrames={LIVRE_30_SECONDS * FPS} fps={FPS} width={1080} height={1920} />
     <Composition id="Livre15-9x16" component={Livre15} durationInFrames={LIVRE_15_SECONDS * FPS} fps={FPS} width={1080} height={1920} />
     <Composition id="Livre6-9x16" component={Livre6} durationInFrames={LIVRE_6_SECONDS * FPS} fps={FPS} width={1080} height={1920} />
     <Composition id="Livre30-4x5" component={Livre30} durationInFrames={LIVRE_30_SECONDS * FPS} fps={FPS} width={1080} height={1350} />

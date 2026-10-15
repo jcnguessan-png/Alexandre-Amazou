@@ -84,7 +84,21 @@ export const DUREES_LIVRE: Record<string, number> = {
   'private/livre/vo/6-01.mp3': 2.19,
   'private/livre/vo/6-02.mp3': 1.03,
   'private/livre/vo/6-03.mp3': 1.81,
+  'private/livre/vo-homme/30-01.mp3': 2.56,
+  'private/livre/vo-homme/30-02.mp3': 2.96,
+  'private/livre/vo-homme/30-03.mp3': 2.81,
+  'private/livre/vo-homme/30-04.mp3': 2.16,
+  'private/livre/vo-homme/30-05.mp3': 3.37,
+  'private/livre/vo-homme/30-06.mp3': 1.77,
+  'private/livre/vo-homme/30-07.mp3': 1.92,
+  'private/livre/vo-homme/30-08.mp3': 2.01,
+  'private/livre/vo-homme/30-09.mp3': 1.55,
+  'private/livre/vo-homme/30-10.mp3': 0.81,
+  'private/livre/vo-homme/30-11.mp3': 2.08,
 };
 
-export const fichierVoixLivre = (format: '30' | '15' | '6', id: string) =>
-  `private/livre/vo/${format}-${id}.mp3`;
+/** Dossier de voix : 'vo' = Sophie (femme), 'vo-homme' = Paul K (homme, 30 s seulement pour l'instant). */
+export type DossierVoix = 'vo' | 'vo-homme';
+
+export const fichierVoixLivre = (format: '30' | '15' | '6', id: string, dossier: DossierVoix = 'vo') =>
+  `private/livre/${dossier}/${format}-${id}.mp3`;

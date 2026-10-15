@@ -10,6 +10,7 @@ import {
   VOIX_30,
   VOIX_6,
   fichierVoixLivre,
+  type DossierVoix,
   type Ligne,
 } from './config';
 import { SceneBookHero, SceneEndLivre, SceneImpact, SceneKinetic, SceneList } from './scenes';
@@ -27,9 +28,9 @@ const Timeline: React.FC<{ shots: Shot[] }> = ({ shots }) => (
   </>
 );
 
-const toClips = (format: '30' | '15' | '6', lignes: Ligne[]): Clip[] =>
+const toClips = (format: '30' | '15' | '6', lignes: Ligne[], dossier: DossierVoix = 'vo'): Clip[] =>
   lignes.map((l) => {
-    const file = fichierVoixLivre(format, l.id);
+    const file = fichierVoixLivre(format, l.id, dossier);
     return { at: l.at, dur: DUREES_LIVRE[file] ?? l.max, text: l.text, file };
   });
 
@@ -75,8 +76,8 @@ const ACCROCHE = `${ANNEES.prochaine} comme ${ANNEES.passee} ?`;
 /* ------------------------------------------------------------------ */
 export const LIVRE_30_SECONDS = 30;
 
-export const Livre30: React.FC = () => {
-  const clips = toClips('30', VOIX_30);
+export const Livre30: React.FC<{ dossier?: DossierVoix }> = ({ dossier = 'vo' }) => {
+  const clips = toClips('30', VOIX_30, dossier);
   return (
     <AbsoluteFill style={{ background: '#000' }}>
       <Timeline
