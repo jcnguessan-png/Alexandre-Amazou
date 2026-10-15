@@ -4,6 +4,7 @@ export const INVITATION_SUBJECT = 'invitation-conference';
 
 export const subjectValues = [
   'invitation-conference',
+  'commande-groupee',
   'rdv-pastoral',
   'demande-presse',
   'partenariat',
@@ -14,6 +15,7 @@ export const subjectValues = [
 
 export const subjectLabels: Record<(typeof subjectValues)[number], string> = {
   'invitation-conference': 'Inviter le Pasteur (culte, conférence, événement)',
+  'commande-groupee': 'Commande groupée de livres (églises, groupes)',
   'rdv-pastoral': 'Rendez-vous pastoral',
   'demande-presse': 'Demande presse / média',
   partenariat: 'Partenariat',
