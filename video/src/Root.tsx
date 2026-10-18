@@ -3,6 +3,7 @@ import { Composition } from 'remotion';
 import { FPS } from './theme';
 import { Promo16x9, Promo9x16, PROMO_16x9_SECONDS, PROMO_9x16_SECONDS } from './Promo';
 import { KitVisuels } from './kit/Visuels';
+import { APRES, AVANT_SECONDS, CatalogueApres, CatalogueAvant, CatalogueVertical, VERTICAL } from './catalogue/Catalogue';
 import { Livre15, Livre30, Livre6, LIVRE_15_SECONDS, LIVRE_30_SECONDS, LIVRE_6_SECONDS } from './livre/Trailer';
 import { Noel15, Noel30, NOEL_15_SECONDS, NOEL_30_SECONDS } from './livre/Noel';
 
@@ -24,6 +25,11 @@ export const Root: React.FC = () => (
     <Composition id="Noel15-9x16" component={Noel15} durationInFrames={NOEL_15_SECONDS * FPS} fps={FPS} width={1080} height={1920} />
     <Composition id="Noel30-4x5" component={Noel30} durationInFrames={NOEL_30_SECONDS * FPS} fps={FPS} width={1080} height={1350} />
     <Composition id="Noel15-4x5" component={Noel15} durationInFrames={NOEL_15_SECONDS * FPS} fps={FPS} width={1080} height={1350} />
+
+    {/* Catalogue des livres, avant / après les enseignements */}
+    <Composition id="Catalogue-avant-16x9" component={CatalogueAvant} durationInFrames={AVANT_SECONDS * FPS} fps={FPS} width={1920} height={1080} />
+    <Composition id="Catalogue-apres-16x9" component={CatalogueApres} durationInFrames={Math.round(APRES.total * FPS)} fps={FPS} width={1920} height={1080} />
+    <Composition id="Catalogue-9x16" component={CatalogueVertical} durationInFrames={Math.round(VERTICAL.total * FPS)} fps={FPS} width={1080} height={1920} />
 
     {/* Visuels fixes du kit (PNG) */}
     <KitVisuels />
