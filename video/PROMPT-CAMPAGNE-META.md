@@ -66,15 +66,16 @@ solution la plus simple (Google Drive est connecté).
 
 | Zone de la publicité | Lien de destination |
 |---|---|
-| France et Suisse | https://www.amazon.fr/dp/B0G349RCYM |
-| Belgique | https://www.amazon.com.be/dp/B0G349RCYM |
-| Canada | https://www.amazon.ca/dp/B0G349RCYM |
+| Europe et Canada (FR, BE, CH, CA) | https://alexandreamazou.com/nouvelle-annee |
 | Côte d'Ivoire | https://alexandreamazou.com/nouvelle-annee#abidjan |
 | Publications gratuites, bio, WhatsApp | https://alexandreamazou.com/nouvelle-annee |
 
-Si je te transmets des liens **Amazon Attribution**, ils remplacent les liens Amazon ci-dessus
-(un par publicité et par pays). Ajoute aussi des paramètres UTM aux liens vers le site
+Les publicités ne renvoient **pas** directement sur Amazon : la page présente les boutons Amazon
+de chaque pays et porte le **pixel Meta** (ID `1504755687938131`), qui envoie PageView, ViewContent
+et **InitiateCheckout au clic vers Amazon**. Ajoute des paramètres UTM aux liens
 (`utm_source=meta&utm_medium=paid&utm_campaign=nouvelle-annee&utm_content=<angle>`).
+**Repli** : si moins d'1 visiteur sur 4 clique vers Amazon après 50 € dépensés, propose-moi de
+renvoyer directement sur Amazon (amazon.fr, amazon.com.be, amazon.ca — `/dp/B0G349RCYM`).
 
 ## 4. Objectif et stratégie
 
@@ -93,15 +94,15 @@ Si je te transmets des liens **Amazon Attribution**, ils remplacent les liens Am
     - des audiences personnalisées : abonnés et interactions de la Page, personnes ayant vu une
       vidéo ;
     - des audiences similaires.
-- **Objectif Meta :** il n'y a pas de pixel sur Amazon, donc utilise l'objectif **Trafic** (clics
-  sur le lien). On juge les publicités sur les **ventes** (KDP, Amazon Attribution), jamais sur
-  les seuls clics. Le pixel Meta du site n'est pas encore installé.
+- **Objectif Meta :** campagne **Ventes** (ou Prospects) optimisée sur la conversion du pixel
+  **InitiateCheckout** (clic vers Amazon). Les premiers jours, tant qu'il y a moins d'environ
+  50 conversions, optimise sur les **vues de page de destination**, puis bascule. Le pixel voit
+  le clic, pas l'achat : en dernier ressort, on juge sur les **ventes** (KDP, Amazon Attribution).
 - **Structure :**
   - une campagne par phase ;
-  - dans chaque campagne, un ensemble de publicités par zone : FR + CH, BE, CA, CI ;
+  - dans chaque campagne, **deux ensembles de publicités** seulement : Europe + Canada (FR, BE,
+    CH, CA) et Côte d'Ivoire. Un ensemble large apprend plus vite que quatre petits ;
   - dans chaque ensemble, une publicité par angle.
-- **Répartition proposée du budget Europe :** 60 % France et Suisse, 15 % Belgique, 25 % Canada.
-  C'est une proposition : tu l'ajustes avec moi d'après la taille des audiences.
 
 ## 5. Calendrier et budgets
 
@@ -116,10 +117,10 @@ Campagne du **lundi 2 novembre 2026 au dimanche 31 janvier 2027**.
 | **Total** | | **1 350 €** | **150 €** | |
 
 **Points particuliers par phase**
-- **Phase 1, test de destination :** la moitié du budget Europe renvoie vers Amazon, l'autre
-  moitié vers alexandreamazou.com/nouvelle-annee, avec les mêmes créations. Le lundi 16 novembre,
-  on garde la destination dont la vente revient le moins cher.
-  - Si la page n'est pas en ligne au 2 novembre, tout le budget va vers Amazon.
+- **Phase 1, démarrage :** tout le budget va vers la page (pas de partage 50/50). Vérifie dans
+  le Gestionnaire d'événements que le pixel reçoit bien PageView, ViewContent et InitiateCheckout
+  avant d'activer. Si la page n'est pas en ligne au 2 novembre, préviens-moi : on renverra
+  directement sur Amazon.
 - **Phase 1, choix des angles :** le 9 novembre, on coupe l'angle le moins performant.
 - **Black Friday :** budget +50 % du vendredi 27 au lundi 30 novembre.
 - **Phase 3 :** budget maximal sur les 2 meilleures publicités du 28 décembre au 3 janvier
@@ -161,12 +162,11 @@ WhatsApp) est dans `video/plan/plan-campagne.html`, section 4.
 
 ## 7. Ce qui manque encore (à me demander au bon moment, sans bloquer le reste)
 
-- **Fusion de la PR #21 :** la page /nouvelle-annee n'est **pas encore en ligne** (erreur 404 au
-  21 octobre). Elle doit être en ligne avant le lancement, sinon l'ensemble Côte d'Ivoire et le
-  test de destination n'ont pas de page d'arrivée.
+- **Fusion de la PR #21 :** la page /nouvelle-annee et le pixel ne sont **pas encore en ligne**
+  (au 21 octobre). Ils doivent l'être avant le lancement : toutes les publicités y renvoient.
 - **Amazon Attribution :** est-il disponible pour ce livre ? Si oui, il me faut les liens.
-- **Pixel Meta :** identifiant à créer, puis installation sur le site avec un bandeau de
-  consentement aux cookies.
+- **Pixel Meta :** installé (ID 1504755687938131, bandeau de consentement RGPD) ; réception des
+  événements à vérifier après la mise en ligne.
 - **Dates et lieux :** ceux du direct et de la dédicace. Ensuite, il faudra produire les visuels
   d'annonce.
 - **Avis lecteurs :** 2 ou 3 avis Amazon exacts à citer.

@@ -109,7 +109,7 @@
 <section>
   <h2><span class="num">1</span>Synthèse</h2>
   <div class="bar"></div>
-  <p class="lead">Une campagne de 13 semaines, du lundi 2 novembre 2026 au dimanche 31 janvier 2027, en 4 temps : un test, la saison de Noël, le pic du Nouvel An, puis un reciblage. Les <b>publicités renvoient directement sur Amazon</b> (un lien par pays) ; les <b>publications, WhatsApp et les pasteurs</b> renvoient vers la page <b>alexandreamazou.com/nouvelle-annee</b>.</p>
+  <p class="lead">Une campagne de 13 semaines, du lundi 2 novembre 2026 au dimanche 31 janvier 2027, en 4 temps : un test, la saison de Noël, le pic du Nouvel An, puis un reciblage. Les <b>publicités</b>, comme les publications, WhatsApp et les pasteurs, renvoient vers la page <b>alexandreamazou.com/nouvelle-annee</b>, équipée du <b>pixel Meta</b> : Meta optimise les publicités sur le clic vers Amazon, et chaque publicité est mesurée.</p>
 
   <div class="grid-2" style="margin-top:5mm">
     <div class="kpi"><div class="v">≈ 420</div><div class="l">exemplaires brochés à vendre sur Amazon pour atteindre 5 000 € de redevances (≈ 12 € par livre, estimation)</div></div>
@@ -138,13 +138,11 @@
   <h3>Où renvoyer les gens</h3>
   <table>
     <tr><th>Source</th><th>Destination</th><th>Lien</th></tr>
-    <tr><td>Publicités — France, Suisse</td><td>Amazon France, directement</td><td class="file">amazon.fr/dp/B0G349RCYM</td></tr>
-    <tr><td>Publicités — Belgique</td><td>Amazon Belgique, directement</td><td class="file">amazon.com.be/dp/B0G349RCYM</td></tr>
-    <tr><td>Publicités — Canada</td><td>Amazon Canada, directement</td><td class="file">amazon.ca/dp/B0G349RCYM</td></tr>
+    <tr><td>Publicités — Europe et Canada (FR, BE, CH, CA)</td><td>Page de la campagne : le visiteur choisit son Amazon (France, Belgique, Canada)</td><td class="file">alexandreamazou.com/nouvelle-annee</td></tr>
     <tr><td>Publicités — Côte d'Ivoire</td><td>Page (partie Abidjan : dédicace, commande WhatsApp)</td><td class="file">alexandreamazou.com/nouvelle-annee#abidjan</td></tr>
     <tr><td>Publications, WhatsApp, bio Instagram, direct, pasteurs</td><td>Page de la campagne (tous les choix)</td><td class="file">alexandreamazou.com/nouvelle-annee</td></tr>
   </table>
-  <p class="footer-note">Les liens Amazon des publicités seront remplacés par des liens Amazon Attribution s'ils sont disponibles pour le livre (à vérifier dans la console Amazon Ads) : ils indiquent les clics, ajouts au panier et achats de chaque publicité. La vidéo fait le travail de persuasion ; la page intermédiaire ajouterait un clic sans valeur pour quelqu'un qui vient de la regarder.</p>
+  <p class="footer-note"><b>Pourquoi la page plutôt qu'Amazon directement :</b> le pixel Meta y mesure le clic vers Amazon (événement « InitiateCheckout »). Meta peut ainsi chercher des acheteurs potentiels plutôt que de simples cliqueurs, chaque publicité est mesurée, et le reciblage de janvier dispose d'une audience (visiteurs de la page, clics vers Amazon). <b>Repli :</b> si moins d'1 visiteur sur 4 clique vers Amazon après 50 € dépensés, les publicités renvoient directement sur Amazon (amazon.fr, amazon.com.be, amazon.ca /dp/B0G349RCYM). Amazon Attribution, s'il est disponible pour le livre, complète la mesure par les ventes réelles.</p>
 
   <div class="callout warn"><b>À retenir.</b> La publicité seule ne suffira pas à atteindre 5 000 € : elle doit s'appuyer sur la communauté, les églises et le direct. Les chiffres de ventes de ce document sont des estimations ; ils seront remplacés par les vrais résultats dès la fin de la phase de test.</div>
 </section>
@@ -174,13 +172,13 @@
   </table>
   <p class="footer-note">Hypothèses : redevance ≈ 12 € par broché vendu 30 € (estimation, à confirmer dans KDP) ; coût publicitaire d'une vente entre 6 et 12 € en Europe. Les ventes en Côte d'Ivoire (librairies, dédicace) s'ajoutent hors redevances Amazon.</p>
 
-  <h3>Test de destination pendant la phase 1</h3>
-  <p>Du 2 au 15 novembre, le budget Europe est partagé en deux : <b>50 % vers Amazon directement</b>, <b>50 % vers la page</b> de campagne, avec les mêmes créations. Le lundi 16 novembre, on garde la destination dont la vente revient le moins cher (ventes KDP et Amazon Attribution) et on y bascule tout le budget.</p>
+  <h3>Démarrage de l'optimisation (phase 1)</h3>
+  <p>Tout le budget va vers la page, sans partage 50/50 : avec ≈ 13 € par jour, couper le budget en deux ralentirait l'apprentissage de Meta des deux côtés. <b>Deux ensembles de publicités seulement</b> : Europe + Canada (FR, BE, CH, CA) et Côte d'Ivoire. Les premiers jours, optimisation sur les <b>vues de page de destination</b> ; dès ≈ 50 clics vers Amazon enregistrés par le pixel, optimisation sur la conversion <b>InitiateCheckout</b> (clic vers Amazon).</p>
 
   <h3>Règles pour augmenter (ou couper) le budget</h3>
   <ul>
-    <li><b>Après 50 € dépensés</b> sur une publicité, couper celle dont le coût par clic vers Amazon dépasse 1 €, ou qui ne génère aucune vente visible.</li>
-    <li>Sans pixel sur Amazon, Meta optimise pour les clics et non pour les achats : juger les publicités sur les <b>ventes</b> (KDP, Amazon Attribution), jamais sur les seuls clics.</li>
+    <li><b>Après 50 € dépensés</b> sur une publicité, couper celle dont le coût par clic vers Amazon (mesuré par le pixel) dépasse 1 €, ou qui ne génère aucune vente visible.</li>
+    <li>Le pixel voit le clic vers Amazon, pas l'achat (invisible pour nous) : en dernier ressort, juger les publicités sur les <b>ventes</b> (KDP, Amazon Attribution).</li>
     <li><b>Coût par vente sous 8 €</b> : augmenter le budget de cette publicité de 20 % tous les 3 jours.</li>
     <li><b>Coût par vente entre 8 et 12 €</b> : maintenir, tester une nouvelle accroche.</li>
     <li><b>Coût par vente au-dessus de 12 €</b> : la publicité perd de l'argent. La couper ou la réserver au reciblage.</li>
@@ -196,10 +194,11 @@
   <table>
     <tr><th>Tâche</th><th>Qui</th><th>Échéance</th><th>Pourquoi</th></tr>
     <tr><td>Fusionner la PR #21 : mise en ligne de la page <b>/nouvelle-annee</b></td><td>Claude (validation JC)</td><td>Lun. 19 oct</td><td>Toutes les publicités y renvoient</td></tr>
-    <tr><td>Vérifier si Amazon Attribution est disponible pour le livre (console Amazon Ads) et, si oui, créer un lien par publicité et par pays</td><td>JC</td><td>Ven. 23 oct</td><td>Savoir quelle publicité fait vendre — indispensable avec le renvoi direct sur Amazon</td></tr>
-    <tr><td>Créer le pixel Meta et transmettre son identifiant</td><td>JC</td><td>Ven. 23 oct</td><td>Mesurer la moitié du test qui passe par la page</td></tr>
-    <tr><td>Installer le pixel et le bandeau de consentement aux cookies (RGPD)</td><td>Claude</td><td>Mar. 27 oct</td><td>Recommandé, non bloquant pour le lancement</td></tr>
-    <tr><td>Créer un ensemble de publicités par zone (FR + CH, BE, CA, CI) avec le bon lien</td><td>JC</td><td>Dim. 1er nov</td><td>Chaque pays vers son Amazon</td></tr>
+    <tr><td>Vérifier si Amazon Attribution est disponible pour le livre (console Amazon Ads) et, si oui, créer un lien par publicité et par pays</td><td>JC</td><td>Ven. 23 oct</td><td>Compléter le pixel par les ventes réelles de chaque publicité</td></tr>
+    <tr><td>Créer le pixel Meta et transmettre son identifiant</td><td>JC</td><td><b>Fait</b> (21 oct)</td><td>Conversion des publicités : le clic vers Amazon</td></tr>
+    <tr><td>Installer le pixel et le bandeau de consentement aux cookies (RGPD)</td><td>Claude</td><td><b>Fait</b> (21 oct) — en ligne à la fusion de la PR #21</td><td>Indispensable : toutes les publicités passent par la page</td></tr>
+    <tr><td>Vérifier la réception des événements (extension Meta Pixel Helper, onglet « Tester les événements »)</td><td>JC</td><td>Mar. 27 oct</td><td>S'assurer que PageView, ViewContent et InitiateCheckout arrivent</td></tr>
+    <tr><td>Créer deux ensembles de publicités (Europe + Canada ; Côte d'Ivoire) renvoyant vers la page</td><td>JC</td><td>Dim. 1er nov</td><td>Un ensemble large apprend plus vite que quatre petits</td></tr>
     <tr><td>Fixer la date du direct et celle de la dédicace d'Abidjan</td><td>JC / Pasteur</td><td>Ven. 30 oct</td><td>Pour les annoncer à temps</td></tr>
     <tr><td>Transmettre 2 ou 3 avis lecteurs Amazon à citer</td><td>JC</td><td>Ven. 30 oct</td><td>Preuve sociale sur la page</td></tr>
     <tr><td>Créer les audiences Meta (diaspora africaine francophone chrétienne 30–60 ans ; FR, BE, CH, CA ; abonnés de la page)</td><td>JC</td><td>Dim. 1er nov</td><td>Ciblage du test</td></tr>
@@ -231,11 +230,11 @@
     <tr><th style="width:17%">Semaine</th><th style="width:38%">Publicités actives</th><th style="width:45%">Publications (organique)</th></tr>
 
     <tr><td><b>S1 · 2 → 8 nov</b><br />Test</td>
-      <td><span class="tag t-ads">Pub</span> Test de 3 angles (A, B, C — KIT § 2) :<br /><span class="file">Livre15-9x16.mp4</span>, <span class="file">Livre15-4x5.mp4</span>, <span class="file">Pub-4x5.png</span><br /><b>Test de destination :</b> 50 % → Amazon, 50 % → page</td>
+      <td><span class="tag t-ads">Pub</span> Test de 3 angles (A, B, C — KIT § 2) :<br /><span class="file">Livre15-9x16.mp4</span>, <span class="file">Livre15-4x5.mp4</span>, <span class="file">Pub-4x5.png</span><br /><b>Optimisation :</b> vues de page, puis clic vers Amazon dès ≈ 50 conversions</td>
       <td>Lun : <span class="tag t-org">FB/IG</span> <span class="file">Livre30-9x16.mp4</span> (Reel) · <span class="tag t-yt">YT</span> même vidéo en Short<br />Mer : <span class="tag t-org">FB/IG</span> carrousel <span class="file">Carrousel-1→6.png</span><br />Ven : <span class="tag t-org">FB/IG</span> <span class="file">Citation-1.png</span><br /><span class="tag t-wa">WA</span> Lun : message chaîne · Mar : <span class="file">Statut-1.png</span> · Jeu : <span class="file">Statut-2.png</span></td></tr>
 
     <tr><td><b>S2 · 9 → 15 nov</b><br />Test</td>
-      <td><span class="tag t-ads">Pub</span> Couper l'angle le moins performant, garder les 2 meilleurs · <b>Lun. 16 : garder la meilleure destination</b></td>
+      <td><span class="tag t-ads">Pub</span> Couper l'angle le moins performant, garder les 2 meilleurs · Optimisation sur le clic vers Amazon (InitiateCheckout)</td>
       <td>Lun : <span class="file">Livre30-4x5.mp4</span> (fil) · Mer : <span class="file">Citation-2.png</span> · Ven : <span class="file">Pub-1x1.png</span><br /><span class="tag t-wa">WA</span> <span class="file">Statut-1.png</span> + message chaîne</td></tr>
 
     <tr><td><b>S3 · 16 → 22 nov</b><br /><span class="tag t-noel">Noël</span></td>
@@ -283,9 +282,9 @@
   <h3>Indicateurs suivis chaque lundi</h3>
   <table>
     <tr><th>Indicateur</th><th>Où le lire</th><th>Seuil d'alerte</th></tr>
-    <tr><td>Coût par clic (vers Amazon ou la page)</td><td>Gestionnaire de publicités Meta</td><td>&gt; 1 € en Europe</td></tr>
+    <tr><td>Coût par clic vers Amazon (InitiateCheckout)</td><td>Gestionnaire de publicités Meta</td><td>&gt; 1 € en Europe</td></tr>
     <tr><td>Taux de clic (CTR)</td><td>Meta</td><td>&lt; 1 % : changer l'accroche</td></tr>
-    <tr><td>Clics vers Amazon depuis la page (moitié du test)</td><td>Pixel Meta / statistiques de la page</td><td>Moins d'1 visiteur sur 4</td></tr>
+    <tr><td>Part des visiteurs de la page qui cliquent vers Amazon</td><td>Pixel Meta (InitiateCheckout / vues de page)</td><td>Moins d'1 sur 4 : revenir à l'envoi direct sur Amazon</td></tr>
     <tr><td>Ventes par publicité</td><td>Amazon Attribution</td><td>Coût par vente &gt; 12 €</td></tr>
     <tr><td>Ventes et redevances totales</td><td>Tableau de bord KDP</td><td>Suivi de l'objectif : ≈ 32 ventes par semaine</td></tr>
     <tr><td>Demandes de commande groupée</td><td>Formulaire de contact du site</td><td>—</td></tr>
@@ -358,7 +357,7 @@
     <li>Visuels de la dédicace d'Abidjan (dès la date et le lieu fixés).</li>
     <li>Courte vidéo de vœux du Pasteur pour le 1er janvier (à tourner).</li>
   </ul>
-  <p class="footer-note">Document préparé le 15 octobre 2026. Les chiffres de ventes sont des estimations à remplacer par les résultats réels après la phase de test.</p>
+  <p class="footer-note">Document préparé le 15 octobre 2026, mis à jour le 21 octobre 2026 (publicités renvoyées vers la page équipée du pixel Meta). Les chiffres de ventes sont des estimations à remplacer par les résultats réels après la phase de test.</p>
 </section>
 
 </body>

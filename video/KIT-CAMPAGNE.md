@@ -5,15 +5,14 @@ vente sur Amazon ; 10 % Côte d'Ivoire, consacrés à la séance de dédicace de
 **Où renvoyer les gens**
 | Source | Lien |
 |---|---|
-| Publicités France et Suisse | https://www.amazon.fr/dp/B0G349RCYM |
-| Publicités Belgique | https://www.amazon.com.be/dp/B0G349RCYM |
-| Publicités Canada | https://www.amazon.ca/dp/B0G349RCYM |
+| Publicités Europe et Canada (FR, BE, CH, CA) | https://alexandreamazou.com/nouvelle-annee |
 | Publicités Côte d'Ivoire | https://alexandreamazou.com/nouvelle-annee#abidjan |
 | Publications, WhatsApp, bio Instagram, direct, pasteurs | https://alexandreamazou.com/nouvelle-annee |
 
-Les liens Amazon des publicités sont à remplacer par des liens **Amazon Attribution** s'ils sont
-disponibles pour le livre. Pendant la phase de test (2–15 novembre), la moitié du budget Europe
-renvoie vers la page au lieu d'Amazon, pour comparer ; on garde ensuite la meilleure destination.
+La page est équipée du **pixel Meta** (ID 1504755687938131) : le clic vers Amazon y est mesuré
+(événement « InitiateCheckout ») et sert de conversion aux publicités. Repli : si moins d'1 visiteur
+sur 4 clique vers Amazon après 50 € dépensés, renvoyer directement sur Amazon
+(amazon.fr, amazon.com.be, amazon.ca — /dp/B0G349RCYM).
 
 ---
 
@@ -54,9 +53,10 @@ Tous les fichiers sont dans `video/out/` (non commités : à téléverser dans M
 
 Règle Meta : le texte principal est coupé après ~125 caractères — l'accroche doit tenir avant.
 Bouton d'action conseillé : **« Acheter »** (ou « En savoir plus »).
-Créer **un ensemble de publicités par zone** (France + Suisse, Belgique, Canada, Côte d'Ivoire),
-chacun avec son lien de destination (tableau ci-dessus). Sans pixel sur Amazon, juger les
-publicités sur les ventes (KDP, Amazon Attribution), pas sur les clics.
+Créer **deux ensembles de publicités** : Europe + Canada (FR, BE, CH, CA) et Côte d'Ivoire, avec
+le lien du tableau ci-dessus. Optimiser d'abord sur les vues de page de destination, puis sur la
+conversion **InitiateCheckout** (clic vers Amazon) dès ≈ 50 conversions. Le pixel voit le clic, pas
+l'achat : en dernier ressort, juger sur les ventes (KDP, Amazon Attribution).
 
 ### Angle A — Le constat
 - **Texte principal :** Et si l'année prochaine ressemblait à celle-ci ? Mêmes combats, mêmes blocages… Une nouvelle année ne se subit pas : elle se prépare. 📖 Le livre du Pasteur Alexandre AMAZOU vous montre comment.
