@@ -5,6 +5,7 @@ import { bookThemes } from '@/data/books';
 import { siteConfig } from '@/lib/site-config';
 import { cn } from '@/lib/utils';
 import { BookCoverImage } from './BookCoverImage';
+import { TrackedLink } from '@/components/campagne/TrackedLink';
 
 const statusLabel: Record<Book['status'], string> = {
   available: 'En stock',
@@ -76,7 +77,10 @@ export function BookCard({
           >
             Lire l'extrait <ArrowRight size={12} aria-hidden="true" className="inline" />
           </Link>
-          <a
+          <TrackedLink
+            event="Clic Amazon"
+            props={{ livre: book.slug, emplacement: 'carte' }}
+            titre={book.title}
             href={book.amazonUrl ?? siteConfig.bookOrder.amazonAuthorUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -85,7 +89,7 @@ export function BookCard({
           >
             <ShoppingCart size={14} aria-hidden="true" />
             Commander
-          </a>
+          </TrackedLink>
         </div>
       </div>
     </article>

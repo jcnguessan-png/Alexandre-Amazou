@@ -375,9 +375,29 @@
   .dyn-na .na-section {
     padding-top: 70px;
   }
-  .dyn-na .na-cta .btn {
+  /* Rien ne doit dépasser la largeur de l'écran (sinon le navigateur dézoome la page). */
+  .dyn-na .na-hero-grid > *,
+  .dyn-na .na-pack-grid > *,
+  .dyn-na .na-author-grid > *,
+  .dyn-na .na-grid > * {
+    min-width: 0;
+  }
+  .dyn-na .btn {
+    white-space: normal;
+    text-align: center;
+    letter-spacing: 0.08em;
+    padding: 16px 18px;
+  }
+  .dyn-na .na-cta .btn,
+  .dyn-na .panel-gold .cta .btn {
     width: 100%;
     justify-content: center;
+  }
+  .dyn-na .panel-gold {
+    padding: 28px 20px;
+  }
+  .dyn-na .panel-gold .cta {
+    flex-wrap: wrap;
   }
   .dyn-na .na-excerpt summary {
     padding: 20px;

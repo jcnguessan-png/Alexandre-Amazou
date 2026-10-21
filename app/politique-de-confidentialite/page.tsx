@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { GererCookies } from '@/components/analytics/MetaPixel';
 import { DynPageHero } from '@/components/layout/DynPageHero';
 import { siteConfig } from '@/lib/site-config';
 
@@ -48,6 +49,11 @@ export default function PrivacyPage() {
               , solution privacy-first qui ne dépose pas de cookie ni ne traque les visiteurs entre
               les sites.
             </li>
+            <li>
+              <strong>Mesure des publicités Meta</strong> (uniquement si vous l&apos;acceptez) : pages
+              vues et clics vers Amazon ou WhatsApp, associés à un identifiant de navigateur, via le
+              pixel Meta (Facebook, Instagram).
+            </li>
           </ul>
 
           <h2>Pourquoi collectons-nous ces données ?</h2>
@@ -56,6 +62,10 @@ export default function PrivacyPage() {
             <li>Vous adresser la newsletter à laquelle vous vous êtes abonné·e.</li>
             <li>Vous transmettre les ressources gratuites demandées.</li>
             <li>Mesurer l&apos;audience du site de façon anonymisée afin de l&apos;améliorer.</li>
+            <li>
+              Avec votre accord, mesurer l&apos;efficacité de nos publicités Facebook et Instagram et les
+              montrer aux personnes les plus intéressées.
+            </li>
           </ul>
 
           <h2>Combien de temps conservons-nous vos données ?</h2>
@@ -68,6 +78,10 @@ export default function PrivacyPage() {
             </li>
             <li>
               <strong>Statistiques Plausible</strong> : agrégées et anonymisées indéfiniment.
+            </li>
+            <li>
+              <strong>Cookies Meta</strong> : 90 jours au plus ; votre choix (accepter ou refuser) est
+              mémorisé dans votre navigateur jusqu&apos;à ce que vous le modifiiez.
             </li>
           </ul>
 
@@ -88,6 +102,10 @@ export default function PrivacyPage() {
             </li>
             <li>
               <strong>Plausible Analytics</strong> — statistiques anonymes.
+            </li>
+            <li>
+              <strong>Meta Platforms Ireland</strong> — mesure des publicités Facebook et Instagram,
+              seulement si vous l&apos;acceptez.
             </li>
           </ul>
           <p>Tous ces prestataires sont engagés contractuellement à respecter le RGPD.</p>
@@ -129,11 +147,17 @@ export default function PrivacyPage() {
             , ou de la CNIL pour les résidents européens.
           </p>
 
-          <h2>Cookies</h2>
+          <h2 id="cookies">Cookies</h2>
           <p>
-            Ce site n&apos;utilise <strong>aucun cookie publicitaire</strong> ni de traçage tiers.
-            Plausible Analytics ne dépose pas de cookie sur votre navigateur. Seuls des cookies
-            strictement techniques (préférences, session) peuvent être créés.
+            Plausible Analytics ne dépose pas de cookie sur votre navigateur. Des cookies strictement
+            techniques (préférences, session) peuvent être créés.
+          </p>
+          <p>
+            Avec votre accord, et seulement après avoir cliqué sur « Accepter » dans le bandeau, le
+            pixel Meta dépose des cookies de mesure (<code>_fbp</code>, <code>_fbc</code>) pour savoir
+            quelle publicité Facebook ou Instagram vous a amené sur le site et si vous avez cliqué vers
+            Amazon. Si vous refusez, rien n&apos;est envoyé à Meta. Vous pouvez changer d&apos;avis à
+            tout moment : <GererCookies className="font-medium underline underline-offset-2" />.
           </p>
 
           <p className="updated">

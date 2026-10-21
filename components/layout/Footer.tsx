@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Facebook, Youtube, Instagram, MessageCircle, Megaphone } from 'lucide-react';
 import { siteConfig } from '@/lib/site-config';
+import { GererCookies } from '@/components/analytics/MetaPixel';
 
 const footerNav = {
   navigation: [
@@ -129,7 +130,8 @@ export function Footer() {
         <div className="mt-14 border-t border-primary-foreground/10 pt-8">
           <div className="flex flex-col items-start gap-4 text-sm text-primary-foreground/60 md:flex-row md:items-center md:justify-between">
             <p>
-              &copy; {year} Alexandre AMAZOU. Tous droits réservés.
+              &copy; {year} Alexandre AMAZOU. Tous droits réservés. ·{' '}
+              <GererCookies className="underline-offset-2 transition hover:text-secondary hover:underline" />
             </p>
             <p className="font-quote italic text-secondary/90">
               {siteConfig.baseline}

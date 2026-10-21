@@ -3,6 +3,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { bookThemes, type Book } from '@/data/books';
 import { siteConfig, buildBookWhatsAppUrl } from '@/lib/site-config';
 import { BookCover } from '@/components/home/dynamic/BookCover';
+import { TrackedLink } from '@/components/campagne/TrackedLink';
 
 const STATUS_LABEL: Record<Book['status'], string> = {
   available: 'En stock',
@@ -43,12 +44,28 @@ export function BookDetailDyn({
               <BookCover book={book} badge={book.bestseller ? 'Best-seller' : undefined} priority />
             </div>
             <div className="lvd-order">
-              <a className="btn btn-gold" href={whatsapp} target="_blank" rel="noopener noreferrer">
+              <TrackedLink
+                className="btn btn-gold"
+                href={whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                event="Clic WhatsApp"
+                props={{ livre: book.slug, emplacement: 'fiche' }}
+                titre={book.title}
+              >
                 Commander sur WhatsApp <span className="ar">→</span>
-              </a>
-              <a className="btn btn-ghost-gold" href={amazon} target="_blank" rel="noopener noreferrer">
+              </TrackedLink>
+              <TrackedLink
+                className="btn btn-ghost-gold"
+                href={amazon}
+                target="_blank"
+                rel="noopener noreferrer"
+                event="Clic Amazon"
+                props={{ livre: book.slug, emplacement: 'fiche' }}
+                titre={book.title}
+              >
                 Acheter sur Amazon
-              </a>
+              </TrackedLink>
             </div>
             <p className="lvd-store">
               Également disponible en version papier à la {siteConfig.bookOrder.bookstoreName} (
