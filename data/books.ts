@@ -123,6 +123,7 @@ export const books: Book[] = [
     coverImage: '/images/livres/preparer-et-reussir-une-nouvelle-annee.jpg',
     coverLayout: 'front-only',
     isbn: '9798272678249',
+    amazonUrl: 'https://www.amazon.fr/dp/B0G349RCYM',
     description:
       "Best-seller. Une nouvelle année n'est pas un simple changement de calendrier — c'est un champ de bataille spirituel où se jouent les enjeux éternels d'une destinée. Fruit de plus de vingt ans de ministère et d'une révélation stratégique reçue par l'auteur, ce manuel dévoile les lois spirituelles qui gouvernent les cycles temporels : les quatre portes prophétiques de l'année (équinoxes et solstices), les quatre armes de commandement (Prière de Commandement, Puissance du Sacrifice, Loi de l'Honneur, Loi des Prémices), les protocoles pratiques de préparation (diagnostic, guerre prophétique, programmation), des cas concrets et un plan d'action personnalisé. Pour ne plus subir l'année — la commander.",
     themes: ['leadership', 'reussite', 'foi', 'priere'],
@@ -143,6 +144,8 @@ export const books: Book[] = [
     coverImage: '/images/livres/mon-journal-de-victoire.png',
     coverLayout: 'front-only',
     isbn: '9798276847542',
+    // Page de la série Amazon (le journal y figure à côté du livre).
+    amazonUrl: 'https://www.amazon.fr/dp/B0G6MR161K',
     description:
       "Plus qu'un agenda ou un carnet de notes : un véritable arsenal de guerre spirituelle. Pensé pour accompagner les révélations du livre « Comment préparer et réussir une nouvelle année », ce journal transforme la théorie en pratique quotidienne. Chaque mois, des espaces dédiés pour définir vos objectifs spirituels et naturels, écrire vos prières et décrets, planifier vos jeûnes et sacrifices, activer la Loi de l'Honneur et la Loi des Prémices, documenter vos victoires. Conçu autour des quatre armes de commandement, il vous fait passer de la passivité à l'autorité — mois après mois. Votre saison de conquête commence ici.",
     themes: ['priere', 'reussite', 'leadership', 'foi'],

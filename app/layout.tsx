@@ -17,6 +17,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { RevealOnScroll } from '@/components/home/dynamic/RevealOnScroll';
 import { ChatWidget } from '@/components/chat/ChatWidget';
+import { MetaPixel } from '@/components/analytics/MetaPixel';
 import './globals.css';
 import './theme-dyn.css';
 import './theme-light.css';
@@ -191,6 +192,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <ChatWidget />
+        <MetaPixel />
         <RevealOnScroll />
       </body>
     </html>

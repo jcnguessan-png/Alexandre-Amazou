@@ -3,6 +3,7 @@ import type { Book } from '@/data/books';
 import { siteConfig, buildBookWhatsAppUrl } from '@/lib/site-config';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
+import { TrackedLink } from '@/components/campagne/TrackedLink';
 
 /**
  * Trois canaux d'achat pour chaque livre :
@@ -30,10 +31,17 @@ export function BookOrderActions({
       )}
     >
       <Button asChild variant="primary" size="md" className={layout === 'stacked' ? 'w-full' : undefined}>
-        <a href={amazonHref} target="_blank" rel="noopener noreferrer">
+        <TrackedLink
+          href={amazonHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          event="Clic Amazon"
+          props={{ livre: book.slug }}
+          titre={book.title}
+        >
           <ShoppingCart size={16} aria-hidden="true" />
           Acheter sur Amazon
-        </a>
+        </TrackedLink>
       </Button>
 
       <Button
